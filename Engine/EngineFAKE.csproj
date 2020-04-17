@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Avatars\herbalist.jpg" />
+    <None Remove="Images\Avatars\Hero.jpg" />
+    <None Remove="Images\Avatars\Kobold.png" />
+    <None Remove="Images\Enemies\Raul.png" />
+    <None Remove="Images\Locations\Bridge.jpg" />
+    <None Remove="Images\Locations\CaveTown.png" />
+    <None Remove="Images\Locations\Forest.png" />
+    <None Remove="Images\Locations\Home.png" />
+    <None Remove="Images\Locations\mushroomhand.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Avatars\herbalist.jpg" />
+    <Resource Include="Images\Avatars\Hero.jpg" />
+    <Resource Include="Images\Avatars\Kobold.png" />
+    <Resource Include="Images\Enemies\Raul.png" />
+    <Resource Include="Images\Locations\Bridge.jpg" />
+    <Resource Include="Images\Locations\CaveTown.png" />
+    <Resource Include="Images\Locations\Forest.png" />
+    <Resource Include="Images\Locations\Home.png" />
+    <Resource Include="Images\Locations\mushroomhand.png" />
+  </ItemGroup>
+
+</Project>

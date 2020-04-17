@@ -95,9 +95,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Engine\Engine.csproj">
-      <Project>{65d6d82d-a1cf-4b1f-866a-e153e253d218}</Project>
-      <Name>Engine</Name>
+    <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
+      <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
+      <Name>ChaosEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

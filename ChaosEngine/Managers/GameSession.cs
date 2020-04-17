@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ChaosEngine.Classes;
+using ChaosEngine.Factories;
 
 namespace ChaosEngine.Managers
 {
@@ -9,9 +10,13 @@ namespace ChaosEngine.Managers
     {
         public Player currentPlayer { get; set; }
         public Location currentLocation { get; set; }
+        public World currentWorld { get; set; }
+
 
         public GameSession()
         {
+            WorldFactory factory = new WorldFactory();
+           
             currentPlayer = new Player
             {
                 Name = "Player",
@@ -21,18 +26,11 @@ namespace ChaosEngine.Managers
                 HitPoints = 10,
                 ExperiencePoints = 0
             };
+            currentWorld = factory.CreateWorld(currentPlayer.Name);
 
-            currentLocation = new Location
-            {
-                Name = "Hero",
-                XCoordinate = 0,
-                YCoordinate = -1,
-                Description = "",
-                /* Description = $"This is you, {currentPlayer.Name}.\n A kobold who dreams of bigger things." +
-                 $"\n Of being a mighty hero or great magician!\n  Now where will your journey begin? ",*/
-                ImageName = "/Engine;component/Images/Avatars/Hero.jpg"
 
-            };
+            currentLocation = currentWorld.LocationAt(0, 0);
+
 
         }
     }
