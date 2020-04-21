@@ -18,6 +18,7 @@ namespace ChaosEngine.Classes
         //----------------------------------------Getter and Setters----------------------------
 
         public ObservableCollection<GameItem> inventory { get; set; }
+        public ObservableCollection<QuestStatus> quests { get; set; }
 
         public string name
         {
@@ -80,6 +81,7 @@ namespace ChaosEngine.Classes
         public Player()
         {
             inventory = new ObservableCollection<GameItem>();
+            quests = new ObservableCollection<QuestStatus>();
         }
         //---------------------------------------------------------------------------------------------------
     }

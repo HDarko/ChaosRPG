@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Classes
 {
-    class Quest
+   public class Quest
     {
         public int iD { get; set; }
         public string name { get; set; }

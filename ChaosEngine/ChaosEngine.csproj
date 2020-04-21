@@ -45,11 +45,16 @@
     <Compile Include="Classes\GameItem.cs" />
     <Compile Include="Classes\ItemQuantity.cs" />
     <Compile Include="Classes\Location.cs" />
+    <Compile Include="Classes\Monster.cs" />
+    <Compile Include="Classes\MonsterEncounter.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Quest.cs" />
+    <Compile Include="Classes\QuestStatus.cs" />
+    <Compile Include="Classes\RandomNumberGenerator.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\World.cs" />
     <Compile Include="Factories\ItemFactory.cs" />
+    <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="Factories\QuestFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />
     <Compile Include="Managers\GameSession.cs" />
@@ -65,7 +70,7 @@
     <Resource Include="Images\Avatars\Kobold.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Enemies\Raul.png" />
+    <Resource Include="Images\Avatars\Raul.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Locations\Bridge.jpg" />
@@ -80,7 +85,11 @@
     <Resource Include="Images\Locations\Home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\mushroomhand.png" />
+    <Resource Include="Images\Monsters\mushroomhand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Monsters\Frog.gif" />
+    <Resource Include="Images\Monsters\JungleBoss.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

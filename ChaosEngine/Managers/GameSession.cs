@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using ChaosEngine.Classes;
 using ChaosEngine.Factories;
+
 
 namespace ChaosEngine.Managers
 {
@@ -26,8 +28,10 @@ namespace ChaosEngine.Managers
                 OnPropertyChanged(nameof(hasLocationToEast));
                 OnPropertyChanged(nameof(hasLocationToWest));
                 OnPropertyChanged(nameof(hasLocationToSouth));
+                GivePlayerQuestsAtLocation();
             }
         }
+
         public bool hasLocationToNorth
         {
             get
@@ -82,6 +86,7 @@ namespace ChaosEngine.Managers
 
 
         }
+        //===============================Move Functions=======================================
 
         public void MoveNorth()
         {
@@ -115,5 +120,18 @@ namespace ChaosEngine.Managers
                 currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate - 1, currentLocation.yCoordinate);
             }
         }
+
+        //====================================================================================================================
+        private void GivePlayerQuestsAtLocation()
+        {
+            foreach (Quest quest in currentLocation.QuestsAvailableHere)
+            {
+                if (!currentPlayer.quests.Any(q => q.playerQuest.iD == quest.iD))
+                {
+                    currentPlayer.quests.Add(new QuestStatus(quest));
+                }
+            }
+        }
+
     }
 }
