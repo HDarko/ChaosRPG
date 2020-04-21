@@ -7,9 +7,9 @@ using ChaosEngine.Classes;
 
 namespace ChaosEngine.Factories
 {
-    internal class WorldFactory
+    internal static class WorldFactory
     {
-        internal World CreateWorld(string playerName)
+        internal static World CreateWorld(string playerName)
         {
             World newWorld = new World();
 
@@ -18,7 +18,7 @@ namespace ChaosEngine.Factories
          
             newWorld.AddLocation(-1, 1, "Bridge",
                 "The path to the outside world.",
-                "/ChaosEngine;component/Images/Locations/Bridge.png");
+                "/ChaosEngine;component/Images/Locations/Bridge.jpg");
 
             newWorld.AddLocation(-2, 1, "Farm",
                 "A recently abandoned farm.",
@@ -47,8 +47,6 @@ namespace ChaosEngine.Factories
             newWorld.AddLocation(-1, 2, "Forest",
                 "A creepy place, filled with danger and adventure",
                 "/ChaosEngine;component/Images/Locations/Forest.png");
-
-            
 
             return newWorld;
         }

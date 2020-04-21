@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         FontSize="11pt"
          Title="Chaos RPG" Height="768" Width="1024">
-       
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -38,17 +42,17 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding currentPlayer.Name}"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding currentPlayer.name}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Class:"/>
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding currentPlayer.CharacterClass}"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding currentPlayer.characterClass}"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Hit points:"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="{Binding currentPlayer.HitPoints}"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding currentPlayer.hitPoints}"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Gold:"/>
-            <Label Grid.Row="3" Grid.Column="1" Content="{Binding currentPlayer.Gold}"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding currentPlayer.gold}"/>
             <Label Grid.Row="4" Grid.Column="0" Content="XP:"/>
-            <Label Grid.Row="4" Grid.Column="1" Content="{Binding currentPlayer.ExperiencePoints}"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding currentPlayer.experiencePoints}"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Level:"/>
-            <Label Grid.Row="5" Grid.Column="1" Content="{Binding currentPlayer.Level}"/>
+            <Label Grid.Row="5" Grid.Column="1" Content="{Binding currentPlayer.level}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1"
@@ -96,8 +100,61 @@
 
             </Border>
         </Grid>
-        <Label Grid.Row="2" Grid.Column="0" Content="Inventory/Quests" Background="BurlyWood"/>
-        <Label Grid.Row="2" Grid.Column="1" Content="Combat/Movement Controls" Background="Lavender"/>
-        <Button Grid.Row="6" Grid.Column="1" Content="Add XP" Click="ButtonBase_OnClick"></Button>
+        <Grid Grid.Row="2" Grid.Column="0"  Background="BurlyWood">
+            <TabControl>
+                <TabItem Header="Inventory">
+                    <DataGrid ItemsSource="{Binding currentPlayer.inventory}"
+                              AutoGenerateColumns="False"
+                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Description"
+                                                Binding="{Binding name}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Price"
+                                                Binding="{Binding price}"
+                                                Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1"  Background="Lavender">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="255" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="North" Click="OnClick_MoveNorth"
+                        Visibility="{Binding hasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="0"  Height="25" Width="65" Margin="10"  Content="West" Click="OnClick_MoveWest"
+                         Visibility="{Binding hasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="1" Grid.Column="2"  Height="25" Width="65" Margin="10"  Content="East" Click="OnClick_MoveEast"
+                         Visibility="{Binding hasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
+                <Button Grid.Row="2" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="South" Click="OnClick_MoveSouth"
+                         Visibility="{Binding hasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
+
+            </Grid>
+
+        </Grid>
+
     </Grid>
 </Window>

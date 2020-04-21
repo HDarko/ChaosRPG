@@ -41,9 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BaseNotificationClass.cs" />
+    <Compile Include="Classes\GameItem.cs" />
+    <Compile Include="Classes\ItemQuantity.cs" />
     <Compile Include="Classes\Location.cs" />
     <Compile Include="Classes\Player.cs" />
+    <Compile Include="Classes\Quest.cs" />
+    <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\World.cs" />
+    <Compile Include="Factories\ItemFactory.cs" />
+    <Compile Include="Factories\QuestFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />
     <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
