@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace ChaosEngine.Classes
 {
-    class Monster: BaseNotificationClass
+    public class Monster: BaseNotificationClass
     {
         private int _hitPoints;
 
@@ -34,7 +34,7 @@ namespace ChaosEngine.Classes
             int rewardExpPoints, int rewardGoldAmount)
         {
             name = monName;
-            imageName = string.Format("/Engine;component/Images/Monsters/{0}", imageFileName);
+            imageName = string.Format("/ChaosEngine;component/Images/Monsters/{0}", imageFileName);
             //If first fails then try this
             //string.Format("pack://application:,,,/Engine;component/Images/Monsters/{0}", imageName);
             maximumHitPoints = maxHitPoints;

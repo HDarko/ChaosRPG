@@ -17,7 +17,7 @@ namespace ChaosEngine.Factories
             List<ItemQuantity> itemsToComplete = new List<ItemQuantity>();
             List<ItemQuantity> rewardItems = new List<ItemQuantity>();
 
-            itemsToComplete.Add(new ItemQuantity(3000, 4));
+            itemsToComplete.Add(new ItemQuantity(3000, 3));
             rewardItems.Add(new ItemQuantity(1002, 1));
 
             // Create the quest
@@ -27,6 +27,26 @@ namespace ChaosEngine.Factories
                                   itemsToComplete,
                                   25, 10,
                                   rewardItems));
+            _quests.Add(new Quest(1,
+                                  "Mushroom Hunt!",
+                                  "Defeat Turkeysaurs for Korra and bring her 3 turkeysaur legs",
+                                  new List<ItemQuantity>{ new ItemQuantity(9001,3) },
+                                  30, 12,
+                                  new List<ItemQuantity> { new ItemQuantity(3000, 1)}));
+            _quests.Add(new Quest(2,
+                                  "Kill the Frogmen Raiders!",
+                                  "Some Frogmen are harrasing the Kobold folk when they try to leave the village. Take them down!" +
+                                  "and take their tounges as warning",
+                                  new List<ItemQuantity> { new ItemQuantity(9005, 3) },
+                                  40, 22,
+                                  new List<ItemQuantity> { new ItemQuantity(3000, 1) }));
+            _quests.Add(new Quest(3,
+                                 "Attack of a Jungle God!",
+                                 "A mighty Jung-Beast has taken the jungle as its new territory!" +
+                                 " Can you be the hero the kobolds need?",
+                                 new List<ItemQuantity> { new ItemQuantity(9007, 3) },
+                                 50, 40,
+                                 new List<ItemQuantity> { new ItemQuantity(3000, 1) }));
 
         }
 

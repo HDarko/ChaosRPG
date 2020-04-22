@@ -16,11 +16,12 @@ namespace ChaosEngine.Factories
             newWorld.AddIntroLocation(0, 0, "Intro",playerName,
                 "/ChaosEngine;component/Images/Avatars/Hero.jpg");
              //Quests
-            newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(0));
+            newWorld.LocationAt(0, 0).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(0));
 
             newWorld.AddLocation(-1, 1, "Bridge",
                 "The path to the outside world.",
                 "/ChaosEngine;component/Images/Locations/Bridge.jpg");
+            newWorld.LocationAt(-1,1).AddMonster(2,100);
 
             newWorld.AddLocation(-2, 1, "Farm",
                 "A recently abandoned farm.",
@@ -34,23 +35,20 @@ namespace ChaosEngine.Factories
                 "She seems excited as always.",
                 "/ChaosEngine;component/Images/Avatars/herbalist.jpg");
             //Quests
-           
+                newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(1));
+                newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(3));
 
-            newWorld.AddLocation(0, 0, "Hero",
-               "",
-               "/ChaosEngine;component/Images/Avatars/Hero.jpg");
-
-            newWorld.AddLocation(0, 2, "Ikka the Trader",
+            newWorld.AddLocation(1, 1, "Ikka the Trader",
                 "Business as usual with Ikka",
                 "/ChaosEngine;component/Images/Avatars/Kobold.png");
+            newWorld.LocationAt(1, 1).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(2));
 
-            //newWorld.AddLocation(-1, 3, "Hand of Shrooms",
-          //      "Korra is very proud of her pet project",
-             //   "/ChaosEngine;component/Images/Locations/mushroomhand.png");
 
-            newWorld.AddLocation(-1, 3, "Forest",
+            newWorld.AddLocation(-1, 2, "Forest",
                 "A creepy place, filled with good resources",
                 "/ChaosEngine;component/Images/Locations/Forest.png");
+            newWorld.LocationAt(-1, 2).AddMonster(1, 95);
+            newWorld.LocationAt(-1, 2).AddMonster(1, 15);
 
             return newWorld;
         }

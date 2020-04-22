@@ -18,6 +18,7 @@ namespace ChaosEngine.Classes
         //----------------------------------------Getter and Setters----------------------------
 
         public ObservableCollection<GameItem> inventory { get; set; }
+        public ObservableCollection<Weapon> weapons { get; set; }
         public ObservableCollection<QuestStatus> quests { get; set; }
 
         public string name
@@ -78,9 +79,23 @@ namespace ChaosEngine.Classes
             }
         }
 
+        public void AddItemToInventory(GameItem item)
+        {
+            inventory.Add(item);
+
+            OnPropertyChanged(nameof(inventory));
+        }
+
+        public void AddItemToWeapon(Weapon weaapon)
+        {
+            weapons.Add(weaapon);
+
+            OnPropertyChanged(nameof(weapons));
+        }
         public Player()
         {
             inventory = new ObservableCollection<GameItem>();
+            weapons = new ObservableCollection<Weapon>();
             quests = new ObservableCollection<QuestStatus>();
         }
         //---------------------------------------------------------------------------------------------------

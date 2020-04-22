@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using ChaosEngine.Classes;
 using ChaosEngine.Factories;
+using ChaosEngine.GameEvents;
 
 
 namespace ChaosEngine.Managers
@@ -12,10 +13,15 @@ namespace ChaosEngine.Managers
     {
         public Player currentPlayer { get; set; }
         public Location _currentLocation;
+        private Monster _currentMonster;
+
         public World currentWorld { get; set; }
 
-        //------------------------------------Getters-----------------------------------------------
+        public bool hasMonster => currentMonster != null;
 
+        public event EventHandler<GameMessageEvent> OnMessageRaised;
+        //------------------------------------Getters-----------------------------------------------
+        #region Properties
         public Location currentLocation
         {
             get { return _currentLocation; }
@@ -29,9 +35,11 @@ namespace ChaosEngine.Managers
                 OnPropertyChanged(nameof(hasLocationToWest));
                 OnPropertyChanged(nameof(hasLocationToSouth));
                 GivePlayerQuestsAtLocation();
+                GetMonsterAtLocation();
             }
         }
 
+        //========================Getters and Accessors================================
         public bool hasLocationToNorth
         {
             get
@@ -120,7 +128,7 @@ namespace ChaosEngine.Managers
                 currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate - 1, currentLocation.yCoordinate);
             }
         }
-
+        #endregion
         //====================================================================================================================
         private void GivePlayerQuestsAtLocation()
         {
@@ -133,5 +141,30 @@ namespace ChaosEngine.Managers
             }
         }
 
+        public Monster currentMonster
+        {
+            get { return _currentMonster; }
+            set
+            {
+                _currentMonster = value;
+
+                OnPropertyChanged(nameof(currentMonster));
+                OnPropertyChanged(nameof(hasMonster));
+                if (currentMonster != null)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"You see a {currentMonster.name} here!");
+                }
+            }
+        }
+        private void GetMonsterAtLocation()
+        {
+            currentMonster = currentLocation.GetMonster();
+        }
+
+        private void RaiseMessage(string message)
+        {
+            OnMessageRaised?.Invoke(this, new GameMessageEvent(message));
+        }
     }
 }

@@ -18,12 +18,12 @@ namespace ChaosEngine.Classes
         public int rewardGold { get; set; }
         public List<ItemQuantity> rewardItems { get; set; }
 
-        public Quest(int id, string itemName, string itemDescription, List<ItemQuantity> itemsToCompleteQuest,
+        public Quest(int id, string questName, string questDescription, List<ItemQuantity> itemsToCompleteQuest,
                      int questExperiencePoints, int questRewardGold, List<ItemQuantity> questRewardItems)
         {
             iD = id;
-            name = name;
-            description = description;
+            name = questName;
+            description = questDescription;
             itemsToComplete = itemsToCompleteQuest;
             rewardExperiencePoints = questExperiencePoints;
             rewardGold = questRewardGold;

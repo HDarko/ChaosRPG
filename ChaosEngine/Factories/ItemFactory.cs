@@ -17,14 +17,14 @@ namespace ChaosEngine.Factories
 
             _standardGameItems.Add(new Weapon(1001, "Pointy Stick", 1, 1, 2));
             _standardGameItems.Add(new Weapon(1002, "Rusty Sword", 5, 1, 3));
-            _standardGameItems.Add(new GameItem(9001, "Juicy Mushroom", 1));
-            _standardGameItems.Add(new GameItem(9002, "Enchanted FingerNails", 2));
-            _standardGameItems.Add(new GameItem(9003, "Frog Legs", 1));
-            _standardGameItems.Add(new GameItem(9004, "Frog Eyes", 2));
-            _standardGameItems.Add(new GameItem(9005, "Frog Tongue", 1));
-            _standardGameItems.Add(new GameItem(9006, "Engraved Rings", 2));
-            _standardGameItems.Add(new GameItem(9007, "Nasty Fangs", 1));
-            _standardGameItems.Add(new GameItem(9008, "Great Moss", 2));
+            _standardGameItems.Add(new GameItem(9001, "Turkeysaur Leg", 1));
+            _standardGameItems.Add(new GameItem(9002, "Turkeysaur Crest", 4));
+            _standardGameItems.Add(new GameItem(9003, "Frog Legs", 3));
+            _standardGameItems.Add(new GameItem(9004, "Frog Eyes", 6));
+            _standardGameItems.Add(new GameItem(9005, "Frog Tongue", 18));
+            _standardGameItems.Add(new GameItem(9006, "Engraved Rings", 18));
+            _standardGameItems.Add(new GameItem(9007, "Nasty Fangs", 20));
+            _standardGameItems.Add(new GameItem(9008, "Great Moss", 29));
             _standardGameItems.Add(new GameItem(3000, "Quest Token", 99));
 
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Classes
 {
-    class Weapon : GameItem
+    public class Weapon : GameItem
     {
         public int minimumDamage { get; set; }
         public int maximumDamage { get; set; }

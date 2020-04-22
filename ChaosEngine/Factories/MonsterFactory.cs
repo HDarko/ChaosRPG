@@ -7,24 +7,24 @@ using ChaosEngine.Classes;
 
 namespace ChaosEngine.Factories
 {
-    class MonsterFactory
+   internal static class MonsterFactory
     {
         public static Monster GetMonster(int monsterID)
         {
             switch (monsterID)
             {
                 case 1:
-                    Monster mushHand =
-                        new Monster("HandShroom", "mushroomhand.png", 6, 4, 5, 2);
+                    Monster turkeySaur =
+                        new Monster("Turkosaur", "Turkeydon.gif", 6, 4, 5, 2);
 
-                    AddLootItem(mushHand, 9001, 25);
-                    AddLootItem(mushHand, 9002, 75);
+                    AddLootItem(turkeySaur, 9001, 75);
+                    AddLootItem(turkeySaur, 9002, 25);
 
-                    return mushHand;
+                    return turkeySaur;
 
                 case 2:
                     Monster frogMan =
-                        new Monster("Frog", "Frog.gif", 11, 7, 8, 5);
+                        new Monster("Frogman", "Frog.gif", 11, 7, 8, 5);
 
                     AddLootItem(frogMan, 9003, 25);
                     AddLootItem(frogMan, 9004, 25);

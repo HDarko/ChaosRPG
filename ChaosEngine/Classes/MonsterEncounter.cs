@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Classes
 {
-    class MonsterEncounter
+   public class MonsterEncounter
     {
+        public int monsterID { get; set; }
+        public int chanceOfEncountering { get; set; }
+
+        public MonsterEncounter(int monsID, int encounterChancePercent)
+        {
+            monsterID = monsID;
+            chanceOfEncountering = encounterChancePercent;
+        }
     }
 }

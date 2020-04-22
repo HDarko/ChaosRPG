@@ -57,6 +57,7 @@
     <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="Factories\QuestFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />
+    <Compile Include="GameEvents\GameMessageEvent.cs" />
     <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +91,9 @@
   <ItemGroup>
     <Resource Include="Images\Monsters\Frog.gif" />
     <Resource Include="Images\Monsters\JungleBoss.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Monsters\Turkeydon.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
