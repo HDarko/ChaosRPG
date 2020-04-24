@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ChaosEngine.Classes
 {
@@ -17,86 +18,113 @@ namespace ChaosEngine.Classes
 
         //----------------------------------------Getter and Setters----------------------------
 
-        public ObservableCollection<GameItem> inventory { get; set; }
-        public ObservableCollection<Weapon> weapons { get; set; }
-        public ObservableCollection<QuestStatus> quests { get; set; }
+        public ObservableCollection<GameItem> Inventory { get; set; }
+        public ObservableCollection<Weapon> Weapons { get; set; }
+        public ObservableCollection<QuestStatus> Quests { get; set; }
 
-        public string name
+        public string Name
         {
             get { return _name; }
             set
             {
                 _name = value;
-                OnPropertyChanged(nameof(name));
+                OnPropertyChanged(nameof(Name));
             }
         }
-        public string characterClass
+        public string CharacterClass
         {
             get { return _characterClass; }
             set
             {
                 _characterClass = value;
-                OnPropertyChanged(nameof(characterClass));
+                OnPropertyChanged(nameof(CharacterClass));
             }
         }
 
-        public int hitPoints
+        public int HitPoints
         {
             get { return _hitPoints; }
             set
             {
                 _hitPoints = value;
-                OnPropertyChanged(nameof(hitPoints));
+                OnPropertyChanged(nameof(HitPoints));
             }
         }
 
-        public int experiencePoints
+        public int ExperiencePoints
         {
             get { return _experiencePoints; }
             set
             {
                 _experiencePoints = value;
-                OnPropertyChanged(nameof(experiencePoints));
+                OnPropertyChanged(nameof(ExperiencePoints));
             }
         }
-        public int level
+        public int Level
         {
             get { return _level; }
             set
             {
                 _level = value;
-                OnPropertyChanged(nameof(level));
+                OnPropertyChanged(nameof(Level));
             }
         }
 
-        public int gold
+        public int Gold
         {
             get { return _gold; }
             set
             {
                 _gold = value;
-                OnPropertyChanged(nameof(gold));
+                OnPropertyChanged(nameof(Gold));
             }
         }
 
         public void AddItemToInventory(GameItem item)
         {
-            inventory.Add(item);
+            Inventory.Add(item);
 
-            OnPropertyChanged(nameof(inventory));
+            OnPropertyChanged(nameof(Inventory));
         }
 
-        public void AddItemToWeapon(Weapon weaapon)
+        public void AddWeaponToWeapons(Weapon weapon)
         {
-            weapons.Add(weaapon);
+            Weapons.Add(weapon);
 
-            OnPropertyChanged(nameof(weapons));
+            OnPropertyChanged(nameof(Weapons));
         }
-        public Player()
+
+        public void RemoveItemFromInventory(GameItem item)
         {
-            inventory = new ObservableCollection<GameItem>();
-            weapons = new ObservableCollection<Weapon>();
-            quests = new ObservableCollection<QuestStatus>();
+            Inventory.Remove(item);
+
+            OnPropertyChanged(nameof(Weapons));
+        }
+
+        public void RemoveWeaponToWeapons(Weapon weapon)
+        {
+            Weapons.Remove(weapon);
+
+            OnPropertyChanged(nameof(Weapons));
+        }
+
+        public bool HasAllTheseItems(List<ItemQuantity> items)
+        {
+            foreach (ItemQuantity item in items)
+            {
+                if (Inventory.Count(i => i.ItemTypeID == item.ItemID) < item.Quantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    public Player()
+        {
+            Inventory = new ObservableCollection<GameItem>();
+            Weapons = new ObservableCollection<Weapon>();
+            Quests = new ObservableCollection<QuestStatus>();
         }
         //---------------------------------------------------------------------------------------------------
     }

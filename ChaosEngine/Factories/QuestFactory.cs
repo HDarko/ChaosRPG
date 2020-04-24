@@ -18,7 +18,7 @@ namespace ChaosEngine.Factories
             List<ItemQuantity> rewardItems = new List<ItemQuantity>();
 
             itemsToComplete.Add(new ItemQuantity(3000, 3));
-            rewardItems.Add(new ItemQuantity(1002, 1));
+            rewardItems.Add(new ItemQuantity(3001, 1));
 
             // Create the quest
             _quests.Add(new Quest(0,
@@ -52,7 +52,7 @@ namespace ChaosEngine.Factories
 
         internal static Quest GetQuestByID(int id)
         {
-            return _quests.FirstOrDefault(quest => quest.iD == id);
+            return _quests.FirstOrDefault(quest => quest.ID == id);
         }
     }
 }

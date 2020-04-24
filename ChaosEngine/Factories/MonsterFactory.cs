@@ -15,7 +15,7 @@ namespace ChaosEngine.Factories
             {
                 case 1:
                     Monster turkeySaur =
-                        new Monster("Turkosaur", "Turkeydon.gif", 6, 4, 5, 2);
+                        new Monster("Turkosaur", "Turkeydon.gif", 6, 4,1,3, 5, 2);
 
                     AddLootItem(turkeySaur, 9001, 75);
                     AddLootItem(turkeySaur, 9002, 25);
@@ -24,7 +24,7 @@ namespace ChaosEngine.Factories
 
                 case 2:
                     Monster frogMan =
-                        new Monster("Frogman", "Frog.gif", 11, 7, 8, 5);
+                        new Monster("Frogman", "Frog.gif", 11, 7,2,4, 8, 5);
 
                     AddLootItem(frogMan, 9003, 25);
                     AddLootItem(frogMan, 9004, 25);
@@ -34,7 +34,7 @@ namespace ChaosEngine.Factories
 
                 case 3:
                     Monster forestBoss =
-                        new Monster("Jung-Beast", "JungleBoss.gif", 16, 11, 15, 18);
+                        new Monster("Jung-Beast", "JungleBoss.gif", 16, 11,1,10, 15, 18);
 
                     AddLootItem(forestBoss, 9006, 15);
                     AddLootItem(forestBoss, 9007, 70);

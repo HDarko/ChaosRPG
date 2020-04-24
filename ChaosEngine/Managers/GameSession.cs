@@ -11,160 +11,287 @@ namespace ChaosEngine.Managers
 {
    public class GameSession: BaseNotificationClass
     {
-        public Player currentPlayer { get; set; }
-        public Location _currentLocation;
+        #region Fields
+        private Location _currentLocation;
         private Monster _currentMonster;
-
-        public World currentWorld { get; set; }
-
-        public bool hasMonster => currentMonster != null;
-
         public event EventHandler<GameMessageEvent> OnMessageRaised;
-        //------------------------------------Getters-----------------------------------------------
+        #endregion
+
         #region Properties
-        public Location currentLocation
+
+        public bool HasMonster => CurrentMonster != null;
+
+        public Player CurrentPlayer { get; set; }
+
+        public World CurrentWorld { get; set; }
+        public Weapon CurrentWeapon { get; set; }
+        public Location CurrentLocation
         {
             get { return _currentLocation; }
             set
             {
                 _currentLocation = value;
 
-                OnPropertyChanged(nameof(currentLocation));
-                OnPropertyChanged(nameof(hasLocationToNorth));
-                OnPropertyChanged(nameof(hasLocationToEast));
-                OnPropertyChanged(nameof(hasLocationToWest));
-                OnPropertyChanged(nameof(hasLocationToSouth));
+                OnPropertyChanged(nameof(CurrentLocation));
+                OnPropertyChanged(nameof(HasLocationToNorth));
+                OnPropertyChanged(nameof(HasLocationToEast));
+                OnPropertyChanged(nameof(HasLocationToWest));
+                OnPropertyChanged(nameof(HasLocationToSouth));
+                CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 GetMonsterAtLocation();
             }
         }
 
-        //========================Getters and Accessors================================
-        public bool hasLocationToNorth
-        {
-            get
-            {
-                return currentWorld.LocationAt(currentLocation.xCoordinate, currentLocation.yCoordinate + 1) != null;
-            }
-        }
-
-        public bool hasLocationToEast
-        {
-            get
-            {
-                return currentWorld.LocationAt(currentLocation.xCoordinate + 1, currentLocation.yCoordinate) != null;
-            }
-        }
-
-        public bool hasLocationToSouth
-        {
-            get
-            {
-                return currentWorld.LocationAt(currentLocation.xCoordinate, currentLocation.yCoordinate - 1) != null;
-            }
-        }
-
-        public bool hasLocationToWest
-        {
-            get
-            {
-                return currentWorld.LocationAt(currentLocation.xCoordinate - 1, currentLocation.yCoordinate) != null;
-            }
-        }
-
-       
-
-        //-------------------------------------------------------------------------------------------
-        public GameSession()
-        {
+        #region  Button Properties
+        public bool HasLocationToNorth=> 
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
             
-           
-            currentPlayer = new Player
-            {
-                name = "Player",
-                gold = 100000,
-                characterClass = "Paladin",
-                level = 1,
-                hitPoints = 10,
-                experiencePoints = 0
-            };
 
-            currentWorld = WorldFactory.CreateWorld(currentPlayer.name);
-            currentLocation = currentWorld.LocationAt(0, 0);
-
-
-        }
-        //===============================Move Functions=======================================
-
-        public void MoveNorth()
-        {
-            if (hasLocationToNorth)
-            {
-                currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate, currentLocation.yCoordinate + 1);
-            }
-        }
+        public bool HasLocationToEast=>
+          CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
     
 
-        public void MoveEast()
-        {
-            if (hasLocationToEast)
-            {
-                currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate + 1, currentLocation.yCoordinate);
-            }
-        }
+        public bool HasLocationToSouth=>
+                 CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
 
-        public void MoveSouth()
-        {
-            if (hasLocationToSouth)
-            {
-                currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate, currentLocation.yCoordinate - 1);
-            }
-        }
-
-        public void MoveWest()
-        {
-            if (hasLocationToWest)
-            {
-                currentLocation = currentWorld.LocationAt(currentLocation.xCoordinate - 1, currentLocation.yCoordinate);
-            }
-        }
+        public bool HasLocationToWest=>
+            CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
+     
         #endregion
-        //====================================================================================================================
-        private void GivePlayerQuestsAtLocation()
-        {
-            foreach (Quest quest in currentLocation.QuestsAvailableHere)
-            {
-                if (!currentPlayer.quests.Any(q => q.playerQuest.iD == quest.iD))
-                {
-                    currentPlayer.quests.Add(new QuestStatus(quest));
-                }
-            }
-        }
+        //========================================================
 
-        public Monster currentMonster
+        public Monster CurrentMonster
         {
             get { return _currentMonster; }
             set
             {
                 _currentMonster = value;
 
-                OnPropertyChanged(nameof(currentMonster));
-                OnPropertyChanged(nameof(hasMonster));
-                if (currentMonster != null)
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));
+                if (CurrentMonster != null)
                 {
                     RaiseMessage("");
-                    RaiseMessage($"You see a {currentMonster.name} here!");
+                    RaiseMessage($"You see a {CurrentMonster.Name} here!");
                 }
             }
         }
+
+        #endregion
+        //-------------------------------------------------------------------------------------------
+        public GameSession()
+        {
+            
+           
+            CurrentPlayer = new Player
+            {
+                Name = "Player",
+                Gold = 100000,
+                CharacterClass = "Paladin",
+                Level = 1,
+                HitPoints = 10,
+                ExperiencePoints = 0
+            };
+            if (!CurrentPlayer.Weapons.Any())
+            {
+                CurrentPlayer.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
+            }
+
+            CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);
+            CurrentLocation = CurrentWorld.LocationAt(0, 0);
+
+
+        }
+        #region Move Functions
+
+        public void MoveNorth()
+        {
+            if (HasLocationToNorth)
+            {
+                CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1);
+            }
+        }
+    
+
+        public void MoveEast()
+        {
+            if (HasLocationToEast)
+            {
+                CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate);
+            }
+        }
+
+        public void MoveSouth()
+        {
+            if (HasLocationToSouth)
+            {
+                CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1);
+            }
+        }
+
+        public void MoveWest()
+        {
+            if (HasLocationToWest)
+            {
+                CurrentLocation = CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate);
+            }
+        }
+        #endregion
+        //====================================================================================================================
+        private void GivePlayerQuestsAtLocation()
+        {
+            foreach (Quest quest in CurrentLocation.QuestsAvailableHere)
+            {
+                if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
+                {
+                    CurrentPlayer.Quests.Add(new QuestStatus(quest));
+                    RaiseMessage("");
+                    RaiseMessage($"You receive the '{quest.Name}' quest");
+                    RaiseMessage(quest.Description);
+                    RaiseMessage("");
+                    RaiseMessage("Objective: Return with:");
+                    foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                    {
+                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                    }
+
+                    RaiseMessage("And you will receive:");
+                    RaiseMessage($"   {quest.RewardExperiencePoints} experience points");
+                    RaiseMessage($"   {quest.RewardGold} gold");
+                    foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                    {
+                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                    }
+                }
+            }
+        }
+
+        private void CompleteQuestsAtLocation()
+        {
+            foreach (Quest quest in CurrentLocation.QuestsAvailableHere)
+            {
+                QuestStatus questToComplete =
+                    CurrentPlayer.Quests.FirstOrDefault(q => q.PlayerQuest.ID == quest.ID &&
+                                                             !q.IsCompleted);
+
+                if (questToComplete != null)
+                {
+                    if (CurrentPlayer.HasAllTheseItems(quest.ItemsToComplete))
+                    {
+                        // Remove the quest completion items from the player's inventory
+                        foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
+                        {
+                            for (int i = 0; i < itemQuantity.Quantity; i++)
+                            {
+                                CurrentPlayer.RemoveItemFromInventory(CurrentPlayer.Inventory.First(item => item.ItemTypeID == itemQuantity.ItemID));
+                            }
+                        }
+
+                        RaiseMessage("");
+                        RaiseMessage($"You completed the '{quest.Name}' quest");
+
+                        // Give the player the quest rewards
+                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
+                        RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
+
+                        CurrentPlayer.Gold += quest.RewardGold;
+                        RaiseMessage($"You receive {quest.RewardGold} gold");
+
+                        foreach (ItemQuantity itemQuantity in quest.RewardItems)
+                        {
+                            GameItem rewardItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
+
+                            CurrentPlayer.AddItemToInventory(rewardItem);
+                            RaiseMessage($"You receive a {rewardItem.Name}");
+                        }
+
+                        // Mark the Quest as completed
+                        questToComplete.IsCompleted = true;
+                    }
+                }
+            }
+        }
+
+
         private void GetMonsterAtLocation()
         {
-            currentMonster = currentLocation.GetMonster();
+            CurrentMonster = CurrentLocation.GetMonster();
         }
 
         private void RaiseMessage(string message)
         {
             OnMessageRaised?.Invoke(this, new GameMessageEvent(message));
+        }
+
+        public void AttackCurrentMonster()
+        {
+            if (CurrentWeapon == null)
+            {
+                RaiseMessage("You must select a weapon, to attack.");
+                return;
+            }
+
+            // Determine damage to monster
+            int damageToMonster = RandomNumberGenerator.NumberBetween(CurrentWeapon.MinimumDamage, CurrentWeapon.MaximumDamage);
+
+            if (damageToMonster == 0)
+            {
+                RaiseMessage($"You missed the {CurrentMonster.Name}.");
+            }
+            else
+            {
+                CurrentMonster.HitPoints -= damageToMonster;
+                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
+            }
+
+            // If monster if killed, collect rewards and loot
+            if (CurrentMonster.HitPoints <= 0)
+            {
+                RaiseMessage("");
+                RaiseMessage($"You defeated the {CurrentMonster.Name}!");
+
+                CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
+                RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
+
+                CurrentPlayer.Gold += CurrentMonster.RewardGold;
+                RaiseMessage($"You receive {CurrentMonster.RewardGold} gold.");
+
+                foreach (ItemQuantity itemQuantity in CurrentMonster.inventory)
+                {
+                    GameItem item = ItemFactory.CreateGameItem(itemQuantity.ItemID);
+                    CurrentPlayer.AddItemToInventory(item);
+                    RaiseMessage($"You receive {itemQuantity.Quantity} {item.Name}.");
+                }
+
+                // Get another monster to fight
+                GetMonsterAtLocation();
+            }
+            else
+            {
+                // If monster is still alive, let the monster attack
+                int damageToPlayer = RandomNumberGenerator.NumberBetween(CurrentMonster.MinimumDamage, CurrentMonster.MaximumDamage);
+
+                if (damageToPlayer == 0)
+                {
+                    RaiseMessage("The monster attacks, but misses you.");
+                }
+                else
+                {
+                    CurrentPlayer.HitPoints -= damageToPlayer;
+                    RaiseMessage($"The {CurrentMonster.Name} hit you for {damageToPlayer} points.");
+                }
+
+                // If player is killed, move them back to their home.
+                if (CurrentPlayer.HitPoints <= 0)
+                {
+                    RaiseMessage("");
+                    RaiseMessage($"The {CurrentMonster.Name} killed you.");
+
+                    CurrentLocation = CurrentWorld.LocationAt(0, 0); // Player's home
+                    CurrentPlayer.HitPoints = CurrentPlayer.Level * 10; // Completely heal the player
+                }
+            }
         }
     }
 }

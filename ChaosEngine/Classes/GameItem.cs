@@ -8,20 +8,20 @@ namespace ChaosEngine.Classes
 {
     public class GameItem
     {
-        public int itemTypeID { get; set; }
-        public string name { get; set; }
-        public int price { get; set; }
+        public int ItemTypeID { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
 
         public GameItem(int itemID, string itemName, int itemPrice)
         {
-            itemTypeID = itemID;
-            name = itemName;
-            price = itemPrice;
+            ItemTypeID = itemID;
+            Name = itemName;
+            Price = itemPrice;
         }
 
         public GameItem Clone()
         {
-            return new GameItem(itemTypeID, name, price);
+            return new GameItem(ItemTypeID, Name, Price);
         }
     }
 }

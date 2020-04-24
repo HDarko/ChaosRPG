@@ -51,17 +51,17 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-            <Label Grid.Row="0" Grid.Column="1" Content="{Binding currentPlayer.name}"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding CurrentPlayer.Name}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Class:"/>
-            <Label Grid.Row="1" Grid.Column="1" Content="{Binding currentPlayer.characterClass}"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.CharacterClass}"/>
             <Label Grid.Row="2" Grid.Column="0" Content="Hit points:"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="{Binding currentPlayer.hitPoints}"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding CurrentPlayer.HitPoints}"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Gold:"/>
-            <Label Grid.Row="3" Grid.Column="1" Content="{Binding currentPlayer.gold}"/>
+            <Label Grid.Row="3" Grid.Column="1" Content="{Binding CurrentPlayer.Gold}"/>
             <Label Grid.Row="4" Grid.Column="0" Content="XP:"/>
-            <Label Grid.Row="4" Grid.Column="1" Content="{Binding currentPlayer.experiencePoints}"/>
+            <Label Grid.Row="4" Grid.Column="1" Content="{Binding CurrentPlayer.ExperiencePoints}"/>
             <Label Grid.Row="5" Grid.Column="0" Content="Level:"/>
-            <Label Grid.Row="5" Grid.Column="1" Content="{Binding currentPlayer.level}"/>
+            <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.Level}"/>
         </Grid>
         <!-- Gameplay -->
         <Grid Grid.Row="1" Grid.Column="1"
@@ -108,18 +108,18 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
 
                     <TextBlock Grid.Row="0"
                                HorizontalAlignment="Center"
-                               Text="{Binding currentLocation.name}"/>
+                               Text="{Binding CurrentLocation.Name}"/>
 
                     <Image Grid.Row="1"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            Height="150"
                            Width="150"
-                           Source="{Binding currentLocation.imageName}"/>
+                           Source="{Binding CurrentLocation.ImageName}"/>
                     <TextBlock Grid.Row="2"
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
-                               Text="{Binding currentLocation.description}"/>
+                               Text="{Binding CurrentLocation.Description}"/>
                     
 
 
@@ -142,21 +142,22 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                     <TextBlock Grid.Row="0"
                                HorizontalAlignment="Center"
                                Height="Auto"
-                               Text="{Binding currentMonster.name}" />
-
+                               Text="{Binding CurrentMonster.Name}" />
+                    <!--'125" before-->
                     <Image Grid.Row="1"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Height="125"
-                           Width="125"
-                           gif:ImageBehavior.AnimatedSource="{Binding currentMonster.imageName}" />
+                           Height="Auto"
+                           
+                         Width="Auto"
+                           gif:ImageBehavior.AnimatedSource="{Binding CurrentMonster.ImageName}" />
 
                     <StackPanel Grid.Row="2"
-                                Visibility="{Binding hasMonster, Converter={StaticResource BooleanToVisibility}}"
+                                Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                         <TextBlock>Current Hit Points:</TextBlock>
-                        <TextBlock Text="{Binding currentMonster.hitPoints}" />
+                        <TextBlock Text="{Binding CurrentMonster.HitPoints}" />
                     </StackPanel>
 
                 </Grid>
@@ -167,49 +168,46 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
         <Grid Grid.Row="2" Grid.Column="0"  Background="BurlyWood">
             <TabControl>
                 <TabItem Header="Inventory">
-                    <DataGrid ItemsSource="{Binding currentPlayer.inventory}"
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.inventory}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding name}"
+                                                Binding="{Binding Name}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Price"
-                                                Binding="{Binding price}"
+                                                Binding="{Binding Price}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Weapons">
-                    <DataGrid ItemsSource="{Binding currentPlayer.weapons}"
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Weapons}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding name}"
+                                                Binding="{Binding Name}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Price"
-                                                Binding="{Binding price}"
+                                                Binding="{Binding Price}"
                                                 Width="Auto"/>
-                            <DataGridTextColumn Header="minDmg"
-                                                Binding="{Binding minimumDamage}"
-                                                Width="Auto"/>
-                            <DataGridTextColumn Header="maxDmg"
-                                                Binding="{Binding maximumDamage}"
+                            <DataGridTextColumn Header="Dmg"
+                                                Binding="{Binding DamageRange}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Quests">
-                    <DataGrid ItemsSource="{Binding currentPlayer.quests}"
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Quests}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding playerQuest.name}"
+                                                Binding="{Binding PlayerQuest.Name}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Done?"
-                                                Binding="{Binding isCompleted}"
+                                                Binding="{Binding IsCompleted}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -227,7 +225,33 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="255" />
             </Grid.ColumnDefinitions>
+            <!-- Combat Controls -->
+            <Grid Grid.Row="0" Grid.Column="0"
+                  Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox Grid.Row="0" Grid.Column="0"
+                          ItemsSource="{Binding CurrentPlayer.weapons}"
+                          SelectedItem="{Binding CurrentWeapon}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="ID"/>
+
+                <Button Grid.Row="0" Grid.Column="2"
+                        Content="Use"
+                        Click="OnClick_AttackMonster"/>
+            </Grid>
+            <!-- Movement Controls-->
             <Grid Grid.Row="0" Grid.Column="1">
 
                 <Grid.RowDefinitions>
@@ -243,14 +267,15 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Row="0" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="North" Click="OnClick_MoveNorth"
-                        Visibility="{Binding hasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
+                        Visibility="{Binding HasLocationToNorth, Converter={StaticResource BooleanToVisibility}}"/>
                 <Button Grid.Row="1" Grid.Column="0"  Height="25" Width="65" Margin="10"  Content="West" Click="OnClick_MoveWest"
-                         Visibility="{Binding hasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
+                         Visibility="{Binding HasLocationToWest, Converter={StaticResource BooleanToVisibility}}"/>
                 <Button Grid.Row="1" Grid.Column="2"  Height="25" Width="65" Margin="10"  Content="East" Click="OnClick_MoveEast"
-                         Visibility="{Binding hasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
+                         Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
                 <Button Grid.Row="2" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="South" Click="OnClick_MoveSouth"
-                         Visibility="{Binding hasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
+                         Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
 
+               
             </Grid>
 
         </Grid>

@@ -8,41 +8,44 @@ namespace ChaosEngine.Classes
 {
     public class Location
     {
-        public int xCoordinate { get; set; }
-        public int yCoordinate { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string imageName { get; set; }
+        #region Properties
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ImageName { get; set; }
         public List<Quest> QuestsAvailableHere { get; set; } = new List<Quest>();
 
 
-         public List<MonsterEncounter> monstersHere { get; set; } =
+         public List<MonsterEncounter> MonstersHere { get; set; } =
             new List<MonsterEncounter>();
+        #endregion
+
         public void AddMonster(int monsterID, int chanceOfEncountering)
         {
-            if (monstersHere.Exists(m => m.monsterID == monsterID))
+            if (MonstersHere.Exists(m => m.monsterID == monsterID))
             {
                 // This monster has already been added to this location.
                 // So, overwrite the ChanceOfEncountering with the new number.
-                monstersHere.First(m => m.monsterID == monsterID)
+                MonstersHere.First(m => m.monsterID == monsterID)
                             .chanceOfEncountering = chanceOfEncountering;
             }
             else
             {
                 // This monster is not already at this location, so add it.
-                monstersHere.Add(new MonsterEncounter(monsterID, chanceOfEncountering));
+                MonstersHere.Add(new MonsterEncounter(monsterID, chanceOfEncountering));
             }
         }
 
         public Monster GetMonster()
         {
-            if (!monstersHere.Any())
+            if (!MonstersHere.Any())
             {
                 return null;
             }
 
             // Total the percentages of all monsters at this location.
-            int totalChances = monstersHere.Sum(m => m.chanceOfEncountering);
+            int totalChances = MonstersHere.Sum(m => m.chanceOfEncountering);
 
             // Select a random number between 1 and the total (in case the total chances is not 100).
             int randomNumber = RandomNumberGenerator.NumberBetween(1, totalChances);
@@ -53,7 +56,7 @@ namespace ChaosEngine.Classes
             // that is the monster to return.
             int runningTotal = 0;
 
-            foreach (MonsterEncounter monsterEncounter in monstersHere)
+            foreach (MonsterEncounter monsterEncounter in MonstersHere)
             {
                 runningTotal += monsterEncounter.chanceOfEncountering;
 
@@ -64,7 +67,7 @@ namespace ChaosEngine.Classes
             }
 
             // If there was a problem, return the last monster in the list.
-            return MonsterFactory.GetMonster(monstersHere.Last().monsterID);
+            return MonsterFactory.GetMonster(MonstersHere.Last().monsterID);
         }
     }
 }

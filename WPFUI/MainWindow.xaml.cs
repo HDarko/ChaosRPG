@@ -22,11 +22,10 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GameSession _gameSession;
+        private readonly GameSession _gameSession= new GameSession();
         public MainWindow()
         {
             InitializeComponent();
-            _gameSession = new GameSession();
             _gameSession.OnMessageRaised += OnGameMessageRaised;
 
             DataContext = _gameSession;
@@ -58,5 +57,11 @@ namespace WPFUI
             gameMessages.Document.Blocks.Add(new Paragraph(new Run(e.message)));
             gameMessages.ScrollToEnd();
         }
+
+        private void OnClick_AttackMonster(object sender, RoutedEventArgs e)
+        {
+            _gameSession.AttackCurrentMonster();
+        }
+
     }
 }

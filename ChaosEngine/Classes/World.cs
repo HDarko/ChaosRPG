@@ -9,18 +9,18 @@ namespace ChaosEngine.Classes
     public class World
     {
 
-        private List<Location> _locations = new List<Location>();
+        private readonly List<Location> _locations = new List<Location>();
      
 
         internal void AddLocation(int xCoordinate, int yCoordinate, string name, string description,
        string imageFileName)
         {
             Location loc = new Location();
-            loc.xCoordinate = xCoordinate;
-            loc.yCoordinate = yCoordinate;
-            loc.name = name;
-            loc.description = description;
-            loc.imageName = imageFileName;
+            loc.XCoordinate = xCoordinate;
+            loc.YCoordinate = yCoordinate;
+            loc.Name = name;
+            loc.Description = description;
+            loc.ImageName = string.Format("/ChaosEngine;component/Images/Locations/{0}", imageFileName); 
 
             _locations.Add(loc);
 
@@ -29,16 +29,33 @@ namespace ChaosEngine.Classes
         internal void AddIntroLocation(int xCoordinate, int yCoordinate, string name, string playerName,
       string imageFileName)
         {
-            AddLocation(xCoordinate, yCoordinate,name, $"This is you, {playerName}.\n A kobold who dreams of bigger things." +
-                $"\n Of being a mighty hero of legend!\n  Now where will your journey begin? ",
-                imageFileName);
+           
+            Location loc = new Location();
+            loc.XCoordinate = xCoordinate;
+            loc.YCoordinate = yCoordinate;
+            loc.Name = name;
+            loc.Description = $"This is you, {playerName}.\n A kobold who dreams of bigger things." +
+                $"\n Of being a mighty hero of legend!\n  Now where will your journey begin? ";
+            loc.ImageName = imageFileName;
+            _locations.Add(loc);
+        }
+        internal void AddIntroLocation2(int xCoordinate, int yCoordinate, string name, string description,
+     string imageFileName)
+        {
+            Location loc = new Location();
+            loc.XCoordinate = xCoordinate;
+            loc.YCoordinate = yCoordinate;
+            loc.Name = name;
+            loc.Description = description;
+            loc.ImageName =imageFileName;
+            _locations.Add(loc);
         }
 
         public Location LocationAt(int xCoordinate, int yCoordinate)
         {
             foreach (Location loc in _locations)
             {
-                if (loc.xCoordinate == xCoordinate && loc.yCoordinate == yCoordinate)
+                if (loc.XCoordinate == xCoordinate && loc.YCoordinate == yCoordinate)
                 {
                     return loc;
                 }

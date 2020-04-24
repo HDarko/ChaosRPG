@@ -8,13 +8,13 @@ namespace ChaosEngine.Classes
 {
     public class ItemQuantity
     {
-        public int itemID { get; set; }
-        public int quantity { get; set; }
+        public int ItemID { get; set; }
+        public int Quantity { get; set; }
 
         public ItemQuantity(int itID, int itemQuantity)
         {
-            itemID = itID;
-            quantity = itemQuantity;
+            ItemID = itID;
+            Quantity = itemQuantity;
         }
     }
 }

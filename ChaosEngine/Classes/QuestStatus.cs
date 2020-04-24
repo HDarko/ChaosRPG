@@ -8,13 +8,13 @@ namespace ChaosEngine.Classes
 {
     public class QuestStatus
     {
-        public Quest playerQuest { get; set; }
-        public bool isCompleted { get; set; }
+        public Quest PlayerQuest { get; set; }
+        public bool IsCompleted { get; set; }
 
         public QuestStatus(Quest quest)
         {
-            playerQuest = quest;
-            isCompleted = false;
+            PlayerQuest = quest;
+            IsCompleted = false;
         }
     }
 }

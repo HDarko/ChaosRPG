@@ -8,26 +8,26 @@ namespace ChaosEngine.Classes
 {
    public class Quest
     {
-        public int iD { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
-        public List<ItemQuantity> itemsToComplete { get; set; }
+        public List<ItemQuantity> ItemsToComplete { get; set; }
 
-        public int rewardExperiencePoints { get; set; }
-        public int rewardGold { get; set; }
-        public List<ItemQuantity> rewardItems { get; set; }
+        public int RewardExperiencePoints { get; set; }
+        public int RewardGold { get; set; }
+        public List<ItemQuantity> RewardItems { get; set; }
 
         public Quest(int id, string questName, string questDescription, List<ItemQuantity> itemsToCompleteQuest,
                      int questExperiencePoints, int questRewardGold, List<ItemQuantity> questRewardItems)
         {
-            iD = id;
-            name = questName;
-            description = questDescription;
-            itemsToComplete = itemsToCompleteQuest;
-            rewardExperiencePoints = questExperiencePoints;
-            rewardGold = questRewardGold;
-            rewardItems = questRewardItems;
+            ID = id;
+            Name = questName;
+            Description = questDescription;
+            ItemsToComplete = itemsToCompleteQuest;
+            RewardExperiencePoints = questExperiencePoints;
+            RewardGold = questRewardGold;
+            RewardItems = questRewardItems;
         }
     }
 }

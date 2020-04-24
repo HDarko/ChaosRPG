@@ -9,14 +9,10 @@ namespace ChaosEngine.Factories
 {
     public static class ItemFactory
     {
-        private static List<GameItem> _standardGameItems;
+        private static readonly List<GameItem> _standardGameItems= new List<GameItem>();
 
         static ItemFactory()
-        {
-            _standardGameItems = new List<GameItem>();
-
-            _standardGameItems.Add(new Weapon(1001, "Pointy Stick", 1, 1, 2));
-            _standardGameItems.Add(new Weapon(1002, "Rusty Sword", 5, 1, 3));
+        {       
             _standardGameItems.Add(new GameItem(9001, "Turkeysaur Leg", 1));
             _standardGameItems.Add(new GameItem(9002, "Turkeysaur Crest", 4));
             _standardGameItems.Add(new GameItem(9003, "Frog Legs", 3));
@@ -26,16 +22,17 @@ namespace ChaosEngine.Factories
             _standardGameItems.Add(new GameItem(9007, "Nasty Fangs", 20));
             _standardGameItems.Add(new GameItem(9008, "Great Moss", 29));
             _standardGameItems.Add(new GameItem(3000, "Quest Token", 99));
+            _standardGameItems.Add(new GameItem(3001, "Game Won Token", 1000));
 
         }
 
         public static GameItem CreateGameItem(int itemTypeID)
         {
-            GameItem standardItem = _standardGameItems.FirstOrDefault(item => item.itemTypeID == itemTypeID);
+            GameItem standardItem = _standardGameItems.FirstOrDefault(item => item.ItemTypeID == itemTypeID);
 
             if (standardItem != null)
             {
-                return standardItem.Clone();
+                return standardItem;
             }
             return null;
         }

@@ -11,36 +11,41 @@ namespace ChaosEngine.Classes
     {
         private int _hitPoints;
 
-        public string name { get; private set; }
-        public string imageName { get; set; }
-        public int maximumHitPoints { get; private set; }
-        public int hitPoints
+        public string Name { get; private set; }
+        public string ImageName { get; set; }
+        public int MaximumHitPoints { get; private set; }
+        public int HitPoints
         {
             get { return _hitPoints; }
-            private set
+             set
             {
                 _hitPoints = value;
-                OnPropertyChanged(nameof(hitPoints));
+                OnPropertyChanged(nameof(HitPoints));
             }
         }
 
-        public int rewardExperiencePoints { get; private set; }
-        public int rewardGold { get; private set; }
-
+        public int RewardExperiencePoints { get; private set; }
+        public int RewardGold { get; private set; }
+        public int MinimumDamage { get; set; }
+        public int MaximumDamage { get; set; }
         public ObservableCollection<ItemQuantity> inventory { get; set; }
 
-        public Monster(string monName, string imageFileName,
-            int maxHitPoints, int startHitPoints,
+        public Monster(string monName, string imageFileName, int startHitPoints,
+            int maxHitPoints, int minDmg, int maxDmg,
             int rewardExpPoints, int rewardGoldAmount)
         {
-            name = monName;
-            imageName = string.Format("/ChaosEngine;component/Images/Monsters/{0}", imageFileName);
+            Name = monName;
+            ImageName = string.Format("/ChaosEngine;component/Images/Monsters/{0}", imageFileName);
+            //or
+            // ImageName = $"/ChaosEngine;component/Images/Monsters/{imageName}";
             //If first fails then try this
             //string.Format("pack://application:,,,/Engine;component/Images/Monsters/{0}", imageName);
-            maximumHitPoints = maxHitPoints;
-            hitPoints = startHitPoints;
-            rewardExperiencePoints = rewardExpPoints;
-            rewardGold = rewardGoldAmount;
+            MaximumHitPoints = maxHitPoints;
+            HitPoints = startHitPoints;
+            RewardExperiencePoints = rewardExpPoints;
+            RewardGold = rewardGoldAmount;
+            MinimumDamage = minDmg;
+            MaximumDamage = maxDmg;
 
             inventory = new ObservableCollection<ItemQuantity>();
         }
