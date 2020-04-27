@@ -15,9 +15,9 @@ namespace ChaosEngine.Classes
         public string Description { get; set; }
         public string ImageName { get; set; }
         public List<Quest> QuestsAvailableHere { get; set; } = new List<Quest>();
+        public Trader TraderHere { get; set; }
 
-
-         public List<MonsterEncounter> MonstersHere { get; set; } =
+        public List<MonsterEncounter> MonstersHere { get; set; } =
             new List<MonsterEncounter>();
         #endregion
 

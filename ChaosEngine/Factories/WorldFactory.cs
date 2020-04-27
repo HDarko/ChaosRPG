@@ -34,14 +34,18 @@ namespace ChaosEngine.Factories
             newWorld.AddIntroLocation2(0, 2, "Korra the Mage",
                 "She seems excited as always.",
                 "/ChaosEngine;component/Images/Avatars/herbalist.jpg");
+            newWorld.LocationAt(0, 2).TraderHere =
+               TraderFactory.GetTraderByName("Korra the Mage");
             //Quests
-                newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(1));
+            newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(1));
                 newWorld.LocationAt(0, 2).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(3));
 
             newWorld.AddIntroLocation2(1, 1, "Ikka the Trader",
                 "Business as usual with Ikka",
                 "/ChaosEngine;component/Images/Avatars/Kobold.png");
             newWorld.LocationAt(1, 1).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(2));
+            newWorld.LocationAt(1, 1).TraderHere =
+               TraderFactory.GetTraderByName("Ikka the Trader");
 
 
             newWorld.AddLocation(-1, 2, "Forest",

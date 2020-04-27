@@ -20,7 +20,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </Window.Resources>
 
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -104,7 +104,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
+
 
                     <TextBlock Grid.Row="0"
                                HorizontalAlignment="Center"
@@ -120,7 +120,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
                                Text="{Binding CurrentLocation.Description}"/>
-                    
+
 
 
                 </Grid>
@@ -168,7 +168,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
         <Grid Grid.Row="2" Grid.Column="0"  Background="BurlyWood">
             <TabControl>
                 <TabItem Header="Inventory">
-                    <DataGrid ItemsSource="{Binding CurrentPlayer.inventory}"
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.Inventory}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
@@ -242,7 +242,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                 </Grid.ColumnDefinitions>
 
                 <ComboBox Grid.Row="0" Grid.Column="0"
-                          ItemsSource="{Binding CurrentPlayer.weapons}"
+                          ItemsSource="{Binding CurrentPlayer.Weapons}"
                           SelectedItem="{Binding CurrentWeapon}"
                           DisplayMemberPath="Name"
                           SelectedValuePath="ID"/>
@@ -274,8 +274,22 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                          Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
                 <Button Grid.Row="2" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="South" Click="OnClick_MoveSouth"
                          Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
+    <!--Items-->
+                <Button Grid.Row="1" Grid.Column="1" 
+                        Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"
+                         Click="OnClick_DisplayItemTradeScreen">
+                    <Image Source="/ChaosEngine;component/Images/Icons/pngwave2.png"></Image>
+                </Button>
+                <!--Weapons-->
+                <Button Grid.Row="1" Grid.Column="1" 
+                        Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Visibility="{Binding TradeWeapons, Converter={StaticResource BooleanToVisibility}}"
+                         Click="OnClick_DisplayWeaponTradeScreen">
+                    <Image Source="/ChaosEngine;component/Images/Icons/pngwave.png"></Image>
+                </Button>
 
-               
+
             </Grid>
 
         </Grid>

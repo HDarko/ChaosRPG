@@ -15,11 +15,14 @@ namespace ChaosEngine.Managers
         private Location _currentLocation;
         private Monster _currentMonster;
         public event EventHandler<GameMessageEvent> OnMessageRaised;
+        private Trader _currentTrader;
         #endregion
 
         #region Properties
 
         public bool HasMonster => CurrentMonster != null;
+        public bool HasTrader => CurrentTrader != null;
+        public bool TradeWeapons => (HasTrader && (CurrentTrader.weaponsAvailable));
 
         public Player CurrentPlayer { get; set; }
 
@@ -37,11 +40,26 @@ namespace ChaosEngine.Managers
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToWest));
                 OnPropertyChanged(nameof(HasLocationToSouth));
+                CurrentTrader = CurrentLocation.TraderHere;
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 GetMonsterAtLocation();
             }
         }
+
+        public Trader CurrentTrader
+        {
+            get { return _currentTrader; }
+            set
+            {
+                _currentTrader = value;
+
+                OnPropertyChanged(nameof(CurrentTrader));
+                OnPropertyChanged(nameof(HasTrader));
+                OnPropertyChanged(nameof(TradeWeapons));
+            }
+        }
+
 
         #region  Button Properties
         public bool HasLocationToNorth=> 

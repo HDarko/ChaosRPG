@@ -63,5 +63,21 @@ namespace WPFUI
             _gameSession.AttackCurrentMonster();
         }
 
+        private void OnClick_DisplayItemTradeScreen(object sender, RoutedEventArgs e)
+        {
+            ItemTradeScreen tradeScreen = new ItemTradeScreen();
+            tradeScreen.Owner = this;
+            tradeScreen.DataContext = _gameSession;
+            tradeScreen.ShowDialog();
+        }
+
+        private void OnClick_DisplayWeaponTradeScreen(object sender, RoutedEventArgs e)
+        {
+            WeaponTradeScreen tradeScreen = new WeaponTradeScreen();
+            tradeScreen.Owner = this;
+            tradeScreen.DataContext = _gameSession;
+            tradeScreen.ShowDialog();
+        }
+
     }
 }

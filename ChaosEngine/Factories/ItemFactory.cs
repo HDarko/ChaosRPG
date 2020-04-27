@@ -12,7 +12,11 @@ namespace ChaosEngine.Factories
         private static readonly List<GameItem> _standardGameItems= new List<GameItem>();
 
         static ItemFactory()
-        {       
+        {       //Quest Items in 9000s,
+                //Trader Items in 3000s
+            _standardGameItems.Add(new GameItem(3001, "Odd Pebble", 1));
+            _standardGameItems.Add(new GameItem(3002, "Rusty Coin", 1));
+            _standardGameItems.Add(new GameItem(3003, "Blue-Green Potion", 1));
             _standardGameItems.Add(new GameItem(9001, "Turkeysaur Leg", 1));
             _standardGameItems.Add(new GameItem(9002, "Turkeysaur Crest", 4));
             _standardGameItems.Add(new GameItem(9003, "Frog Legs", 3));
