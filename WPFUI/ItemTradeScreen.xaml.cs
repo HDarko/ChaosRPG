@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChaosEngine.Managers;
 using ChaosEngine.Classes;
+using System.Text.RegularExpressions;
+using System.Data;
 
 namespace WPFUI
 {
@@ -30,27 +32,38 @@ namespace WPFUI
 
         private void OnClick_Sell(object sender, RoutedEventArgs e)
         {
-            GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
+            GroupedInventoryItem inventoryItem = ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
+            GameItem item = inventoryItem.Item;
+            int amounttoSell = inventoryItem.Quantity;
+            int fullPrice = item.Price * amounttoSell;
 
             if (item != null)
             {
-                Session.CurrentPlayer.Gold += item.Price;
-                Session.CurrentTrader.AddItemToInventory(item);
-                Session.CurrentPlayer.RemoveItemFromInventory(item);
+                if (Session.CurrentPlayer.Gold >= fullPrice)
+                {
+                    Session.CurrentPlayer.Gold += fullPrice;
+                    Session.CurrentTrader.AddItemToInventory(item,amounttoSell);
+                    Session.CurrentPlayer.RemoveItemFromInventory(item,amounttoSell);
+                }
             }
         }
 
         private void OnClick_Buy(object sender, RoutedEventArgs e)
         {
-            GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
+           // GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
+            GroupedInventoryItem inventoryItem = ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
+            GameItem item = inventoryItem.Item;
+            int amounttoBuy = inventoryItem.Quantity;
+            int fullPrice = item.Price * amounttoBuy;
+
 
             if (item != null)
             {
-                if (Session.CurrentPlayer.Gold >= item.Price)
+                if (Session.CurrentPlayer.Gold >= fullPrice)
                 {
-                    Session.CurrentPlayer.Gold -= item.Price;
-                    Session.CurrentTrader.RemoveItemFromInventory(item);
-                    Session.CurrentPlayer.AddItemToInventory(item);
+                    Session.CurrentPlayer.Gold -= fullPrice;
+                    Session.CurrentTrader.RemoveItemFromInventory(item,amounttoBuy);
+                    Session.CurrentPlayer.AddItemToInventory(item,amounttoBuy);
                 }
                 else
                 {
@@ -58,7 +71,8 @@ namespace WPFUI
                 }
             }
         }
-
+       
+        
         private void OnClick_Close(object sender, RoutedEventArgs e)
         {
             Close();

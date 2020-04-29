@@ -6,31 +6,22 @@ using System.Linq;
 
 namespace ChaosEngine.Classes
 {
-    public class Player: BaseNotificationClass
+    public class Player: LivingEntity
     {
         //--------------------------------------Private properties-----------------------
-        private string _name;
+      
         private string _characterClass;
-        private int _hitPoints;
+       
         private int _experiencePoints;
         private int _level;
-        private int _gold;
+     
 
         //----------------------------------------Getter and Setters----------------------------
 
-        public ObservableCollection<GameItem> Inventory { get; set; }
-        public ObservableCollection<Weapon> Weapons { get; set; }
+       
         public ObservableCollection<QuestStatus> Quests { get; set; }
 
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        
         public string CharacterClass
         {
             get { return _characterClass; }
@@ -38,16 +29,6 @@ namespace ChaosEngine.Classes
             {
                 _characterClass = value;
                 OnPropertyChanged(nameof(CharacterClass));
-            }
-        }
-
-        public int HitPoints
-        {
-            get { return _hitPoints; }
-            set
-            {
-                _hitPoints = value;
-                OnPropertyChanged(nameof(HitPoints));
             }
         }
 
@@ -70,43 +51,6 @@ namespace ChaosEngine.Classes
             }
         }
 
-        public int Gold
-        {
-            get { return _gold; }
-            set
-            {
-                _gold = value;
-                OnPropertyChanged(nameof(Gold));
-            }
-        }
-
-        public void AddItemToInventory(GameItem item)
-        {
-            Inventory.Add(item);
-
-            OnPropertyChanged(nameof(Inventory));
-        }
-
-        public void AddWeaponToWeapons(Weapon weapon)
-        {
-            Weapons.Add(weapon);
-
-            OnPropertyChanged(nameof(Weapons));
-        }
-
-        public void RemoveItemFromInventory(GameItem item)
-        {
-            Inventory.Remove(item);
-
-            OnPropertyChanged(nameof(Weapons));
-        }
-
-        public void RemoveWeaponToWeapons(Weapon weapon)
-        {
-            Weapons.Remove(weapon);
-
-            OnPropertyChanged(nameof(Weapons));
-        }
 
         public bool HasAllTheseItems(List<ItemQuantity> items)
         {
@@ -122,8 +66,6 @@ namespace ChaosEngine.Classes
         }
     public Player()
         {
-            Inventory = new ObservableCollection<GameItem>();
-            Weapons = new ObservableCollection<Weapon>();
             Quests = new ObservableCollection<QuestStatus>();
         }
         //---------------------------------------------------------------------------------------------------

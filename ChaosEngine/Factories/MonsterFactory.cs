@@ -51,8 +51,9 @@ namespace ChaosEngine.Factories
         {
             if (RandomNumberGenerator.NumberBetween(1, 100) <= percentage)
             {
-                monster.inventory.Add(new ItemQuantity(itemID, 1));
+                //monster.inventory.Add(new ItemQuantity(itemID, 1));
+                monster.Inventory.Add(ItemFactory.CreateGameItem(itemID));
             }
         }
-    }
+   }
 }
