@@ -15,6 +15,7 @@ namespace ChaosEngine.Managers
         private Location _currentLocation;
         private Monster _currentMonster;
         public event EventHandler<GameMessageEvent> OnMessageRaised;
+     
         private Trader _currentTrader;
         #endregion
 

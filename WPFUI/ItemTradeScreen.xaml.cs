@@ -15,6 +15,8 @@ using ChaosEngine.Managers;
 using ChaosEngine.Classes;
 using System.Text.RegularExpressions;
 using System.Data;
+using System.Windows.Controls.Primitives;
+using Xceed.Wpf.Toolkit;
 
 namespace WPFUI
 {
@@ -25,6 +27,7 @@ namespace WPFUI
     {
         public GameSession Session => DataContext as GameSession;
 
+
         public ItemTradeScreen()
         {
             InitializeComponent();
@@ -33,10 +36,11 @@ namespace WPFUI
         private void OnClick_Sell(object sender, RoutedEventArgs e)
         {
             GroupedInventoryItem inventoryItem = ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
-            GameItem item = inventoryItem.Item;
-            int amounttoSell = inventoryItem.Quantity;
-            int fullPrice = item.Price * amounttoSell;
+            int amounttoSell = inventoryItem.QuantityForTrade;
 
+            GameItem item = inventoryItem.Item;
+           
+            int fullPrice = item.Price * amounttoSell;
             if (item != null)
             {
                 if (Session.CurrentPlayer.Gold >= fullPrice)
@@ -53,9 +57,9 @@ namespace WPFUI
            // GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
             GroupedInventoryItem inventoryItem = ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
             GameItem item = inventoryItem.Item;
-            int amounttoBuy = inventoryItem.Quantity;
+            int amounttoBuy = inventoryItem.QuantityForTrade;
             int fullPrice = item.Price * amounttoBuy;
-
+          
 
             if (item != null)
             {
@@ -67,15 +71,15 @@ namespace WPFUI
                 }
                 else
                 {
-                    MessageBox.Show("You do not have enough gold");
+                    System.Windows.MessageBox.Show("You do not have enough gold");
                 }
             }
         }
-       
-        
+   
+
         private void OnClick_Close(object sender, RoutedEventArgs e)
         {
             Close();
         }
-    }
+}
 }

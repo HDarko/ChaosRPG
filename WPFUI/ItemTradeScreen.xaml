@@ -38,6 +38,7 @@
         <DataGrid Grid.Row="2" Grid.Column="0"
                   Margin="10"
                   ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
+                  Name="PlayerGroupedInventory"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   CanUserAddRows="False"
@@ -60,7 +61,7 @@
                 <DataGridTemplateColumn MinWidth="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <xctk:IntegerUpDown FormatString="N0" Value="1" Increment="1" Minimum="1" Maximum="{Binding Quantity}"/>
+                            <xctk:IntegerUpDown FormatString="N0" Value="{Binding Path=QuantityForTrade, UpdateSourceTrigger=PropertyChanged}" Increment="1" Minimum="1" Maximum="{Binding Quantity}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -69,6 +70,7 @@
                         <DataTemplate>
                             <Button Click="OnClick_Sell"
                                     Width="55"
+                                    CommandParameter="QuantityTrader.Value"
                                     Content="Sell"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -79,6 +81,7 @@
 
         <DataGrid Grid.Row="2" Grid.Column="1"
                   Margin="10"
+                  Name="TraderGroupedInventory"
                   ItemsSource="{Binding CurrentTrader.GroupedInventory}"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
@@ -102,7 +105,7 @@
                 <DataGridTemplateColumn MinWidth="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <xctk:IntegerUpDown FormatString="N0" Value="1" Increment="1" Minimum="1" Maximum="{Binding Quantity}"/>
+                            <xctk:IntegerUpDown FormatString="N0" Value="{Binding Path=QuantityForTrade, UpdateSourceTrigger=PropertyChanged}" Increment="1" Minimum="1" Maximum="{Binding QuantityForTrade}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
