@@ -82,9 +82,10 @@ namespace ChaosEngine.Classes
                 {
                     GroupedInventory.Add(new GroupedInventoryItem(item,1));
                     Inventory.Add(item);
+                    quantity -= 1;
                 }
-
-                GroupedInventory.First(gi => gi.Item.ItemTypeID == item.ItemTypeID).Quantity+=(quantity-1);
+                
+                GroupedInventory.First(gi => gi.Item.ItemTypeID == item.ItemTypeID).Quantity+=quantity;
             }
 
            

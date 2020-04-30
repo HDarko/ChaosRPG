@@ -37,8 +37,8 @@ namespace ChaosEngine.Classes
             set
             {
                 _quantity = value;
-                QuantityForTrade = value;
                 OnPropertyChanged(nameof(Quantity));
+                QuantityForTrade = value;
             }
         }
 

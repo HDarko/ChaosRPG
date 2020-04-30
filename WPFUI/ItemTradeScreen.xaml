@@ -105,7 +105,7 @@
                 <DataGridTemplateColumn MinWidth="75">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <xctk:IntegerUpDown FormatString="N0" Value="{Binding Path=QuantityForTrade, UpdateSourceTrigger=PropertyChanged}" Increment="1" Minimum="1" Maximum="{Binding QuantityForTrade}"/>
+                            <xctk:IntegerUpDown FormatString="N0" Value="{Binding Path=QuantityForTrade, UpdateSourceTrigger=PropertyChanged}" Increment="1" Minimum="1" Maximum="{Binding Quantity}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
