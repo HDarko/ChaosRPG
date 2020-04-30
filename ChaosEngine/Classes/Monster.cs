@@ -17,22 +17,20 @@ namespace ChaosEngine.Classes
         public int MaximumDamage { get; set; }
         
         #endregion
-        public Monster(string monName, string imageFileName, int startHitPoints,
-            int maxHitPoints, int minDmg, int maxDmg,
-            int rewardExpPoints, int rewardGoldAmount)
-        {
-            Name = monName;
+        public Monster(string name, string imageFileName,
+                       int maximumHitPoints, int currentHitPoints,
+                       int minimumDamage, int maxmumDamage,
+                       int rewardExpPoints, int gold) :
+            base(name, maximumHitPoints, currentHitPoints, gold)
+        {        
             ImageName = string.Format("/ChaosEngine;component/Images/Monsters/{0}", imageFileName);
             //or
             // ImageName = $"/ChaosEngine;component/Images/Monsters/{imageName}";
             //If first fails then try this
             //string.Format("pack://application:,,,/Engine;component/Images/Monsters/{0}", imageName);
-            MaximumHitPoints = maxHitPoints;
-            CurrentHitPoints = startHitPoints;
             RewardExperiencePoints = rewardExpPoints;
-            Gold = rewardGoldAmount;
-            MinimumDamage = minDmg;
-            MaximumDamage = maxDmg;
+            MinimumDamage = minimumDamage;
+            MaximumDamage = maxmumDamage;
 
             
         }

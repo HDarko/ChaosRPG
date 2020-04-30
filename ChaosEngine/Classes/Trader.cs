@@ -12,10 +12,8 @@ namespace ChaosEngine.Classes
     {
        public bool weaponsAvailable = false;
 
-        public Trader(string name,bool hasWeapons)
+        public Trader(string name,bool hasWeapons) :base(name,500,500,9999)
         {
-            Name = name;
-
             if(hasWeapons)
             {
                 weaponsAvailable = true;

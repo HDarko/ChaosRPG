@@ -34,7 +34,7 @@ namespace WPFUI
 
             if (weapon != null)
             {
-                Session.CurrentPlayer.Gold += weapon.Price;
+                Session.CurrentPlayer.ReceiveGold (weapon.Price);
                 Session.CurrentTrader.AddWeaponToWeapons(weapon);
                 Session.CurrentPlayer.RemoveWeaponToWeapons(weapon);
             }
@@ -48,7 +48,7 @@ namespace WPFUI
             {
                 if (Session.CurrentPlayer.Gold >= weapon.Price)
                 {
-                    Session.CurrentPlayer.Gold -= weapon.Price;
+                    Session.CurrentPlayer.SpendGold( weapon.Price);
                     Session.CurrentTrader.RemoveWeaponToWeapons(weapon);
                     Session.CurrentPlayer.AddWeaponToWeapons(weapon);
                 }

@@ -64,8 +64,12 @@ namespace ChaosEngine.Classes
 
             return true;
         }
-    public Player()
+    public Player(string name, string characterClass, int experiencePoints,
+                      int maximumHitPoints, int currentHitPoints, int gold) :
+            base(name, maximumHitPoints, currentHitPoints, gold)
         {
+            CharacterClass = characterClass;
+            ExperiencePoints = experiencePoints;
             Quests = new ObservableCollection<QuestStatus>();
         }
         //---------------------------------------------------------------------------------------------------

@@ -15,7 +15,7 @@ namespace ChaosEngine.Managers
         private Location _currentLocation;
         private Monster _currentMonster;
         public event EventHandler<GameMessageEvent> OnMessageRaised;
-     
+        private Player _player;
         private Trader _currentTrader;
         #endregion
 
@@ -25,7 +25,24 @@ namespace ChaosEngine.Managers
         public bool HasTrader => CurrentTrader != null;
         public bool TradeWeapons => (HasTrader && (CurrentTrader.weaponsAvailable));
 
-        public Player CurrentPlayer { get; set; }
+        public Player CurrentPlayer
+        {
+            get { return _player; }
+            set
+            {
+                if (_player != null)
+                {
+                    _player.OnKilled -= OnCurrentPlayerKilled;
+                }
+
+                _player = value;
+
+                if (_player != null)
+                {
+                    _player.OnKilled += OnCurrentPlayerKilled;
+                }
+            }
+        }
 
         public World CurrentWorld { get; set; }
         public Weapon CurrentWeapon { get; set; }
@@ -85,15 +102,24 @@ namespace ChaosEngine.Managers
             get { return _currentMonster; }
             set
             {
+                if (_currentMonster != null)
+                {
+                    _currentMonster.OnKilled -= OnCurrentMonsterKilled;
+                }
+
                 _currentMonster = value;
 
-                OnPropertyChanged(nameof(CurrentMonster));
-                OnPropertyChanged(nameof(HasMonster));
-                if (CurrentMonster != null)
+                if (_currentMonster != null)
                 {
+                    _currentMonster.OnKilled += OnCurrentMonsterKilled;
+
                     RaiseMessage("");
                     RaiseMessage($"You see a {CurrentMonster.Name} here!");
                 }
+
+                OnPropertyChanged(nameof(CurrentMonster));
+                OnPropertyChanged(nameof(HasMonster));
+                
             }
         }
 
@@ -101,18 +127,18 @@ namespace ChaosEngine.Managers
         //-------------------------------------------------------------------------------------------
         public GameSession()
         {
-            
-           
+
+
             CurrentPlayer = new Player
-            {
-                Name = "Player",
-                Gold = 100000,
-                CharacterClass = "Paladin",
-                Level = 1,
-                CurrentHitPoints = 40,
-                MaximumHitPoints = 80,
-                ExperiencePoints = 0
-            };
+            (
+               "Player",
+               "Paladin",
+                15,
+              50,
+              40,
+              20
+            );
+            
             if (!CurrentPlayer.Weapons.Any())
             {
                 CurrentPlayer.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
@@ -212,11 +238,11 @@ namespace ChaosEngine.Managers
                         RaiseMessage($"You completed the '{quest.Name}' quest");
 
                         // Give the player the quest rewards
-                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
                         RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
+                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
 
-                        CurrentPlayer.Gold += quest.RewardGold;
                         RaiseMessage($"You receive {quest.RewardGold} gold");
+                        CurrentPlayer.ReceiveGold(quest.RewardGold);
 
                         foreach (ItemQuantity itemQuantity in quest.RewardItems)
                         {
@@ -233,7 +259,32 @@ namespace ChaosEngine.Managers
             }
         }
 
+        private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
+        {
+            RaiseMessage("");
+            RaiseMessage($"The {CurrentMonster.Name} killed you.");
 
+            CurrentLocation = CurrentWorld.LocationAt(0, 0);
+            CurrentPlayer.CompletelyHeal();
+        }
+
+        private void OnCurrentMonsterKilled(object sender, System.EventArgs eventArgs)
+        {
+            RaiseMessage("");
+            RaiseMessage($"You defeated the {CurrentMonster.Name}!");
+
+            RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
+            CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
+
+            RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
+            CurrentPlayer.ReceiveGold(CurrentMonster.Gold);
+
+            foreach (GameItem gameItem in CurrentMonster.Inventory)
+            {
+                RaiseMessage($"You receive one {gameItem.Name}.");
+                CurrentPlayer.AddItemToInventory(gameItem);
+            }
+        }
         private void GetMonsterAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
@@ -261,28 +312,15 @@ namespace ChaosEngine.Managers
             }
             else
             {
-                CurrentMonster.CurrentHitPoints -= damageToMonster;
                 RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
+                CurrentMonster.TakeDamage(damageToMonster);
+               
             }
 
             // If monster if killed, collect rewards and loot
-            if (CurrentMonster.CurrentHitPoints <= 0)
+            if (CurrentMonster.IsDead)
             {
-                RaiseMessage("");
-                RaiseMessage($"You defeated the {CurrentMonster.Name}!");
-
-                CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
-                RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
-
-                CurrentPlayer.Gold += CurrentMonster.Gold;
-                RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
-
-                foreach (GameItem item in CurrentMonster.Inventory)
-                {
-                    CurrentPlayer.AddItemToInventory(item);
-                    RaiseMessage($"You receive a {item.Name}.");
-                }
-
+                //Maybe a way to wait for new monster 
                 // Get another monster to fight
                 GetMonsterAtLocation();
             }
@@ -297,20 +335,15 @@ namespace ChaosEngine.Managers
                 }
                 else
                 {
-                    CurrentPlayer.CurrentHitPoints -= damageToPlayer;
                     RaiseMessage($"The {CurrentMonster.Name} hit you for {damageToPlayer} points.");
-                }
+                    CurrentPlayer.TakeDamage(damageToPlayer);
 
-                // If player is killed, move them back to their home.
-                if (CurrentPlayer.CurrentHitPoints <= 0)
-                {
-                    RaiseMessage("");
-                    RaiseMessage($"The {CurrentMonster.Name} killed you.");
-
-                    CurrentLocation = CurrentWorld.LocationAt(0, 0); // Player's home
-                    CurrentPlayer.CurrentHitPoints = CurrentPlayer.Level * 10; // Completely heal the player
                 }
             }
+
+               
+                
+            
         }
     }
 }

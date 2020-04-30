@@ -45,7 +45,7 @@ namespace WPFUI
             {
                 if (Session.CurrentPlayer.Gold >= fullPrice)
                 {
-                    Session.CurrentPlayer.Gold += fullPrice;
+                    Session.CurrentPlayer.ReceiveGold(fullPrice);
                     Session.CurrentTrader.AddItemToInventory(item,amounttoSell);
                     Session.CurrentPlayer.RemoveItemFromInventory(item,amounttoSell);
                 }
@@ -65,7 +65,7 @@ namespace WPFUI
             {
                 if (Session.CurrentPlayer.Gold >= fullPrice)
                 {
-                    Session.CurrentPlayer.Gold -= fullPrice;
+                    Session.CurrentPlayer.SpendGold(fullPrice);
                     Session.CurrentTrader.RemoveItemFromInventory(item,amounttoBuy);
                     Session.CurrentPlayer.AddItemToInventory(item,amounttoBuy);
                 }
