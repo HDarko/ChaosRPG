@@ -33,6 +33,7 @@ namespace ChaosEngine.Managers
                 if (_player != null)
                 {
                     _player.OnKilled -= OnCurrentPlayerKilled;
+                    _player.OnLeveledUp -= OnCurrentPlayerLeveledUp;
                 }
 
                 _player = value;
@@ -40,6 +41,7 @@ namespace ChaosEngine.Managers
                 if (_player != null)
                 {
                     _player.OnKilled += OnCurrentPlayerKilled;
+                    _player.OnLeveledUp += OnCurrentPlayerLeveledUp;
                 }
             }
         }
@@ -134,8 +136,8 @@ namespace ChaosEngine.Managers
                "Player",
                "Paladin",
                 15,
-              50,
-              40,
+              10,
+              10,
               20
             );
             
@@ -239,7 +241,7 @@ namespace ChaosEngine.Managers
 
                         // Give the player the quest rewards
                         RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
-                        CurrentPlayer.ExperiencePoints += quest.RewardExperiencePoints;
+                        CurrentPlayer.AddExperience( quest.RewardExperiencePoints);
 
                         RaiseMessage($"You receive {quest.RewardGold} gold");
                         CurrentPlayer.ReceiveGold(quest.RewardGold);
@@ -247,9 +249,9 @@ namespace ChaosEngine.Managers
                         foreach (ItemQuantity itemQuantity in quest.RewardItems)
                         {
                             GameItem rewardItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
-
-                            CurrentPlayer.AddItemToInventory(rewardItem);
                             RaiseMessage($"You receive a {rewardItem.Name}");
+                            CurrentPlayer.AddItemToInventory(rewardItem);
+                           
                         }
 
                         // Mark the Quest as completed
@@ -262,7 +264,7 @@ namespace ChaosEngine.Managers
         private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
         {
             RaiseMessage("");
-            RaiseMessage($"The {CurrentMonster.Name} killed you.");
+            RaiseMessage($"You have been slain");
 
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
             CurrentPlayer.CompletelyHeal();
@@ -274,7 +276,7 @@ namespace ChaosEngine.Managers
             RaiseMessage($"You defeated the {CurrentMonster.Name}!");
 
             RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
-            CurrentPlayer.ExperiencePoints += CurrentMonster.RewardExperiencePoints;
+            CurrentPlayer.AddExperience(CurrentMonster.RewardExperiencePoints);
 
             RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
             CurrentPlayer.ReceiveGold(CurrentMonster.Gold);
@@ -295,6 +297,10 @@ namespace ChaosEngine.Managers
             OnMessageRaised?.Invoke(this, new GameMessageEvent(message));
         }
 
+        private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs eventArgs)
+        {
+            RaiseMessage($"You are now level {CurrentPlayer.Level}!");
+        }
         public void AttackCurrentMonster()
         {
             if (CurrentWeapon == null)

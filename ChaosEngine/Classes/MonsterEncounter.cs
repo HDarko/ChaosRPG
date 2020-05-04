@@ -8,7 +8,7 @@ namespace ChaosEngine.Classes
 {
    public class MonsterEncounter
     {
-        public int monsterID { get; set; }
+        public int monsterID { get;  }
         public int chanceOfEncountering { get; set; }
 
         public MonsterEncounter(int monsID, int encounterChancePercent)

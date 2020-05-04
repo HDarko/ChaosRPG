@@ -32,6 +32,28 @@ namespace WPFUI
 
         }
 
+        private void OnClick_Move(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            string direction = button.Tag.ToString();
+            switch(direction)
+            {
+                case "N":
+                    _gameSession.MoveNorth();
+                    break;
+                case "W":
+                    _gameSession.MoveWest();
+                    break;
+                case "E":
+                    _gameSession.MoveEast();
+                    break;
+                case "S":
+                    _gameSession.MoveSouth();
+                    break;
+                default:
+                    break;
+            }
+        }
         private void OnClick_MoveNorth(object sender, RoutedEventArgs e)
         {
             _gameSession.MoveNorth();

@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Classes
 {
-    public class QuestStatus
+    public class QuestStatus: BaseNotificationClass
     {
-        public Quest PlayerQuest { get; set; }
-        public bool IsCompleted { get; set; }
-
-        public QuestStatus(Quest quest)
+        private bool _isCompleted = false;
+        public Quest PlayerQuest { get; }
+        public bool IsCompleted
+        { 
+            get { return _isCompleted;}
+            set
+            {
+                _isCompleted = value;
+                OnPropertyChanged();
+            }
+        }
+public QuestStatus(Quest quest)
         {
             PlayerQuest = quest;
             IsCompleted = false;
