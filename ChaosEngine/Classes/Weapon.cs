@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChaosEngine.Classes.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,41 @@ namespace ChaosEngine.Classes
 {
     public class Weapon : GameItem
     {
-        public int MinimumDamage { get; }
-        public int MaximumDamage { get;}
-        public string DamageRange { get;}
-        public Weapon(int itemTypeID, string name, int price, int minDamage, int maxDamage)
-           : base(itemTypeID, name, price,true)
+        private AttackWithWeapon _action;
+       public AttackWithWeapon Action
+        { get { return _action; }
+            set 
+            {
+                _action = value;
+                SetDamageRange();
+            } }
+        public string DamageRange { get; set; }
+        public Weapon(int itemTypeID, string name, int price, AttackWithWeapon command=null)
+           : base(itemTypeID, ItemCategory.Weapon, name, price,true)
         {
-            MinimumDamage = minDamage;
-            MaximumDamage = maxDamage;
-            DamageRange = $"{MinimumDamage}-{MaximumDamage}";
+            Action = command;
         }
 
+        public void SetDamageRange()
+        {
+            if (Action != null)
+            {
+                DamageRange = $"{Action.GetMinDamage()}-{Action.GetMaxDamage()}";
+            }
+            else
+            {
+                DamageRange = "";
+            }
+        }
+
+        public void PerformAction(LivingEntity actor, LivingEntity target)
+        {
+            Action?.Execute(actor, target);
+        }
         public new Weapon Clone()
         {
             //fix either with virtual/orveride or through composition- 5.1
-            return new Weapon(ItemTypeID, Name, Price, MinimumDamage, MaximumDamage);
+            return new Weapon(ItemTypeID, Name, Price, Action);
         }
     }
 }

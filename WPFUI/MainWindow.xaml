@@ -246,9 +246,9 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
 
                 <ComboBox Grid.Row="0" Grid.Column="0"
                           ItemsSource="{Binding CurrentPlayer.Weapons}"
-                          SelectedItem="{Binding CurrentWeapon}"
+                          SelectedItem="{Binding CurrentPlayer.CurrentWeapon}"
                           DisplayMemberPath="Name"
-                          SelectedValuePath="ID"/>
+                          SelectedValuePath="ItemTypeID"/>
 
                 <Button Grid.Row="0" Grid.Column="2"
                         Content="Use"

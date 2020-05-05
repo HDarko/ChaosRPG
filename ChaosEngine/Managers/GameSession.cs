@@ -34,6 +34,7 @@ namespace ChaosEngine.Managers
                 {
                     _player.OnKilled -= OnCurrentPlayerKilled;
                     _player.OnLeveledUp -= OnCurrentPlayerLeveledUp;
+                    _player.OnActionPerformed -= OnCurrentPlayerPerformedAction;
                 }
 
                 _player = value;
@@ -42,12 +43,12 @@ namespace ChaosEngine.Managers
                 {
                     _player.OnKilled += OnCurrentPlayerKilled;
                     _player.OnLeveledUp += OnCurrentPlayerLeveledUp;
+                    _player.OnActionPerformed += OnCurrentPlayerPerformedAction;
                 }
             }
         }
 
         public World CurrentWorld { get; set; }
-        public Weapon CurrentWeapon { get; set; }
         public Location CurrentLocation
         {
             get { return _currentLocation; }
@@ -260,7 +261,10 @@ namespace ChaosEngine.Managers
                 }
             }
         }
-
+        private void OnCurrentPlayerPerformedAction(object sender, string result)
+        {
+            RaiseMessage(result);
+        }
         private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
         {
             RaiseMessage("");
@@ -303,25 +307,14 @@ namespace ChaosEngine.Managers
         }
         public void AttackCurrentMonster()
         {
-            if (CurrentWeapon == null)
+            if (CurrentPlayer.CurrentWeapon == null)
             {
                 RaiseMessage("You must select a weapon, to attack.");
                 return;
             }
 
             // Determine damage to monster
-            int damageToMonster = RandomNumberGenerator.NumberBetween(CurrentWeapon.MinimumDamage, CurrentWeapon.MaximumDamage);
-
-            if (damageToMonster == 0)
-            {
-                RaiseMessage($"You missed the {CurrentMonster.Name}.");
-            }
-            else
-            {
-                RaiseMessage($"You hit the {CurrentMonster.Name} for {damageToMonster} points.");
-                CurrentMonster.TakeDamage(damageToMonster);
-               
-            }
+            CurrentPlayer.UseCurrentWeaponOn(CurrentMonster);
 
             // If monster if killed, collect rewards and loot
             if (CurrentMonster.IsDead)

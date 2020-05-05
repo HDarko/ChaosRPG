@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BaseNotificationClass.cs" />
+    <Compile Include="Classes\Commands\AttackWithWeapon.cs" />
     <Compile Include="Classes\GameItem.cs" />
     <Compile Include="Classes\GroupedInventoryItem.cs" />
     <Compile Include="Classes\ItemQuantity.cs" />
