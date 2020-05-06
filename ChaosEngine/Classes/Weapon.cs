@@ -1,4 +1,4 @@
-﻿using ChaosEngine.Classes.Commands;
+﻿using ChaosEngine.Classes.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +36,7 @@ namespace ChaosEngine.Classes
             }
         }
 
-        public void PerformAction(LivingEntity actor, LivingEntity target)
+        public new void PerformAction(LivingEntity actor, LivingEntity target)
         {
             Action?.Execute(actor, target);
         }
