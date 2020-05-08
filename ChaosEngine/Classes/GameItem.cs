@@ -15,31 +15,32 @@ namespace ChaosEngine.Classes
         public enum ItemCategory
         {
             Miscellaneous,
-            Weapon
+            Weapon,
+            Consumable
         }
         public int ItemTypeID { get;  }
         public string Name { get;  }
         public int Price { get;}
-        public IAction ItemAction { get; set; }
+        public IAction Action { get; set; }
         public bool IsUnique { get; }
         public ItemCategory Category { get; }
-        public GameItem(int itemID, ItemCategory category, string itemName, int itemPrice, bool isUnique=false, IAction itemAction=null)
+        public GameItem( ItemCategory category, int itemID, string itemName, int itemPrice, bool isUnique=false, IAction itemAction=null)
         {
             ItemTypeID = itemID;
             Category = category;
             Name = itemName;
             Price = itemPrice;
             IsUnique = isUnique;
-            ItemAction = itemAction;
+            Action = itemAction;
         }
 
         public void PerformAction(LivingEntity actor, LivingEntity target)
         {
-            ItemAction?.Execute(actor, target);
+            Action?.Execute(actor, target);
         }
         public GameItem Clone()
         {
-            return new GameItem(ItemTypeID, Category, Name, Price, IsUnique,ItemAction);
+            return new GameItem( Category, ItemTypeID, Name, Price, IsUnique,Action);
         }
     }
 }

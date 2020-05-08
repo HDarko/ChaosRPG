@@ -148,7 +148,8 @@ namespace ChaosEngine.Managers
             {
                 CurrentPlayer.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
             }
-
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(6001));
+            CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(1));
             CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
 
@@ -272,6 +273,7 @@ namespace ChaosEngine.Managers
             RaiseMessage(result);
         }
 
+        
         private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
         {
             RaiseMessage("");
@@ -301,6 +303,11 @@ namespace ChaosEngine.Managers
         private void GetMonsterAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
+        }
+
+        public void UseCurrentConsumable()
+        {
+            CurrentPlayer.UseCurrentConsumableOnSelf();
         }
 
         private void RaiseMessage(string message)

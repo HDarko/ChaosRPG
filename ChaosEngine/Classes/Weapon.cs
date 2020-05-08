@@ -10,31 +10,18 @@ namespace ChaosEngine.Classes
     public class Weapon : GameItem
     {
         private AttackWithWeapon _action;
-       public AttackWithWeapon Action
-        { get { return _action; }
-            set 
-            {
-                _action = value;
-                SetDamageRange();
-            } }
-        public string DamageRange { get; set; }
+        public new AttackWithWeapon Action
+        { get => _action;
+            set => _action = value;
+        }
         public Weapon(int itemTypeID, string name, int price, AttackWithWeapon command=null)
-           : base(itemTypeID, ItemCategory.Weapon, name, price,true)
+           : base( ItemCategory.Weapon, itemTypeID, name, price,true)
         {
             Action = command;
         }
 
-        public void SetDamageRange()
-        {
-            if (Action != null)
-            {
-                DamageRange = $"{Action.GetMinDamage()}-{Action.GetMaxDamage()}";
-            }
-            else
-            {
-                DamageRange = "";
-            }
-        }
+       
+        
 
         public new void PerformAction(LivingEntity actor, LivingEntity target)
         {

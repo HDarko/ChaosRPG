@@ -15,7 +15,9 @@ namespace ChaosEngine.Classes
         private int _gold;
         private int _level;
         private Weapon _currentWeapon;
+        private GameItem _currentConsumable;
         public bool IsDead => CurrentHitPoints <= 0;
+        public bool HasConsumable => Consumables.Any();
 
         #region Properties
         public string Name
@@ -89,9 +91,32 @@ namespace ChaosEngine.Classes
             }
         }
 
+        public GameItem CurrentConsumable
+        {
+            get => _currentConsumable;
+            set
+            {
+                if (_currentConsumable != null)
+                {
+                    _currentConsumable.Action.OnActionPerformed -= RaiseActionPerformedEvent;
+                }
+
+                _currentConsumable = value;
+
+                if (_currentConsumable != null)
+                {
+                    _currentConsumable.Action.OnActionPerformed += RaiseActionPerformedEvent;
+                }
+
+                OnPropertyChanged();
+            }
+        }
+
         public List<GameItem> Inventory { get;  }
         public ObservableCollection<GroupedInventoryItem> GroupedInventory { get;  }
         public ObservableCollection<Weapon> Weapons { get; set; }
+        public List<GameItem> Consumables =>
+            Inventory.Where(i => i.Category == GameItem.ItemCategory.Consumable).ToList();
 
         #endregion
 
@@ -129,8 +154,9 @@ namespace ChaosEngine.Classes
                 
                 GroupedInventory.First(gi => gi.Item.ItemTypeID == item.ItemTypeID).Quantity+=quantity;
             }
+            OnPropertyChanged(nameof(Consumables));
+            OnPropertyChanged(nameof(HasConsumable));
 
-           
         }
 
         //The binding in Views will prevent us from going over or under
@@ -150,8 +176,9 @@ namespace ChaosEngine.Classes
                     Inventory.Remove(item);
                 }
             }
+            OnPropertyChanged(nameof(Consumables));
+            OnPropertyChanged(nameof(HasConsumable));
 
-          
         }
         public void TakeDamage(int hitPointsOfDamage)
         {
@@ -192,6 +219,12 @@ namespace ChaosEngine.Classes
             }
 
             Gold -= amountOfGold;
+        }
+
+        public void UseCurrentConsumableOnSelf()
+        {
+            CurrentConsumable.PerformAction(this, this);
+            RemoveItemFromInventory(CurrentConsumable);
         }
         public void AddWeaponToWeapons(Weapon weapon)
         {

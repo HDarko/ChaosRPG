@@ -56,6 +56,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Actions\BaseAction.cs" />
+    <Compile Include="Classes\Actions\Heal.cs" />
     <Compile Include="Classes\Actions\IAction.cs" />
     <Compile Include="Classes\BaseNotificationClass.cs" />
     <Compile Include="Classes\Actions\AttackWithWeapon.cs" />
@@ -70,12 +72,14 @@
     <Compile Include="Classes\Quest.cs" />
     <Compile Include="Classes\QuestStatus.cs" />
     <Compile Include="Classes\RandomNumberGenerator.cs" />
+    <Compile Include="Classes\Recipe.cs" />
     <Compile Include="Classes\Trader.cs" />
     <Compile Include="Classes\Weapon.cs" />
     <Compile Include="Classes\World.cs" />
     <Compile Include="Factories\ItemFactory.cs" />
     <Compile Include="Factories\MonsterFactory.cs" />
     <Compile Include="Factories\QuestFactory.cs" />
+    <Compile Include="Factories\RecipeFactory.cs" />
     <Compile Include="Factories\TraderFactory.cs" />
     <Compile Include="Factories\WeaponFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Classes.Actions
 {
-    public class AttackWithWeapon: IAction
+    public class AttackWithWeapon: BaseAction,IAction
     {
-        private readonly Weapon _weapon;
+    
         private readonly int _maximumDamage;
         private readonly int _minimumDamage;
 
-        public event EventHandler<string> OnActionPerformed;
+   
 
         public AttackWithWeapon(Weapon weapon, int minimumDamage, int maximumDamage)
+            :base(weapon)
         {
             if (weapon.Category != GameItem.ItemCategory.Weapon)
             {
@@ -30,8 +31,6 @@ namespace ChaosEngine.Classes.Actions
             {
                 throw new ArgumentException("maximumDamage must be >= minimumDamage");
             }
-
-            _weapon = weapon;
             _minimumDamage = minimumDamage;
             _maximumDamage = maximumDamage;
         }
@@ -64,9 +63,6 @@ namespace ChaosEngine.Classes.Actions
             }
         }
 
-        private void ReportResult(string result)
-        {
-            OnActionPerformed?.Invoke(this, result);
-        }
+     
     }
 }

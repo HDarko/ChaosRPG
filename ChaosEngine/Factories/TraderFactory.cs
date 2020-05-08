@@ -14,11 +14,11 @@ namespace ChaosEngine.Factories
         static TraderFactory()
         {
             Trader korra = new Trader("Korra the Mage", false);
-            korra.AddItemToInventory(ItemFactory.CreateGameItem(3002),2);
-            korra.AddItemToInventory(ItemFactory.CreateGameItem(3003),1);
+            korra.AddItemToInventory(ItemFactory.CreateGameItem(9010),6);
+            korra.AddItemToInventory(ItemFactory.CreateGameItem(6001), 7);
 
             Trader ikka = new Trader("Ikka the Trader",true);
-            ikka.AddItemToInventory(ItemFactory.CreateGameItem(3001),4);
+            ikka.AddItemToInventory(ItemFactory.CreateGameItem(9009),4);
             ikka.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1002));
             ikka.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1003));
 

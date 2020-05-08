@@ -20,8 +20,8 @@ namespace ChaosEngine.Classes
 
 
         public ObservableCollection<QuestStatus> Quests { get; }
+        public ObservableCollection<Recipe> Recipes { get; }
 
-        
         public string CharacterClass
         {
             get { return _characterClass; }
@@ -88,6 +88,15 @@ namespace ChaosEngine.Classes
             CharacterClass = characterClass;
             ExperiencePoints = experiencePoints;
             Quests = new ObservableCollection<QuestStatus>();
+            Recipes = new ObservableCollection<Recipe>();
+        }
+
+        public void LearnRecipe(Recipe recipe)
+        {
+            if (!Recipes.Any(r => r.ID == recipe.ID))
+            {
+                Recipes.Add(recipe);
+            }
         }
         //---------------------------------------------------------------------------------------------------
     }
