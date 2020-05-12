@@ -5,7 +5,7 @@ using System.Linq;
 using ChaosEngine.Classes;
 using ChaosEngine.Factories;
 using ChaosEngine.GameEvents;
-
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ChaosEngine.Managers
 {
@@ -149,7 +149,12 @@ namespace ChaosEngine.Managers
                 CurrentPlayer.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
             }
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(6001));
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4000),4);
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4001),4);
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4002),4);
+            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4003), 4);
             CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(1));
+            CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(2));
             CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
 
@@ -232,13 +237,7 @@ namespace ChaosEngine.Managers
                     if (CurrentPlayer.HasAllTheseItems(quest.ItemsToComplete))
                     {
                         // Remove the quest completion items from the player's inventory
-                        foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
-                        {
-                            for (int i = 0; i < itemQuantity.Quantity; i++)
-                            {
-                                CurrentPlayer.RemoveItemFromInventory(CurrentPlayer.Inventory.First(item => item.ItemTypeID == itemQuantity.ItemID));
-                            }
-                        }
+                        CurrentPlayer.RemoveItemsFromInventory(quest.ItemsToComplete);
 
                         RaiseMessage("");
                         RaiseMessage($"You completed the '{quest.Name}' quest");
@@ -262,6 +261,43 @@ namespace ChaosEngine.Managers
                         questToComplete.IsCompleted = true;
                     }
                 }
+            }
+        }
+
+        public void CraftItemUsing(Recipe recipe)
+        {
+            if (CurrentPlayer.HasAllTheseItems(recipe.Ingredients))
+            {
+                CurrentPlayer.RemoveRecipeIngredientsFromInventory(recipe.Ingredients);
+
+                foreach (ItemQuantity itemQuantity in recipe.OutputItems)
+                {
+                    if(itemQuantity.isWeapon)
+                    {
+                        Weapon outputWeapon = WeaponFactory.CreateWeapon(itemQuantity.ItemID);
+                        CurrentPlayer.AddWeaponToWeapons(outputWeapon);
+                        RaiseMessage($"You craft a {outputWeapon.Name}");
+                    }
+                    else
+                    {
+                        GameItem outputItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
+                        CurrentPlayer.AddItemToInventory(outputItem, itemQuantity.Quantity);
+                        RaiseMessage($"You craft {itemQuantity.Quantity} {outputItem.Name}");
+                    }
+                }
+            }
+            else
+            {
+                RaiseMessage("You do not have the required ingredients:");
+                foreach (ItemQuantity itemQuantity in recipe.Ingredients)
+                    if(itemQuantity.isWeapon)
+                    {
+                        RaiseMessage($"  {itemQuantity.Quantity} {WeaponFactory.WeaponName(itemQuantity.ItemID)}");
+                    }
+                else
+                    {
+                    RaiseMessage($"  {itemQuantity.Quantity} {ItemFactory.ItemName(itemQuantity.ItemID)}");
+                    }
             }
         }
         private void OnCurrentPlayerPerformedAction(object sender, string result)

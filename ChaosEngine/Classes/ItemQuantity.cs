@@ -10,11 +10,13 @@ namespace ChaosEngine.Classes
     {
         public int ItemID { get;  }
         public int Quantity { get; }
+        public bool isWeapon { get; }
 
-        public ItemQuantity(int itID, int itemQuantity)
+        public ItemQuantity(int itID, int itemQuantity, bool itemIsWeapon=false)
         {
             ItemID = itID;
             Quantity = itemQuantity;
+            isWeapon = itemIsWeapon;
         }
     }
 }

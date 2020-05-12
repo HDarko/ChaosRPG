@@ -54,7 +54,7 @@ namespace ChaosEngine.Classes.Actions
             string targetName = (target is Player) ? "you" : $"the {target.Name.ToLower()}";
             if (damage == 0)
             {
-                ReportResult($"{actorName} missed the {targetName}.");
+                ReportResult($"{actorName} missed {targetName}.");
             }
             else
             {

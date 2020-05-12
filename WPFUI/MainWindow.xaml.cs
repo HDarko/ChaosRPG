@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChaosEngine.Managers;
 using ChaosEngine.GameEvents;
+using ChaosEngine.Classes;
 
 namespace WPFUI
 {
@@ -104,6 +105,12 @@ namespace WPFUI
         private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e)
         {
             _gameSession.UseCurrentConsumable();
+        }
+
+        private void OnClick_Craft(object sender, RoutedEventArgs e)
+        {
+            Recipe recipe = ((FrameworkElement)sender).DataContext as Recipe;
+            _gameSession.CraftItemUsing(recipe);
         }
 
     }

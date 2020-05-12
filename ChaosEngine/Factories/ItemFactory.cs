@@ -33,6 +33,7 @@ namespace ChaosEngine.Factories
             BuildMiscellaneousItem(4000, "Blue-Green Moss", 5);
             BuildMiscellaneousItem(4001, "Bone Marrow", 5);
             BuildMiscellaneousItem(4002, "Lovely Ivy Extract", 5);
+            BuildMiscellaneousItem(4003, "Sharp Nails", 5);
             //Quest Items in 3000s,
             BuildMiscellaneousItem(3000, "Quest Token", 99);
             BuildMiscellaneousItem(3001, "Game Won Token", 1000);
@@ -61,6 +62,11 @@ namespace ChaosEngine.Factories
             GameItem item = new GameItem(GameItem.ItemCategory.Consumable, id, name, price);
             item.Action = new Heal(item, hitPointsToHeal);
             _standardGameItems.Add(item);
+        }
+
+        public static string ItemName(int itemTypeID)
+        {
+            return _standardGameItems.FirstOrDefault(i => i.ItemTypeID == itemTypeID)?.Name ?? "";
         }
 
     }

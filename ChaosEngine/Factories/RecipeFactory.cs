@@ -15,11 +15,17 @@ namespace ChaosEngine.Factories
         {
             Recipe healthPotionLesser = new Recipe(1, "Health Potion(Lesser)");
             healthPotionLesser.AddIngredient(4000, 1);
-            healthPotionLesser.AddIngredient(4001, 1);
+            healthPotionLesser.AddIngredient(4001, 2);
             healthPotionLesser.AddIngredient(4002, 1);
-            healthPotionLesser.AddOutputItem(2001, 1);
+            healthPotionLesser.AddOutputItem(6001, 1);
 
             _recipes.Add(healthPotionLesser);
+
+            Recipe stonkaStick = new Recipe(2, "Stonka Stick");
+            stonkaStick.AddIngredient(4003, 1);
+            stonkaStick.AddWeaponIngredient(1001);
+            stonkaStick.AddOutputWeapon(1003);
+            _recipes.Add(stonkaStick);
         }
 
         public static Recipe RecipeByID(int id)

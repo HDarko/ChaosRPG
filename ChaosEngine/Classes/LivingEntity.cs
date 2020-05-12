@@ -180,6 +180,65 @@ namespace ChaosEngine.Classes
             OnPropertyChanged(nameof(HasConsumable));
 
         }
+
+        public void RemoveItemsFromInventory(List<ItemQuantity> itemQuantities)
+        {
+            foreach (ItemQuantity itemQuantity in itemQuantities)
+            {
+                
+                    RemoveItemFromInventory(Inventory.First(item => item.ItemTypeID == itemQuantity.ItemID),
+                        itemQuantity.Quantity);
+             
+            }
+        }
+        //Recipe Functions
+        public bool HasAllTheseItems(List<ItemQuantity> items)
+        {
+            foreach (ItemQuantity item in items)
+            {     //Check if the item is a non weapon item or not
+                if (item.isWeapon)
+                {
+                    Weapon weapon = Weapons.FirstOrDefault(i => i.ItemTypeID == item.ItemID);
+                    if (weapon == null) return false;
+                }
+                else
+                {
+                    GroupedInventoryItem groupedInventoryItem =
+                   GroupedInventory.FirstOrDefault(i => i.Item.ItemTypeID == item.ItemID);
+                    if (groupedInventoryItem == null) return false;
+                    if (groupedInventoryItem.Quantity < item.Quantity)
+                    {
+                        return false;
+                    }
+
+                }
+            }
+            return true;
+        }
+         public void RemoveRecipeIngredientsFromInventory(List<ItemQuantity> itemQuantities)
+        {
+            foreach (ItemQuantity item in itemQuantities)
+            {
+                if(item.isWeapon)
+                {
+                    Weapon weapon = Weapons.FirstOrDefault(i => i.ItemTypeID == item.ItemID);
+                   if(weapon!=null)
+                    {
+                        RemoveWeaponFromWeapons(weapon);
+                    }
+                    
+                }
+                else
+                {
+                    RemoveItemFromInventory(Inventory.First(i => i.ItemTypeID == item.ItemID),
+                        item.Quantity);
+                }
+                
+            }
+         }
+
+
+
         public void TakeDamage(int hitPointsOfDamage)
         {
             CurrentHitPoints -= hitPointsOfDamage;
@@ -232,7 +291,7 @@ namespace ChaosEngine.Classes
 
             OnPropertyChanged(nameof(Weapons));
         }
-        public void RemoveWeaponToWeapons(Weapon weapon)
+        public void RemoveWeaponFromWeapons(Weapon weapon)
         {
             Weapons.Remove(weapon);
 

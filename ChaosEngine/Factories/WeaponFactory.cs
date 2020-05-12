@@ -50,6 +50,10 @@ namespace ChaosEngine.Factories
             }
             return null;
         }
+        public static string WeaponName(int weaponID)
+        {
+            return _allweaponsinGame.FirstOrDefault(weap => weap.ItemTypeID == weaponID)?.Name ?? "";
+        }
 
     }
 }

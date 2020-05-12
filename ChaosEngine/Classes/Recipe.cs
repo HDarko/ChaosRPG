@@ -12,7 +12,7 @@ namespace ChaosEngine.Classes
         public string Name { get; }
         public List<ItemQuantity> Ingredients { get; } = new List<ItemQuantity>();
         public List<ItemQuantity> OutputItems { get; } = new List<ItemQuantity>();
-
+        
         public Recipe(int id, string name)
         {
             ID = id;
@@ -25,6 +25,16 @@ namespace ChaosEngine.Classes
             {
                 Ingredients.Add(new ItemQuantity(itemID, quantity));
             }
+            
+        }
+
+        public void AddWeaponIngredient(int weaponID)
+        {
+            if (!Ingredients.Any(x => x.ItemID == weaponID))
+            {
+                Ingredients.Add(new ItemQuantity(weaponID, 1,true));
+            }
+
         }
 
         public void AddOutputItem(int itemID, int quantity)
@@ -33,6 +43,15 @@ namespace ChaosEngine.Classes
             {
                 OutputItems.Add(new ItemQuantity(itemID, quantity));
             }
+        }
+
+        public void AddOutputWeapon(int weaponID)
+        {
+            if (!OutputItems.Any(x => x.ItemID == weaponID))
+            {
+                OutputItems.Add(new ItemQuantity(weaponID, 1,true));
+            }
+
         }
     }
 }
