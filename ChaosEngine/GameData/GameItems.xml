@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GameItems>
+  <!--#region PlayerItems IDs in 6000s-->
+  <HealingItems>
+    <HealingItem ID="6001" Name="Health Potion(Lesser)" Price="1"/>
+  </HealingItems>
+  <!--#endregion PlayerItems IDs in 6000s-->
+  <MiscellaneousItems>
+    <!-- #region LootItems or Drops ID in 9000s -->
+    <MiscellaneousItem ID="9001" Name="Turkeysaur Leg" Price="1"/>
+    <MiscellaneousItem ID="9002" Name="Turkeysaur Crest" Price="4"/>
+    <MiscellaneousItem ID="9003" Name="Frog Legs" Price="3"/>
+    <MiscellaneousItem ID="9004" Name="Frog Eyes" Price="6"/>
+    <MiscellaneousItem ID="9005" Name="Frog Tongue" Price="18"/>
+    <MiscellaneousItem ID="9006" Name="Engraved Rings" Price="18"/>
+    <MiscellaneousItem ID="9007" Name="Nasty Fangs" Price="20"/>
+    <MiscellaneousItem ID="9008" Name="Great Moss" Price="29"/>
+    <MiscellaneousItem ID="9009" Name="Odd Pebble" Price="1"/>
+    <MiscellaneousItem ID="9010" Name="Rusty Coin" Price="1"/>
+    <!-- #endregion LootItems or Drops ID in 9000s I-->
+    <!-- #region Trader Only or Ingredients ID in 8000s -->
+    <MiscellaneousItem ID="4000" Name="Blue-Green Moss" Price="5"/>
+    <MiscellaneousItem ID="4001" Name="Bone Marrow" Price="5"/>
+    <MiscellaneousItem ID="4002" Name="Lovely Ivy Extract" Price="5"/>
+    <MiscellaneousItem ID="4003" Name="Sharp Nails" Price="5"/>
+    <!-- #endregion Trader Only Items or Ingredients ID in 8000s -->
+    <!--#region Quest or Key Item ID in 3000s-->
+    <MiscellaneousItem ID="3000" Name="Quest Token" Price="99"/>
+    <MiscellaneousItem ID="3001" Name="Game Won Token" Price="1000"/>
+    <!--#endregion Quest or Key Item ID in 3000s-->
+  </MiscellaneousItems>
+</GameItems>

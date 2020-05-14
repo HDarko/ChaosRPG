@@ -9,6 +9,7 @@
         xmlns:local="clr-namespace:WPFUI"      
         mc:Ignorable="d"
         FontSize="11pt"
+        KeyDown="MainWindow_OnKeyDown"
          Title="Chaos RPG" Height="768" Width="1024">
     <!--
     the line with “xmlns:Managers” tells the Window that we are using objects in the ChaosEngine project (assembly), and in theChaosEngine.Managers namespace (folder structure).
@@ -164,65 +165,65 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
 
             </Border>
         </Grid>
-        <!-- Inventory and Quests -->
+        <!-- Inventory,Weapons, Quests and Recipes -->
         <Grid Grid.Row="2" Grid.Column="0"  Background="BurlyWood">
-            <TabControl>
-                <TabItem Header="Inventory">
+            <TabControl x:Name="PlayerDataTabControl">
+                <TabItem Header="Inventory" x:Name="InventoryTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding Item.Name}"
+                                                Binding="{Binding Item.Name, Mode=OneWay}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Price"
-                                                Binding="{Binding Item.Price}"
+                                                Binding="{Binding Item.Price, Mode=OneWay}"
                                                 Width="Auto"/>
                             <DataGridTextColumn Header="Quantity"
-                                                Binding="{Binding Quantity}"
+                                                Binding="{Binding Quantity, Mode=OneWay}"
                                                 Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="Weapons">
+                <TabItem Header="Weapons"  x:Name="WeaponsTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Weapons}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding Name}"
+                                                Binding="{Binding Name, Mode=OneWay}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Price"
-                                                Binding="{Binding Price}"
+                                                Binding="{Binding Price, Mode=OneWay}"
                                                 Width="Auto"/>
                             <DataGridTextColumn Header="Dmg"
-                                                Binding="{Binding DamageRange}"
+                                                Binding="{Binding DamageRange, Mode=OneWay}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="Quests">
+                <TabItem Header="Quests"  x:Name="QuestsTabItem">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Quests}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
-                                                Binding="{Binding PlayerQuest.Name}"
+                                                Binding="{Binding PlayerQuest.Name, Mode=OneWay}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Done?"
-                                                Binding="{Binding IsCompleted}"
+                                                Binding="{Binding IsCompleted, Mode=OneWay}"
                                                 Width="Auto"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="Recipes">
+                <TabItem Header="Recipes"  x:Name="RecipesTabItem">
                     <DataGrid
                         ItemsSource="{Binding CurrentPlayer.Recipes}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name"
-                                                Binding="{Binding Name}"
+                                                Binding="{Binding Name, Mode=OneWay}"
                                                 Width="*"/>
                         <DataGridTemplateColumn MinWidth="75">
                             <DataGridTemplateColumn.CellTemplate>

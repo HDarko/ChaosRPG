@@ -24,13 +24,64 @@ namespace WPFUI
     public partial class MainWindow : Window
     {
         private readonly GameSession _gameSession= new GameSession();
+        private readonly Dictionary<Key, Action> _userInputActions =
+           new Dictionary<Key, Action>();
         public MainWindow()
         {
             InitializeComponent();
+            InitializeUserInputActions();
             _gameSession.OnMessageRaised += OnGameMessageRaised;
 
             DataContext = _gameSession;
 
+        }
+
+        private void InitializeUserInputActions()
+        {
+            /*_userInputActions.Add(Key.W, () => _gameSession.MoveNorth());
+            _userInputActions.Add(Key.A, () => _gameSession.MoveWest());
+            _userInputActions.Add(Key.S, () => _gameSession.MoveSouth());
+            _userInputActions.Add(Key.D, () => _gameSession.MoveEast());
+            _userInputActions.Add(Key.Z, () => _gameSession.AttackCurrentMonster());
+            _userInputActions.Add(Key.C, () => _gameSession.UseCurrentConsumable());*/
+            //Movement
+            _userInputActions.Add(Key.Up, () => _gameSession.MoveNorth());
+            _userInputActions.Add(Key.Left, () => _gameSession.MoveWest());
+            _userInputActions.Add(Key.Down, () => _gameSession.MoveSouth());
+            _userInputActions.Add(Key.Right, () => _gameSession.MoveEast());
+            //Actions
+            _userInputActions.Add(Key.A, () => _gameSession.AttackCurrentMonster());
+            _userInputActions.Add(Key.C, () => _gameSession.UseCurrentConsumable());
+            //Shops
+            _userInputActions.Add(Key.I, () => OnClick_DisplayItemTradeScreen(this, new RoutedEventArgs()));
+            _userInputActions.Add(Key.K, () => OnClick_DisplayWeaponTradeScreen(this, new RoutedEventArgs()));
+            //Navigating UI
+            _userInputActions.Add(Key.E, () => SetTabFocusTo("InventoryTabItem"));
+            _userInputActions.Add(Key.Q, () => SetTabFocusTo("QuestsTabItem"));
+            _userInputActions.Add(Key.W, () => SetTabFocusTo("WeaponsTabItem"));
+            _userInputActions.Add(Key.R, () => SetTabFocusTo("RecipesTabItem"));
+        }
+
+        private void SetTabFocusTo(string tabName)
+        {
+            foreach (object item in PlayerDataTabControl.Items)
+            {
+                if (item is TabItem tabItem)
+                {
+                    if (tabItem.Name == tabName)
+                    {
+                        tabItem.IsSelected = true;
+                        return;
+                    }
+                }
+            }
+        }
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (_userInputActions.ContainsKey(e.Key))
+            {
+                _userInputActions[e.Key].Invoke();
+            }
         }
 
         private void OnClick_Move(object sender, RoutedEventArgs e)
@@ -86,21 +137,32 @@ namespace WPFUI
             _gameSession.AttackCurrentMonster();
         }
 
+     
+       
         private void OnClick_DisplayItemTradeScreen(object sender, RoutedEventArgs e)
         {
-            ItemTradeScreen tradeScreen = new ItemTradeScreen();
-            tradeScreen.Owner = this;
-            tradeScreen.DataContext = _gameSession;
-            tradeScreen.ShowDialog();
+            if (_gameSession.HasTrader)
+            {
+                ItemTradeScreen tradeScreen = new ItemTradeScreen();
+                tradeScreen.Owner = this;
+                tradeScreen.DataContext = _gameSession;
+                tradeScreen.ShowDialog();
+            }
+            
         }
 
         private void OnClick_DisplayWeaponTradeScreen(object sender, RoutedEventArgs e)
         {
-            WeaponTradeScreen tradeScreen = new WeaponTradeScreen();
-            tradeScreen.Owner = this;
-            tradeScreen.DataContext = _gameSession;
-            tradeScreen.ShowDialog();
+            if(_gameSession.TradeWeapons)
+            {
+                WeaponTradeScreen tradeScreen = new WeaponTradeScreen();
+                tradeScreen.Owner = this;
+                tradeScreen.DataContext = _gameSession;
+                tradeScreen.ShowDialog();
+            }
+        
         }
+       
 
         private void OnClick_UseCurrentConsumable(object sender, RoutedEventArgs e)
         {

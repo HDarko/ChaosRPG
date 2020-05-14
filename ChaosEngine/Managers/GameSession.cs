@@ -343,7 +343,11 @@ namespace ChaosEngine.Managers
 
         public void UseCurrentConsumable()
         {
-            CurrentPlayer.UseCurrentConsumableOnSelf();
+            if (CurrentPlayer.CurrentConsumable != null)
+            {
+                CurrentPlayer.UseCurrentConsumableOnSelf();
+            }
+                
         }
 
         private void RaiseMessage(string message)
@@ -357,6 +361,10 @@ namespace ChaosEngine.Managers
         }
         public void AttackCurrentMonster()
         {
+            if (CurrentMonster == null)
+            {
+                return;
+            }
             if (CurrentPlayer.CurrentWeapon == null)
             {
                 RaiseMessage("You must select a weapon, to attack.");
