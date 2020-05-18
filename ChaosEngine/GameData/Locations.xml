@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Locations >
+  <BasicLocations  RootImagePath="/Images/Locations/">
+    
+    <Location X="-1" Y="1" Name="Bridge" ImageName="Bridge.jpg">
+      <Description><![CDATA[The path to the outside world.]]></Description>
+      <Monsters>
+        <Monster ID="2" Percent="100"/>
+      </Monsters>
+    </Location>
+
+    <Location X="-2" Y="1" Name="Farm" ImageName="Home.png">
+      <Description><![CDATA[A recently abandoned farm.]]></Description>
+    </Location>
+
+    <Location X="0" Y="1" Name="Home" ImageName="CaveTown.png">
+      <Description><![CDATA[This is your cave village]]></Description>
+    </Location>
+
+    <Location X="-1" Y="1" Name="Bridge" ImageName="Bridge.jpg">
+      <Description><![CDATA[The path to the outside world.]]></Description>
+      <Monsters>
+        <Monster ID="2" Percent="100"/>
+      </Monsters>
+    </Location>
+
+    <Location X="-1" Y="2" Name="Forest" ImageName="Forest.png">
+      <Description><![CDATA[A creepy place, filled with good resources.]]></Description>
+      <Monsters>
+        <Monster ID="1" Percent="95"/>
+        <Monster ID="3" Percent="15"/>
+      </Monsters>
+    </Location>
+  </BasicLocations>
+
+  <TraderLocations  RootImagePath="/Images/Avatars/">
+    <Location X="0" Y="2" Name="Korra the Mage" ImageName="herbalist.jpg">
+      <Description><![CDATA[She seems excited as always.]]></Description>
+      <Trader Name="Korra the Mage" ></Trader>
+      <Quests>
+        <Quest ID="1"></Quest>
+        <Quest ID="3"></Quest>
+      </Quests>
+    </Location>
+
+    <Location X="1" Y="1" Name="Ikka the Trader" ImageName="Kobold.png">
+      <Description><![CDATA[Business as usual with Ikka]]></Description>
+      <Trader Name="Ikka the Trader" ></Trader>
+      <Quests>
+        <Quest ID="2"></Quest>
+      </Quests>
+    </Location>
+  </TraderLocations>
+  
+
+</Locations>

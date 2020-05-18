@@ -175,11 +175,11 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
                                                 Binding="{Binding Item.Name, Mode=OneWay}"
-                                                Width="*"/>
+                                                Width="Auto"/>
                             <DataGridTextColumn Header="Price"
                                                 Binding="{Binding Item.Price, Mode=OneWay}"
                                                 Width="Auto"/>
-                            <DataGridTextColumn Header="Quantity"
+                            <DataGridTextColumn Header="Num"
                                                 Binding="{Binding Quantity, Mode=OneWay}"
                                                 Width="*"/>
                         </DataGrid.Columns>

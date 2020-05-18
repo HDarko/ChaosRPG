@@ -86,40 +86,65 @@
     <Compile Include="GameEvents\GameMessageEvent.cs" />
     <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\herbalist.jpg" />
+    <None Include="Images\Avatars\herbalist.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\Hero.jpg" />
+    <None Include="Images\Avatars\Hero.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\Kobold.png" />
+    <None Include="Images\Avatars\Kobold.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Avatars\Raul.png" />
+    <None Include="Images\Avatars\Raul.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\Bridge.jpg" />
+    <None Include="Images\Locations\Bridge.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\CaveTown.png" />
+    <None Include="Images\Locations\CaveTown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\Forest.png" />
+    <None Include="Images\Locations\Forest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Locations\Home.png" />
+    <None Include="Images\Locations\Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Monsters\mushroomhand.png" />
+    <None Include="Images\Monsters\mushroomhand.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Monsters\Frog.gif" />
-    <Resource Include="Images\Monsters\JungleBoss.gif" />
+    <None Include="Images\Monsters\Frog.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Monsters\JungleBoss.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Monsters\Turkeydon.gif" />
+    <None Include="Images\Monsters\Turkeydon.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Icons\pngwave.png" />
@@ -134,7 +159,12 @@
     <Content Include="GameData\GameItems.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="GameData\GameWeapons.xml" />
+    <Content Include="GameData\GameWeapons.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GameData\Locations.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

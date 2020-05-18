@@ -73,6 +73,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomConverters\FileToBitmapConverter.cs" />
     <Compile Include="ItemTradeScreen.xaml.cs">
       <DependentUpon>ItemTradeScreen.xaml</DependentUpon>
     </Compile>

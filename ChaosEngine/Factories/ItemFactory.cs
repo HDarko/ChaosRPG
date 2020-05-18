@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.IO;
 using System.Xml;
-using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Classes;
 using ChaosEngine.Classes.Actions;
+using ChaosEngine.Shared;
 
 namespace ChaosEngine.Factories
 {
@@ -45,18 +46,19 @@ namespace ChaosEngine.Factories
             foreach (XmlNode node in nodes)
             {
                 GameItem.ItemCategory itemCategory = DetermineItemCategory(node.Name);
+                //Maybe turn this into a switch case and use the functions below
 
                 GameItem gameItem =
                     new GameItem(itemCategory,
-                                 GetXmlAttributeAsInt(node, "ID"),
-                                 GetXmlAttributeAsString(node, "Name"),
-                                 GetXmlAttributeAsInt(node, "Price"),
+                                 node.GetXmlAttributeAsInt("ID"),
+                                 node.GetXmlAttributeAsString("Name"),
+                                 node.GetXmlAttributeAsInt("Price"),
                                  false );         
                 if (itemCategory == GameItem.ItemCategory.Consumable)
                 {
                     gameItem.Action =
                         new Heal(gameItem,
-                                 GetXmlAttributeAsInt(node, "HitPointsToHeal"));
+                                 node.GetXmlAttributeAsInt("HitPointsToHeal"));
                 }
 
                 _standardGameItems.Add(gameItem);
@@ -76,15 +78,7 @@ namespace ChaosEngine.Factories
             }
         }
 
-        private static int GetXmlAttributeAsInt(XmlNode node, string attributeName)
-        {
-            return Convert.ToInt32(GetXmlAttribute(node, attributeName));
-        }
-
-        private static string GetXmlAttributeAsString(XmlNode node, string attributeName)
-        {
-            return GetXmlAttribute(node, attributeName);
-        }
+      
 
         private static string GetXmlAttribute(XmlNode node, string attributeName)
         {
@@ -109,6 +103,7 @@ namespace ChaosEngine.Factories
             return null;
         }
 
+        
         private static void BuildMiscellaneousItem(int id, string name, int price)
         {
             _standardGameItems.Add(new GameItem( GameItem.ItemCategory.Miscellaneous,id, name, price));

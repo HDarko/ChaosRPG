@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,10 @@ namespace ChaosEngine.Classes
 
             _locations.Add(loc);
 
+        }
+        internal void AddLocation(Location location)
+        {
+            _locations.Add(location);
         }
 
         internal void AddIntroLocation(int xCoordinate, int yCoordinate, string name, string playerName,

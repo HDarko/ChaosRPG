@@ -2,7 +2,7 @@
 <GameItems>
   <!--#region PlayerItems IDs in 6000s-->
   <HealingItems>
-    <HealingItem ID="6001" Name="Health Potion(Lesser)" Price="1"/>
+    <HealingItem ID="6001" Name="Health Potion(Lesser)" Price="1" HitPointsToHeal="6"/>
   </HealingItems>
   <!--#endregion PlayerItems IDs in 6000s-->
   <MiscellaneousItems>
