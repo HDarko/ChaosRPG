@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Recipes>
+  
+  <Recipe ID="1">
+    <Name><![CDATA[Health Potion(Lesser)]]></Name>
+    <Ingredients>
+      <Item ID="4000" Quantity="1"/>
+      <Item ID="4001" Quantity="2"/>
+      <Item ID="4002" Quantity="1"/>
+    </Ingredients>
+    <OutputItems>
+      <Item ID="6001" Quantity="1"/>
+    </OutputItems>
+  </Recipe>
+
+  <Recipe ID="2">
+    <Name><![CDATA[Stonka Stick]]></Name>
+    <Ingredients>
+      <Item ID="4003" Quantity="1"/>
+      <Weapon ID="1001"/>
+    </Ingredients>
+    <OutputItems>
+      <Weapon ID="1003"/>
+    </OutputItems>
+  </Recipe>
+  
+</Recipes>

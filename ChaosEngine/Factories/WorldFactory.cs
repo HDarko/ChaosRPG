@@ -18,7 +18,7 @@ namespace ChaosEngine.Factories
             World newWorld = new World();
             //Intro Specific
             newWorld.AddIntroLocation(0, 0, "Intro",playerName,
-                "/ChaosEngine;component/Images/Avatars/Hero.jpg");
+                "/Images/Avatars/Hero.jpg");
              
             newWorld.LocationAt(0, 0).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(0));
             //Rest of the world
@@ -32,7 +32,7 @@ namespace ChaosEngine.Factories
                         .GetXmlAttributeAsString("RootImagePath");
 
                 string traderLocationImagePath =
-                    data.SelectSingleNode("/Locations/BasicLocations").
+                    data.SelectSingleNode("/Locations/TraderLocations").
                     GetXmlAttributeAsString("RootImagePath");
 
                 LoadLocationsFromNodes(newWorld,
@@ -40,7 +40,7 @@ namespace ChaosEngine.Factories
                                        data.SelectNodes("/Locations/BasicLocations/Location"));
                 LoadLocationsFromNodes(newWorld,
                                       traderLocationImagePath,
-                                      data.SelectNodes("/Locations/TraderLocations/Locationn")); 
+                                      data.SelectNodes("/Locations/TraderLocations/Location")); 
             }
             else
             {
@@ -154,6 +154,4 @@ namespace ChaosEngine.Factories
     }
 }
 
-    
-}
 

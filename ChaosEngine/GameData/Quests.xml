@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Quests>
+  
+  <Quest ID="0" RewardExperiencePoints="250" RewardGold="150">
+    <Name><![CDATA[Have an adventure]]></Name>
+    <Description><![CDATA[Beat all the quests and get their tokens]]></Description>
+    <ItemsToComplete>
+      <Item ID="3000" Quantity="3" IsWeapon="false"/>
+    </ItemsToComplete>
+    <RewardItems>
+      <Item ID="3001" Quantity="1"/>
+    </RewardItems>
+  </Quest>
+  
+  <Quest ID="1" RewardExperiencePoints="100" RewardGold="20">
+    <Name><![CDATA[Mushroom Hunt!]]></Name>
+    <Description><![CDATA[Defeat Turkeysaurs for Korra and bring her 3 turkeysaur legs]]></Description>
+    <ItemsToComplete>
+      <Item ID="9001" Quantity="3"/>
+    </ItemsToComplete>
+    <RewardItems>
+      <Item ID="3000" Quantity="1"/>
+    </RewardItems>
+  </Quest>
+  
+  <Quest ID="2" RewardExperiencePoints="100" RewardGold="40">
+    <Name><![CDATA[Stop the Frogmen Raiders!]]></Name>
+    <Description>
+      <![CDATA[Some Frogmen are harrasing the Kobold folk when they try to leave the village. Take them down!
+                                  and take their tongues as warning]]></Description>
+    <ItemsToComplete>
+      <Item ID="9005" Quantity="3"/>
+    </ItemsToComplete>
+    <RewardItems>
+      <Item ID="3000" Quantity="1"/>
+    </RewardItems>
+  </Quest>
+
+  <Quest ID="3" RewardExperiencePoints="100" RewardGold="85">
+    <Name><![CDATA[Attack of a Jungle God!]]></Name>
+    <Description>
+      <![CDATA[A mighty Jung-Beast has taken the jungle as its new territory! 
+                                 Can you be the hero the kobolds need?]]>
+    </Description>
+    <ItemsToComplete>
+      <Item ID="9007" Quantity="3"/>
+    </ItemsToComplete>
+    <RewardItems>
+      <Item ID="3000" Quantity="1"/>
+    </RewardItems>
+  </Quest>
+  
+</Quests>

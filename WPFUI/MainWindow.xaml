@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Managers="clr-namespace:ChaosEngine.Managers;assembly=ChaosEngine"
-        d:DataContext="{d:DesignInstance Managers:GameSession}"
+        d:DataContext="{Binding Managers.GameSession}"
         xmlns:local="clr-namespace:WPFUI"      
         mc:Ignorable="d"
         FontSize="11pt"
@@ -116,7 +116,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                            VerticalAlignment="Center"
                            Height="150"
                            Width="150"
-                           Source="{Binding CurrentLocation.ImageName}"/>
+                           Source="{Binding CurrentLocation.ImageName,Converter={StaticResource FileToBitmapConverter}}"/>
                     <TextBlock Grid.Row="2"
                                HorizontalAlignment="Center"
                                TextWrapping="Wrap"
@@ -151,7 +151,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                            Height="Auto"
                            
                          Width="Auto"
-                           gif:ImageBehavior.AnimatedSource="{Binding CurrentMonster.ImageName}" />
+                           gif:ImageBehavior.AnimatedSource="{Binding CurrentMonster.ImageName,Converter={StaticResource FileToBitmapConverter}}" />
 
                     <StackPanel Grid.Row="2"
                                 Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"

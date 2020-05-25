@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Monsters RootImagePath="/Images/Monsters/">
+  <Monster ID="1" Name="Turkosaur" ImageName="Turkeydon.gif" MaxHitPoints="3" RewardExp="5" Gold="2">
+    <Weapons>
+      <WeaponID ID="1006"/>
+    </Weapons>
+    <LootTable>
+      <LootItem ID="9001" Percentage="75" Quantity="1"/>
+      <LootItem ID="9002" Percentage="25" Quantity="1"/>
+    </LootTable>
+  </Monster>
+
+  <Monster ID="2" Name="Frogman" ImageName="Frog.gif" MaxHitPoints="6" RewardExp="8" Gold="5">
+    <Weapons>
+      <WeaponID ID="1007"/>
+      <WeaponID ID="1008"/>
+    </Weapons>
+    <LootTable>
+      <LootItem ID="9003" Percentage="25" Quantity="1"/>
+      <LootItem ID="9004" Percentage="25" Quantity="1"/>
+      <LootItem ID="9005" Percentage="100" Quantity="1"/>
+    </LootTable>
+  </Monster>
+
+  <Monster ID="3" Name="Jung-Beast" ImageName="JungleBoss.gif" MaxHitPoints="32" RewardExp="50" Gold="90">
+    <Weapons>
+      <WeaponID ID="1009"/>
+      <WeaponID ID="1010"/>
+    </Weapons>
+    <LootTable>
+      <LootItem ID="9006" Percentage="100" Quantity="4"/>
+      <LootItem ID="9007" Percentage="100" Quantity="4"/>
+      <LootItem ID="9008" Percentage="100" Quantity="4"/>
+    </LootTable>
+  </Monster>
+  
+</Monsters>

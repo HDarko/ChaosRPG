@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Traders>
+  
+  <!--HasWeapons is either 1 for true or 0 for false-->
+  
+  <Trader ID="1" HasWeapons="False">
+    <Name><![CDATA[Korra the Mage]]></Name>
+    <InventoryItems>
+      <Item ID="9010" Quantity="9"/>
+    </InventoryItems>
+  </Trader>
+  
+  <Trader ID="2" HasWeapons="True">
+    <Name><![CDATA[Ikka the Trader]]></Name>
+    <InventoryItems>
+      <Item ID="9009" Quantity="8"/>
+    </InventoryItems>
+    <Weapons>
+      <Weapon ID="1002"/>
+      <Weapon ID="1003"/>
+    </Weapons>
+  </Trader>
+  
+</Traders>

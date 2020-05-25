@@ -4,59 +4,94 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Classes;
+using ChaosEngine.Shared;
+using System.IO;
+using System.Xml;
 
 namespace ChaosEngine.Factories
 {
    internal static class MonsterFactory
     {
-        public static Monster GetMonster(int monsterID)
+        private const string GAME_DATA_FILENAME = ".\\GameData\\GameMonsters.xml";
+
+        private static readonly List<Monster> _baseMonsters = new List<Monster>();
+        static MonsterFactory()
         {
-            switch (monsterID)
+            if (File.Exists(GAME_DATA_FILENAME))
             {
-                case 1:
-                    Monster turkeySaur =
-                        new Monster("Turkosaur", "Turkeydon.gif", 6, 4, 5, 2);
+                XmlDocument data = new XmlDocument();
+                data.LoadXml(File.ReadAllText(GAME_DATA_FILENAME));
 
-                    AddLootItem(turkeySaur, 9001, 75);
-                    AddLootItem(turkeySaur, 9002, 25);
-                    turkeySaur.CurrentWeapon=WeaponFactory.CreateWeapon(1006);
-                    return turkeySaur;
+                string rootImagePath =
+                    data.SelectSingleNode("/Monsters")
+                        .GetXmlAttributeAsString("RootImagePath");
 
-                case 2:
-                    Monster frogMan =
-                        new Monster("Frogman", "Frog.gif", 11, 7, 8, 5);
-
-                    AddLootItem(frogMan, 9003, 25);
-                    AddLootItem(frogMan, 9004, 25);
-                    AddLootItem(frogMan, 9005, 50);
-                    frogMan.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1007));
-                    frogMan.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1008));
-
-                    return frogMan;
-
-                case 3:
-                    Monster forestBoss =
-                        new Monster("Jung-Beast", "JungleBoss.gif", 16, 11,15, 18);
-
-                    AddLootItem(forestBoss, 9006, 15);
-                    AddLootItem(forestBoss, 9007, 70);
-                    AddLootItem(forestBoss, 9008, 15);
-                    forestBoss.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1009));
-                    forestBoss.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1010));
-                    return forestBoss;
-
-                default:
-                    throw new ArgumentException(string.Format("MonsterType '{0}' does not exist", monsterID));
+                LoadMonstersFromNodes(data.SelectNodes("/Monsters/Monster"), rootImagePath);
+            }
+            else
+            {
+                throw new FileNotFoundException($"Missing data file: {GAME_DATA_FILENAME}");
             }
         }
 
-        private static void AddLootItem(Monster monster, int itemID, int percentage)
+        private static void LoadMonstersFromNodes(XmlNodeList nodes, string rootImagePath)
         {
-            if (RandomNumberGenerator.NumberBetween(1, 100) <= percentage)
+            if (nodes == null)
             {
-                //monster.inventory.Add(new ItemQuantity(itemID, 1));
-                monster.Inventory.Add(ItemFactory.CreateGameItem(itemID));
+                return;
+            }
+            foreach (XmlNode node in nodes)
+            {
+                Monster monster =
+                    new Monster(node.GetXmlAttributeAsInt("ID"),
+                                node.GetXmlAttributeAsString("Name"),
+                                $".{rootImagePath}{node.GetXmlAttributeAsString("ImageName")}",
+                                node.GetXmlAttributeAsInt("MaxHitPoints"),
+                                node.GetXmlAttributeAsInt("RewardExp"),
+                                node.GetXmlAttributeAsInt("Gold"));
+
+                LoadLootTableFromMonsterNode(node, monster);
+
+                _baseMonsters.Add(monster);
             }
         }
-   }
+
+        private static void LoadLootTableFromMonsterNode(XmlNode monsterNode, Monster monsterType)
+        {
+            XmlNodeList lootItemNodes = monsterNode.SelectNodes("./LootTable/LootItem");
+            if (lootItemNodes != null)
+            {
+                foreach (XmlNode lootItemNode in lootItemNodes)
+                {
+                    /*If there is no Quanity attribute then the value is meant to be 1
+                     */
+                    int? getQuantity = lootItemNode.GetXmlAttributeAsInt("Quantity",true);
+                    int quantity = getQuantity ?? 1;
+                    monsterType.AddItemToLootTable(lootItemNode.GetXmlAttributeAsInt("ID"),
+                                               lootItemNode.GetXmlAttributeAsInt("Percentage"),
+                                               quantity
+                                               );
+                }
+            }
+        }
+
+        private static void LoadWeaponsFromMonsterNode(XmlNode monsterNode, Monster monsterType)
+        {
+            XmlNodeList weaponNodes = monsterNode.SelectNodes("./Weapons/WeaponID");
+            if (weaponNodes != null)
+            {
+                foreach (XmlNode weaponNode in weaponNodes)
+                {
+                    monsterType.AddWeaponToWeapons(
+                        WeaponFactory.CreateWeapon(weaponNode.GetXmlAttributeAsInt("ID")));
+                }
+            }
+        }
+
+        public static Monster GetMonster(int id)
+        {
+            return _baseMonsters.FirstOrDefault(m => m.ID == id)?.GetNewInstance();
+        }
+    }
+        
 }

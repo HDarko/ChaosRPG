@@ -2,35 +2,81 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.IO;
 using System.Threading.Tasks;
 using ChaosEngine.Classes;
+using ChaosEngine.Shared;
 
 namespace ChaosEngine.Factories
 {
     class RecipeFactory
     {
         private static readonly List<Recipe> _recipes = new List<Recipe>();
+        private const string GAME_DATA_FILENAME = ".\\GameData\\Recipes.xml";
 
         static RecipeFactory()
         {
-            Recipe healthPotionLesser = new Recipe(1, "Health Potion(Lesser)");
-            healthPotionLesser.AddIngredient(4000, 1);
-            healthPotionLesser.AddIngredient(4001, 2);
-            healthPotionLesser.AddIngredient(4002, 1);
-            healthPotionLesser.AddOutputItem(6001, 1);
+            if (File.Exists(GAME_DATA_FILENAME))
+            {
+                XmlDocument data = new XmlDocument();
+                data.LoadXml(File.ReadAllText(GAME_DATA_FILENAME));
 
-            _recipes.Add(healthPotionLesser);
+                LoadRecipesFromNodes(data.SelectNodes("/Recipes/Recipe"));
+            }
+            else
+            {
+                throw new FileNotFoundException($"Missing data file: {GAME_DATA_FILENAME}");
+            }
+           
+        }
 
-            Recipe stonkaStick = new Recipe(2, "Stonka Stick");
-            stonkaStick.AddIngredient(4003, 1);
-            stonkaStick.AddWeaponIngredient(1001);
-            stonkaStick.AddOutputWeapon(1003);
-            _recipes.Add(stonkaStick);
+        private static void LoadRecipesFromNodes(XmlNodeList nodes)
+        {
+            foreach (XmlNode node in nodes)
+            {
+                Recipe recipe =
+                    new Recipe(node.GetXmlAttributeAsInt("ID"),
+                               node.SelectSingleNode("./Name")?.InnerText ?? "");
+
+                foreach (XmlNode childNode in node.SelectNodes("./Ingredients/Item"))
+                {
+                    recipe.AddIngredient(childNode.GetXmlAttributeAsInt("ID"),
+                                         childNode.GetXmlAttributeAsInt("Quantity"));
+                }
+
+                foreach (XmlNode childNode in node.SelectNodes("./Ingredients/Weapon"))
+                {
+                    recipe.AddWeaponIngredient(childNode.GetXmlAttributeAsInt("ID"));
+                }
+                foreach (XmlNode childNode in node.SelectNodes("./OutputItems/Item"))
+                {
+                    recipe.AddOutputItem(childNode.GetXmlAttributeAsInt("ID"),
+                                         childNode.GetXmlAttributeAsInt("Quantity"));
+                }
+
+                foreach (XmlNode childNode in node.SelectNodes("./OutputItems/Weapon"))
+                {
+                    recipe.AddOutputWeapon(childNode.GetXmlAttributeAsInt("ID"));
+                }
+
+                AddRecipeToList(recipe);
+            }
         }
 
         public static Recipe RecipeByID(int id)
         {
             return _recipes.FirstOrDefault(x => x.ID == id);
+        }
+
+        private static void AddRecipeToList(Recipe recipe)
+        {
+            if (_recipes.Any(r => r.ID == recipe.ID))
+            {
+                throw new ArgumentException($"There is already a recipe with ID'{recipe.ID}'");
+            }
+
+            _recipes.Add(recipe);
         }
     }
 }

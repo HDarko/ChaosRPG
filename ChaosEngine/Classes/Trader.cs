@@ -11,9 +11,10 @@ namespace ChaosEngine.Classes
     public class Trader: LivingEntity
     {
        public bool weaponsAvailable = false;
-
-        public Trader(string name,bool hasWeapons) :base(name,500,500,9999)
+        public int ID { get; }
+        public Trader(int iD, string name,bool hasWeapons) :base(name,500,500,9999)
         {
+            ID = ID;
             if(hasWeapons)
             {
                 weaponsAvailable = true;
