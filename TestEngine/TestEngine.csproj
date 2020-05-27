@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\TestAttackWithWeapon.cs" />
     <Compile Include="Managers\TestGameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

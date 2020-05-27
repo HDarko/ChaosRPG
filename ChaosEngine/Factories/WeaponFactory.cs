@@ -10,7 +10,7 @@ using ChaosEngine.Classes.Actions;
 using ChaosEngine.Shared;
 namespace ChaosEngine.Factories
 {
-    class WeaponFactory
+    public static class WeaponFactory
     {
         private static List<Weapon> _allweaponsinGame;
         private const string GAME_DATA_FILENAME = ".\\GameData\\GameWeapons.xml";

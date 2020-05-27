@@ -12,7 +12,17 @@ namespace ChaosEngine.Classes
         public string Name { get; }
         public List<ItemQuantity> Ingredients { get; } = new List<ItemQuantity>();
         public List<ItemQuantity> OutputItems { get; } = new List<ItemQuantity>();
-        
+
+        //Might replace item desciption in ToolTipContents to just quanity plus name in future
+        public string ToolTipContents =>
+            "Ingredients" + Environment.NewLine +
+            "===========" + Environment.NewLine +
+            string.Join(Environment.NewLine, Ingredients.Select(i => i.ItemDescription)) +
+            Environment.NewLine + Environment.NewLine +
+            "Creates" + Environment.NewLine +
+            "===========" + Environment.NewLine +
+            string.Join(Environment.NewLine, OutputItems.Select(i => i.ItemDescription));
+
         public Recipe(int id, string name)
         {
             ID = id;
