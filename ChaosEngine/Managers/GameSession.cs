@@ -6,6 +6,7 @@ using ChaosEngine.Classes;
 using ChaosEngine.Factories;
 using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using ChaosEngine.Sevices;
 
 namespace ChaosEngine.Managers
 {
@@ -14,10 +15,12 @@ namespace ChaosEngine.Managers
         #region Fields
         private Location _currentLocation;
         private Monster _currentMonster;
-        public event EventHandler<GameMessageEvent> OnMessageRaised;
         private Player _player;
         private Trader _currentTrader;
+        private Battle _currentBattle;
         #endregion
+
+        private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
 
         #region Properties
 
@@ -34,7 +37,7 @@ namespace ChaosEngine.Managers
                 {
                     _player.OnKilled -= OnCurrentPlayerKilled;
                     _player.OnLeveledUp -= OnCurrentPlayerLeveledUp;
-                    _player.OnActionPerformed -= OnCurrentPlayerPerformedAction;
+                   // _player.OnActionPerformed -= OnCurrentPlayerPerformedAction;
                 }
 
                 _player = value;
@@ -43,7 +46,7 @@ namespace ChaosEngine.Managers
                 {
                     _player.OnKilled += OnCurrentPlayerKilled;
                     _player.OnLeveledUp += OnCurrentPlayerLeveledUp;
-                    _player.OnActionPerformed += OnCurrentPlayerPerformedAction;
+                  // _player.OnActionPerformed += OnCurrentPlayerPerformedAction;
                 }
             }
         }
@@ -64,7 +67,8 @@ namespace ChaosEngine.Managers
                 CurrentTrader = CurrentLocation.TraderHere;
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
-                GetMonsterAtLocation();
+                CurrentMonster = CurrentLocation.GetMonster();
+                   
             }
         }
 
@@ -105,21 +109,19 @@ namespace ChaosEngine.Managers
             get { return _currentMonster; }
             set
             {
-                if (_currentMonster != null)
+                if (_currentBattle != null)
                 {
-                    _currentMonster.OnActionPerformed -= OnCurrentMonsterPerformedAction;
-                    _currentMonster.OnKilled -= OnCurrentMonsterKilled;
+                    _currentBattle.OnCombatVictory -= OnCurrentMonsterKilled;
+                    _currentBattle.Dispose();
                 }
+
 
                 _currentMonster = value;
 
                 if (_currentMonster != null)
                 {
-                    _currentMonster.OnActionPerformed += OnCurrentMonsterPerformedAction;
-                    _currentMonster.OnKilled += OnCurrentMonsterKilled;
-
-                    RaiseMessage("");
-                    RaiseMessage($"You see a {CurrentMonster.Name} here!");
+                    _currentBattle = new Battle(CurrentPlayer, CurrentMonster);
+                    _currentBattle.OnCombatVictory += OnCurrentMonsterKilled;
                 }
 
                 OnPropertyChanged(nameof(CurrentMonster));
@@ -203,22 +205,22 @@ namespace ChaosEngine.Managers
                 if (!CurrentPlayer.Quests.Any(q => q.PlayerQuest.ID == quest.ID))
                 {
                     CurrentPlayer.Quests.Add(new QuestStatus(quest));
-                    RaiseMessage("");
-                    RaiseMessage($"You receive the '{quest.Name}' quest");
-                    RaiseMessage(quest.Description);
-                    RaiseMessage("");
-                    RaiseMessage("Objective: Return with:");
+                    _messageBroker.RaiseMessage("");
+                    _messageBroker.RaiseMessage($"You receive the '{quest.Name}' quest");
+                    _messageBroker.RaiseMessage(quest.Description);
+                    _messageBroker.RaiseMessage("");
+                    _messageBroker.RaiseMessage("Objective: Return with:");
                     foreach (ItemQuantity itemQuantity in quest.ItemsToComplete)
                     {
-                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                       _messageBroker.RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
                     }
 
-                    RaiseMessage("And you will receive:");
-                    RaiseMessage($"   {quest.RewardExperiencePoints} experience points");
-                    RaiseMessage($"   {quest.RewardGold} gold");
+                    _messageBroker.RaiseMessage("And you will receive:");
+                    _messageBroker.RaiseMessage($"{quest.RewardExperiencePoints} experience points");
+                    _messageBroker.RaiseMessage($"{quest.RewardGold} gold");
                     foreach (ItemQuantity itemQuantity in quest.RewardItems)
                     {
-                        RaiseMessage($"   {itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
+                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {ItemFactory.CreateGameItem(itemQuantity.ItemID).Name}");
                     }
                 }
             }
@@ -239,20 +241,20 @@ namespace ChaosEngine.Managers
                         // Remove the quest completion items from the player's inventory
                         CurrentPlayer.RemoveItemsFromInventory(quest.ItemsToComplete);
 
-                        RaiseMessage("");
-                        RaiseMessage($"You completed the '{quest.Name}' quest");
+                        _messageBroker.RaiseMessage("");
+                        _messageBroker.RaiseMessage($"You completed the '{quest.Name}' quest");
 
                         // Give the player the quest rewards
-                        RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
+                        _messageBroker.RaiseMessage($"You receive {quest.RewardExperiencePoints} experience points");
                         CurrentPlayer.AddExperience( quest.RewardExperiencePoints);
 
-                        RaiseMessage($"You receive {quest.RewardGold} gold");
+                        _messageBroker.RaiseMessage($"You receive {quest.RewardGold} gold");
                         CurrentPlayer.ReceiveGold(quest.RewardGold);
 
                         foreach (ItemQuantity itemQuantity in quest.RewardItems)
                         {
                             GameItem rewardItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
-                            RaiseMessage($"You receive a {rewardItem.Name}");
+                            _messageBroker.RaiseMessage($"You receive a {rewardItem.Name}");
                             CurrentPlayer.AddItemToInventory(rewardItem);
                            
                         }
@@ -276,44 +278,44 @@ namespace ChaosEngine.Managers
                     {
                         Weapon outputWeapon = WeaponFactory.CreateWeapon(itemQuantity.ItemID);
                         CurrentPlayer.AddWeaponToWeapons(outputWeapon);
-                        RaiseMessage($"You craft a {outputWeapon.Name}");
+                        _messageBroker.RaiseMessage($"You craft a {outputWeapon.Name}");
                     }
                     else
                     {
                         GameItem outputItem = ItemFactory.CreateGameItem(itemQuantity.ItemID);
                         CurrentPlayer.AddItemToInventory(outputItem, itemQuantity.Quantity);
-                        RaiseMessage($"You craft {itemQuantity.Quantity} {outputItem.Name}");
+                        _messageBroker.RaiseMessage($"You craft {itemQuantity.Quantity} {outputItem.Name}");
                     }
                 }
             }
             else
             {
-                RaiseMessage("You do not have the required ingredients:");
+                _messageBroker.RaiseMessage("You do not have the required ingredients:");
                 foreach (ItemQuantity itemQuantity in recipe.Ingredients)
                     if(itemQuantity.isWeapon)
                     {
-                        RaiseMessage($"  {itemQuantity.Quantity} {WeaponFactory.WeaponName(itemQuantity.ItemID)}");
+                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {WeaponFactory.WeaponName(itemQuantity.ItemID)}");
                     }
                 else
                     {
-                    RaiseMessage($"  {itemQuantity.Quantity} {ItemFactory.ItemName(itemQuantity.ItemID)}");
+                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {ItemFactory.ItemName(itemQuantity.ItemID)}");
                     }
             }
         }
         private void OnCurrentPlayerPerformedAction(object sender, string result)
         {
-            RaiseMessage(result);
+            _messageBroker.RaiseMessage(result);
         }
         private void OnCurrentMonsterPerformedAction(object sender, string result)
         {
-            RaiseMessage(result);
+            _messageBroker.RaiseMessage(result);
         }
 
         
         private void OnCurrentPlayerKilled(object sender, System.EventArgs eventArgs)
         {
-            RaiseMessage("");
-            RaiseMessage($"You have been slain");
+            _messageBroker.RaiseMessage("");
+            _messageBroker.RaiseMessage($"You have been slain");
 
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
             CurrentPlayer.CompletelyHeal();
@@ -321,25 +323,10 @@ namespace ChaosEngine.Managers
 
         private void OnCurrentMonsterKilled(object sender, System.EventArgs eventArgs)
         {
-            RaiseMessage("");
-            RaiseMessage($"You defeated the {CurrentMonster.Name}!");
-
-            RaiseMessage($"You receive {CurrentMonster.RewardExperiencePoints} experience points.");
-            CurrentPlayer.AddExperience(CurrentMonster.RewardExperiencePoints);
-
-            RaiseMessage($"You receive {CurrentMonster.Gold} gold.");
-            CurrentPlayer.ReceiveGold(CurrentMonster.Gold);
-
-            foreach (GameItem gameItem in CurrentMonster.Inventory)
-            {
-                RaiseMessage($"You receive one {gameItem.Name}.");
-                CurrentPlayer.AddItemToInventory(gameItem);
-            }
-        }
-        private void GetMonsterAtLocation()
-        {
+            // Get another monster to fight
             CurrentMonster = CurrentLocation.GetMonster();
         }
+   
 
         public void UseCurrentConsumable()
         {
@@ -350,49 +337,13 @@ namespace ChaosEngine.Managers
                 
         }
 
-        private void RaiseMessage(string message)
-        {
-            OnMessageRaised?.Invoke(this, new GameMessageEvent(message));
-        }
-
         private void OnCurrentPlayerLeveledUp(object sender, System.EventArgs eventArgs)
         {
-            RaiseMessage($"You are now level {CurrentPlayer.Level}!");
+            _messageBroker.RaiseMessage($"You are now level {CurrentPlayer.Level}!");
         }
         public void AttackCurrentMonster()
         {
-            if (CurrentMonster == null)
-            {
-                return;
-            }
-            if (CurrentPlayer.CurrentWeapon == null)
-            {
-                RaiseMessage("You must select a weapon, to attack.");
-                return;
-            }
-
-            // Determine damage to monster
-            CurrentPlayer.UseCurrentWeaponOn(CurrentMonster);
-
-            // If monster if killed, collect rewards and loot
-            if (CurrentMonster.IsDead)
-            {
-                //Maybe a way to wait for new monster 
-                // Get another monster to fight
-                GetMonsterAtLocation();
-            }
-            else
-            {
-                // If monster is still alive, let the monster attack
-                CurrentMonster.UseWeaponOn(CurrentPlayer);
-               
-                
-                
-            }
-
-               
-                
-            
+            _currentBattle.AttackOpponent();
         }
     }
 }

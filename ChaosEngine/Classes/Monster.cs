@@ -45,10 +45,14 @@ namespace ChaosEngine.Classes
         {
             //If there is no multiple weapons then Current Weapon must have been assigned
             //Else pick a weapon randomly and use it
-            if(Weapons.Count>0)
-            {           
-                int index=RandomNumberGenerator.NumberBetween(0, Weapons.Count - 1);
+            if (Weapons.Count > 1)
+            {
+                int index = RandomNumberGenerator.NumberBetween(0, Weapons.Count - 1);
                 CurrentWeapon = Weapons[index];
+            }
+            else
+            {
+                CurrentWeapon = Weapons[0];
             }
             CurrentWeapon.PerformAction(this, target);
         }
@@ -79,6 +83,12 @@ namespace ChaosEngine.Classes
                 {
                     newMonster.AddItemToInventory(ItemFactory.CreateGameItem(lootPercentage.ID));
                 }
+                //Add the weaponry
+                foreach(Weapon weapon in Weapons)
+                {
+                    newMonster.AddWeaponToWeapons(WeaponFactory.CreateWeapon(weapon.ItemTypeID));
+                }
+                
             }
 
             return newMonster;

@@ -61,6 +61,7 @@
     <Compile Include="Classes\Actions\IAction.cs" />
     <Compile Include="Classes\BaseNotificationClass.cs" />
     <Compile Include="Classes\Actions\AttackWithWeapon.cs" />
+    <Compile Include="Classes\Battle.cs" />
     <Compile Include="Classes\GameItem.cs" />
     <Compile Include="Classes\GroupedInventoryItem.cs" />
     <Compile Include="Classes\ItemQuantity.cs" />
@@ -84,10 +85,12 @@
     <Compile Include="Factories\TraderFactory.cs" />
     <Compile Include="Factories\WeaponFactory.cs" />
     <Compile Include="Factories\WorldFactory.cs" />
+    <Compile Include="GameEvents\CombatVictoryEvent.cs" />
     <Compile Include="GameEvents\GameMessageEvent.cs" />
     <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sevices\LoggingService.cs" />
+    <Compile Include="Sevices\MessageBroker.cs" />
     <Compile Include="Shared\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>

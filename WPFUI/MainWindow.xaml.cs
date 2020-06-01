@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ChaosEngine.Managers;
 using ChaosEngine.GameEvents;
 using ChaosEngine.Classes;
+using ChaosEngine.Sevices;
 
 namespace WPFUI
 {
@@ -24,13 +25,14 @@ namespace WPFUI
     public partial class MainWindow : Window
     {
         private readonly GameSession _gameSession= new GameSession();
+        private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Dictionary<Key, Action> _userInputActions =
            new Dictionary<Key, Action>();
         public MainWindow()
         {
             InitializeComponent();
             InitializeUserInputActions();
-            _gameSession.OnMessageRaised += OnGameMessageRaised;
+            _messageBroker.OnMessageRaised += OnGameMessageRaised;
 
             DataContext = _gameSession;
 

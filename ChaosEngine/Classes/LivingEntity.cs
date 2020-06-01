@@ -16,7 +16,9 @@ namespace ChaosEngine.Classes
         private int _level;
         private Weapon _currentWeapon;
         private GameItem _currentConsumable;
-        public bool IsDead => CurrentHitPoints <= 0;
+
+        public bool IsAlive => CurrentHitPoints > 0;
+        public bool IsDead => !IsAlive;
         public bool HasConsumable => Consumables.Any();
 
         #region Properties
