@@ -12,7 +12,7 @@ namespace ChaosEngine.Classes
     {
        public bool weaponsAvailable = false;
         public int ID { get; }
-        public Trader(int iD, string name,bool hasWeapons) :base(name,500,500,9999)
+        public Trader(int iD, string name,bool hasWeapons) :base(name,500,500,9999,50)
         {
             ID = ID;
             if(hasWeapons)

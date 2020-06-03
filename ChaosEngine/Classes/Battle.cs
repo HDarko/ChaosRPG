@@ -10,19 +10,14 @@ namespace ChaosEngine.Classes
 {
     public class Battle : IDisposable
     {
+
+        
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Player _player;
         private readonly Monster _opponent;
-        private static Combatant FirstAttacker =>
-          RandomNumberGenerator.SimpleNumberBetween(1, 2) == 1 ?
-              Combatant.Player :
-              Combatant.Opponent;
+       
 
-        private enum Combatant
-        {
-            Player,
-            Opponent
-        }
+       
 
         public Battle(Player player, Monster opponent)
         {
@@ -36,7 +31,7 @@ namespace ChaosEngine.Classes
             _messageBroker.RaiseMessage("");
             _messageBroker.RaiseMessage($"You see a {_opponent.Name} here!");
 
-            if (FirstAttacker == Combatant.Opponent)
+            if (CombatService.FirstAttacker(_player,_opponent) == CombatService.Combatant.Opponent)
             {
                 AttackPlayer();
             }

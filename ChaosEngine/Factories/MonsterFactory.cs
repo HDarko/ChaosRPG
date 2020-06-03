@@ -48,9 +48,11 @@ namespace ChaosEngine.Factories
                                 $".{rootImagePath}{node.GetXmlAttributeAsString("ImageName")}",
                                 node.GetXmlAttributeAsInt("MaxHitPoints"),
                                 node.GetXmlAttributeAsInt("RewardExp"),
-                                node.GetXmlAttributeAsInt("Gold"));
+                                node.GetXmlAttributeAsInt("Gold"),
+                                Convert.ToInt32(node.SelectSingleNode("./Dexterity").InnerText));
 
                 LoadLootTableFromMonsterNode(node, monster);
+                LoadWeaponsFromMonsterNode(node, monster);
 
                 _baseMonsters.Add(monster);
             }

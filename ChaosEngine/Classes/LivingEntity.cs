@@ -14,6 +14,7 @@ namespace ChaosEngine.Classes
         private int _maximumHitPoints;
         private int _gold;
         private int _level;
+        private int _dexterity;
         private Weapon _currentWeapon;
         private GameItem _currentConsumable;
 
@@ -24,7 +25,7 @@ namespace ChaosEngine.Classes
         #region Properties
         public string Name
         {
-            get { return _name; }
+            get => _name; 
             private set
             {
                 _name = value;
@@ -34,7 +35,7 @@ namespace ChaosEngine.Classes
 
         public int CurrentHitPoints
         {
-            get { return _currentHitPoints; }
+            get => _currentHitPoints;
             private set
             {
                 _currentHitPoints = value;
@@ -44,7 +45,7 @@ namespace ChaosEngine.Classes
 
         public int MaximumHitPoints
         {
-            get { return _maximumHitPoints; }
+            get => _maximumHitPoints;
             protected set
             {
                 _maximumHitPoints = value;
@@ -54,7 +55,7 @@ namespace ChaosEngine.Classes
 
         public int Gold
         {
-            get { return _gold; }
+            get => _gold; 
             private set
             {
                 _gold = value;
@@ -64,7 +65,7 @@ namespace ChaosEngine.Classes
 
         public int Level
         {
-            get { return _level; }
+            get => _level; 
             protected set
             {
                 _level = value;
@@ -72,9 +73,20 @@ namespace ChaosEngine.Classes
             }
         }
 
+        public int Dexterity
+        {
+            get => _dexterity;
+            private set
+            {
+                _dexterity = value;
+                //Can go with nothing in paratheses
+                OnPropertyChanged();
+            }
+        }
+
         public Weapon CurrentWeapon
         {
-            get { return _currentWeapon; }
+            get => _currentWeapon; 
             set
             {
                 if (_currentWeapon != null)
@@ -124,11 +136,12 @@ namespace ChaosEngine.Classes
 
         public event EventHandler OnKilled;
         public event EventHandler<string> OnActionPerformed;
-        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold, int level=1)
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold, int dexterity, int level=1 )
         {
             Name = name;
             MaximumHitPoints = maximumHitPoints;
             CurrentHitPoints = currentHitPoints;
+            Dexterity = dexterity;
             Gold = gold;
             Level = level;
             Inventory = new List<GameItem>();
@@ -252,6 +265,10 @@ namespace ChaosEngine.Classes
             }
         }
 
+        public void SetDexterity(int dexterity)
+        {
+            Dexterity = dexterity;
+        }
         public void Heal(int hitPointsToHeal)
         {
             CurrentHitPoints += hitPointsToHeal;

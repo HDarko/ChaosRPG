@@ -134,7 +134,7 @@ namespace ChaosEngine.Managers
         //-------------------------------------------------------------------------------------------
         public GameSession()
         {
-
+            int dexterity = RandomNumberGenerator.SimpleNumberBetween(3, 40);
 
             CurrentPlayer = new Player
             (
@@ -143,7 +143,8 @@ namespace ChaosEngine.Managers
                 15,
               10,
               10,
-              20
+              20,
+              dexterity
             );
             
             if (!CurrentPlayer.Weapons.Any())

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Monsters RootImagePath="/Images/Monsters/">
   <Monster ID="1" Name="Turkosaur" ImageName="Turkeydon.gif" MaxHitPoints="3" RewardExp="5" Gold="2">
+    <Dexterity>15</Dexterity>
     <Weapons>
       <WeaponID ID="1006"/>
     </Weapons>
@@ -11,6 +12,7 @@
   </Monster>
 
   <Monster ID="2" Name="Frogman" ImageName="Frog.gif" MaxHitPoints="6" RewardExp="8" Gold="5">
+    <Dexterity>8</Dexterity>
     <Weapons>
       <WeaponID ID="1007"/>
       <WeaponID ID="1008"/>
@@ -23,6 +25,7 @@
   </Monster>
 
   <Monster ID="3" Name="Jung-Beast" ImageName="JungleBoss.gif" MaxHitPoints="32" RewardExp="50" Gold="90">
+    <Dexterity>20</Dexterity>
     <Weapons>
       <WeaponID ID="1009"/>
       <WeaponID ID="1010"/>

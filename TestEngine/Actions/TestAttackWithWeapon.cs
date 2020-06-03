@@ -19,7 +19,7 @@ namespace TestEngine.Actions
             Assert.IsNotNull(attackWithWeapon);
         }
 
-        [TestMethod]
+       /* [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Test_Constructor_ItemIsNotAWeapon()
         {
@@ -28,7 +28,7 @@ namespace TestEngine.Actions
             // A granola bar is not a weapon.
             // So, the constructor should throw an exception.
             AttackWithWeapon attackWithWeapon = new AttackWithWeapon(granolaBar, 1, 5);
-        }
+        }*/
         /*
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]

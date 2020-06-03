@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Weapons>
     <!-- #region Player Weapons-->
-    <Weapon ID="1001" Name="Frail Stick" Price="1" minDamage="0" maxDamage="2"/>
-    <Weapon ID="1002" Name="Thick Stick" Price="3" minDamage="0" maxDamage="4"/>
+    <Weapon ID="1001" Name="Frail Stick" Price="1" minDamage="1" maxDamage="2"/>
+    <Weapon ID="1002" Name="Thick Stick" Price="3" minDamage="1" maxDamage="4"/>
     <Weapon ID="1003" Name="Stonka Stick" Price=" 5" minDamage="3" maxDamage="4"/>
     <Weapon ID="1004" Name="Old Rusty Sword" Price="5" minDamage="1" maxDamage="8"/>
     <Weapon ID="1005" Name="Sharpened Spade" Price="6" minDamage="5" maxDamage="6"/>
@@ -10,15 +10,15 @@
   <!--#region Monster Weapons-->
   <!--Bridge-->
       <!--#region Frogman-->
-          <Weapon ID="1007" Name="Lashing Tounge" Price="6" minDamage="0" maxDamage="5"/>
-          <Weapon ID="1008" Name="Frogman Claws" Price="3" minDamage="0" maxDamage="3"/>
+          <Weapon ID="1007" Name="Lashing Tounge" Price="6" minDamage="1" maxDamage="5"/>
+          <Weapon ID="1008" Name="Frogman Claws" Price="3" minDamage="1" maxDamage="3"/>
       <!--#endregion Frogman-->
   <!--Forest-->
       <!--#region Turkysaur-->
           <Weapon ID="1006" Name="Vicious Maul" Price="4" minDamage="2" maxDamage="4"/>
       <!--#endregion Turkysaur-->
       <!--#region Jungle-Beast-->
-      <Weapon ID="1009" Name="Raging Fist" Price="3" minDamage="0" maxDamage="8"/>
+      <Weapon ID="1009" Name="Raging Fist" Price="3" minDamage="1" maxDamage="8"/>
       <Weapon ID="1010" Name="Fanged Roar" Price="3" minDamage="2" maxDamage="7"/>
       <!--#endregion Jungle-Beast-->
   <!--#endregion Monster Weapons-->

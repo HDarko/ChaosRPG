@@ -27,8 +27,8 @@ namespace ChaosEngine.Classes
 
         public Monster(int id,string name, string imageFileName,
                        int maximumHitPoints,
-                       int rewardExpPoints, int gold) :
-            base(name, maximumHitPoints, maximumHitPoints, gold)
+                       int rewardExpPoints, int gold, int dexterity) :
+            base(name, maximumHitPoints, maximumHitPoints, gold, dexterity)
         {
             //ImageName = string.Format("/ChaosEngine;component/Images/Monsters/{0}", imageFileName);
             //or
@@ -71,7 +71,7 @@ namespace ChaosEngine.Classes
             // "Clone" this monster to a new Monster object
             Monster newMonster =
                 new Monster(ID, Name, ImageName, MaximumHitPoints,
-                            RewardExperiencePoints, Gold);
+                            RewardExperiencePoints, Gold, Dexterity);
 
             foreach (LootPercentage lootPercentage in _lootTable)
             {
