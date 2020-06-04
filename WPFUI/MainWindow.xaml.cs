@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly GameSession _gameSession= new GameSession();
+        private readonly GameSession _gameSession;
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Dictionary<Key, Action> _userInputActions =
            new Dictionary<Key, Action>();
@@ -33,7 +34,7 @@ namespace WPFUI
             InitializeComponent();
             InitializeUserInputActions();
             _messageBroker.OnMessageRaised += OnGameMessageRaised;
-
+            _gameSession = SaveGameService.LoadLastSaveOrCreateNew();
             DataContext = _gameSession;
 
         }
@@ -176,6 +177,9 @@ namespace WPFUI
             Recipe recipe = ((FrameworkElement)sender).DataContext as Recipe;
             _gameSession.CraftItemUsing(recipe);
         }
-
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            SaveGameService.Save(_gameSession);
+        }
     }
 }

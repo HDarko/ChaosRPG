@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         FontSize="11pt"
         KeyDown="MainWindow_OnKeyDown"
-         Title="Chaos RPG" Height="768" Width="1024">
+        Closing="MainWindow_OnClosing"
+        Title="Chaos RPG" Height="768" Width="1024">
     <!--
     the line with “xmlns:Managers” tells the Window that we are using objects in the ChaosEngine project (assembly), and in theChaosEngine.Managers namespace (folder structure).
 

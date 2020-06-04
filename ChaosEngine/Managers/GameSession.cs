@@ -24,6 +24,7 @@ namespace ChaosEngine.Managers
 
         #region Properties
 
+        public string Version { get; } = "0.1.000";
         public bool HasMonster => CurrentMonster != null;
         public bool HasTrader => CurrentTrader != null;
         public bool TradeWeapons => (HasTrader && (CurrentTrader.weaponsAvailable));
@@ -134,6 +135,9 @@ namespace ChaosEngine.Managers
         //-------------------------------------------------------------------------------------------
         public GameSession()
         {
+            
+           
+
             int dexterity = RandomNumberGenerator.SimpleNumberBetween(3, 40);
 
             CurrentPlayer = new Player
@@ -158,10 +162,18 @@ namespace ChaosEngine.Managers
             CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4003), 4);
             CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(1));
             CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(2));
+
             CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);
             CurrentLocation = CurrentWorld.LocationAt(0, 0);
 
 
+        }
+
+        public GameSession(Player player, int xCoordinate, int yCoordinate)
+        {
+            CurrentPlayer = player;
+            CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);    
+            CurrentLocation = CurrentWorld.LocationAt(xCoordinate, yCoordinate);
         }
         #region Move Functions
 
