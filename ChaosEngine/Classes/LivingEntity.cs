@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
 namespace ChaosEngine.Classes
@@ -17,8 +18,9 @@ namespace ChaosEngine.Classes
         private int _dexterity;
         private Weapon _currentWeapon;
         private GameItem _currentConsumable;
-
+        [JsonIgnore]
         public bool IsAlive => CurrentHitPoints > 0;
+        [JsonIgnore]
         public bool IsDead => !IsAlive;
         public bool HasConsumable => Consumables.Any();
 

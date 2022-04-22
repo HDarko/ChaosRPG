@@ -16,6 +16,8 @@ namespace ChaosEngine.Sevices
     {
         private const string SAVE_GAME_FILE_NAME = "ChaosRPG.json";
 
+        private const string _currentGameVersion = "0.1.001";
+
         public static void Save(GameSession gameSession)
         {
             File.WriteAllText(SAVE_GAME_FILE_NAME,
@@ -59,7 +61,7 @@ namespace ChaosEngine.Sevices
 
             switch (fileVersion)
             {
-                case "0.1.000":
+                case _currentGameVersion:
                     player =
                         new Player((string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Name)],
                                    (string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CharacterClass)],
@@ -88,7 +90,7 @@ namespace ChaosEngine.Sevices
 
             switch (fileVersion)
             {
-                case "0.1.000":
+                case _currentGameVersion:
                     foreach (JToken itemToken in (JArray)data[nameof(GameSession.CurrentPlayer)]
                         [nameof(Player.Inventory)])
                     {
@@ -109,7 +111,7 @@ namespace ChaosEngine.Sevices
 
             switch (fileVersion)
             {
-                case "0.1.000":
+                case _currentGameVersion:
                     foreach (JToken questToken in (JArray)data[nameof(GameSession.CurrentPlayer)]
                         [nameof(Player.Quests)])
                     {
@@ -135,7 +137,7 @@ namespace ChaosEngine.Sevices
 
             switch (fileVersion)
             {
-                case "0.1.000":
+                case _currentGameVersion:
                     foreach (JToken recipeToken in
                         (JArray)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Recipes)])
                     {

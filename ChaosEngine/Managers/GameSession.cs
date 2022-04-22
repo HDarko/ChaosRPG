@@ -7,6 +7,7 @@ using ChaosEngine.Factories;
 using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Sevices;
+using Newtonsoft.Json;
 
 namespace ChaosEngine.Managers
 {
@@ -24,8 +25,10 @@ namespace ChaosEngine.Managers
 
         #region Properties
 
-        public string Version { get; } = "0.1.000";
+        public string Version { get; } = "0.1.001";
+        [JsonIgnore]
         public bool HasMonster => CurrentMonster != null;
+        [JsonIgnore]
         public bool HasTrader => CurrentTrader != null;
         public bool TradeWeapons => (HasTrader && (CurrentTrader.weaponsAvailable));
 
@@ -51,8 +54,9 @@ namespace ChaosEngine.Managers
                 }
             }
         }
-
+        [JsonIgnore]
         public World CurrentWorld { get; set; }
+
         public Location CurrentLocation
         {
             get { return _currentLocation; }
@@ -72,7 +76,7 @@ namespace ChaosEngine.Managers
                    
             }
         }
-
+        [JsonIgnore]
         public Trader CurrentTrader
         {
             get { return _currentTrader; }
@@ -88,23 +92,24 @@ namespace ChaosEngine.Managers
 
 
         #region  Button Properties
+        [JsonIgnore]
         public bool HasLocationToNorth=> 
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate + 1) != null;
-            
 
+        [JsonIgnore]
         public bool HasLocationToEast=>
           CurrentWorld.LocationAt(CurrentLocation.XCoordinate + 1, CurrentLocation.YCoordinate) != null;
-    
 
+        [JsonIgnore]
         public bool HasLocationToSouth=>
                  CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate - 1) != null;
-
+        [JsonIgnore]
         public bool HasLocationToWest=>
             CurrentWorld.LocationAt(CurrentLocation.XCoordinate - 1, CurrentLocation.YCoordinate) != null;
-     
+
         #endregion
         //========================================================
-
+        [JsonIgnore]
         public Monster CurrentMonster
         {
             get { return _currentMonster; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using ChaosEngine.Factories;
+using Newtonsoft.Json;
 
 namespace ChaosEngine.Classes
 {
@@ -11,10 +12,15 @@ namespace ChaosEngine.Classes
         #region Properties
         public int XCoordinate { get;  }
         public int YCoordinate { get;  }
+        [JsonIgnore]
         public string Name { get;  }
+        [JsonIgnore]
         public string Description { get; }
+        [JsonIgnore]
         public string ImageName { get;  }
+        [JsonIgnore]
         public List<Quest> QuestsAvailableHere { get; } = new List<Quest>();
+        [JsonIgnore]
         public Trader TraderHere { get; set; }
 
         public List<MonsterEncounter> MonstersHere { get; set; } =

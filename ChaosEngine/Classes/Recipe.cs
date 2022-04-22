@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ChaosEngine.Classes
 {
     public class Recipe
     {
         public int ID { get; }
+        [JsonIgnore]
         public string Name { get; }
+        [JsonIgnore]
         public List<ItemQuantity> Ingredients { get; } = new List<ItemQuantity>();
+        [JsonIgnore]
         public List<ItemQuantity> OutputItems { get; } = new List<ItemQuantity>();
 
         //Might replace item desciption in ToolTipContents to just quanity plus name in future
+        [JsonIgnore]
         public string ToolTipContents =>
             "Ingredients" + Environment.NewLine +
             "===========" + Environment.NewLine +
