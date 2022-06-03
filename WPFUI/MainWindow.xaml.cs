@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
+using Microsoft.Win32;
+using WPFUI.Windows;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +27,8 @@ namespace WPFUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly GameSession _gameSession;
+        private const string SAVE_GAME_FILE_EXTENSION = "soscsrpg";
+        private GameSession _gameSession;
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Dictionary<Key, Action> _userInputActions =
            new Dictionary<Key, Action>();
@@ -33,10 +36,8 @@ namespace WPFUI
         {
             InitializeComponent();
             InitializeUserInputActions();
-            _messageBroker.OnMessageRaised += OnGameMessageRaised;
-            _gameSession = SaveGameService.LoadLastSaveOrCreateNew();
+            SetActiveGameSessionTo(new GameSession());
             DataContext = _gameSession;
-
         }
 
         private void InitializeUserInputActions()
@@ -154,6 +155,10 @@ namespace WPFUI
             
         }
 
+        private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            SetActiveGameSessionTo(new GameSession());
+        }
         private void OnClick_DisplayWeaponTradeScreen(object sender, RoutedEventArgs e)
         {
             if(_gameSession.TradeWeapons)
@@ -177,9 +182,66 @@ namespace WPFUI
             Recipe recipe = ((FrameworkElement)sender).DataContext as Recipe;
             _gameSession.CraftItemUsing(recipe);
         }
+
+        private void SetActiveGameSessionTo(GameSession gameSession)
+        {
+            // Unsubscribe from OnMessageRaised, or we will get double messages
+            _messageBroker.OnMessageRaised -= OnGameMessageRaised;
+            _gameSession = gameSession;
+            DataContext = _gameSession;
+            // Clear out previous game's messages
+            gameMessages.Document.Blocks.Clear();
+            _messageBroker.OnMessageRaised += OnGameMessageRaised;
+        }
+
+        private void SaveGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveGame();
+        }
+
+        private void Exit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            SaveGameService.Save(_gameSession);
+            YesNoWindow message =
+                new YesNoWindow("Save Game", "Do you want to save your game?");
+            message.Owner = GetWindow(this);
+            message.ShowDialog();
+            if (message.ClickedYes)
+            {
+                SaveGame();
+            }
+        }
+
+        private void SaveGame()
+        {
+            SaveFileDialog saveFileDialog =
+                new SaveFileDialog
+                {
+                    InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Filter = $"Saved games (*.{SAVE_GAME_FILE_EXTENSION})|*.{SAVE_GAME_FILE_EXTENSION}"
+                };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                SaveGameService.Save(_gameSession, saveFileDialog.FileName);
+            }
+        }
+
+        private void LoadGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog =
+                new OpenFileDialog
+                {
+                    InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Filter = $"Saved games (*.{SAVE_GAME_FILE_EXTENSION})|*.{SAVE_GAME_FILE_EXTENSION}"
+                };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                SetActiveGameSessionTo(SaveGameService.LoadLastSaveOrCreateNew(openFileDialog.FileName));
+            }
         }
     }
 }

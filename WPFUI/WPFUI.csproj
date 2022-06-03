@@ -80,6 +80,9 @@
     <Compile Include="WeaponTradeScreen.xaml.cs">
       <DependentUpon>WeaponTradeScreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\YesNoWindow.xaml.cs">
+      <DependentUpon>YesNoWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WeaponTradeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\YesNoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
