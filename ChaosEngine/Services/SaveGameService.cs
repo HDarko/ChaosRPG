@@ -10,7 +10,7 @@ using ChaosEngine.Managers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace ChaosEngine.Sevices
+namespace ChaosEngine.Services
 {
     public static class SaveGameService
     {
@@ -68,7 +68,8 @@ namespace ChaosEngine.Sevices
                                    (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.MaximumHitPoints)],
                                    (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CurrentHitPoints)],
                                    (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Gold)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Dexterity)]);
+                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Dexterity)],
+                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Level)]);
                     break;
                 default:
                     throw new InvalidDataException($"File version '{fileVersion}' not recognized");

@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChaosEngine.Sevices
+namespace ChaosEngine.Services
 {
     public static class LoggingService
     {

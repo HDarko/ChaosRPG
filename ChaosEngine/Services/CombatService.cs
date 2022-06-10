@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Classes;
 
-namespace ChaosEngine.Sevices
+namespace ChaosEngine.Services
 {
     public static class CombatService
     {

@@ -6,7 +6,7 @@ using ChaosEngine.Classes;
 using ChaosEngine.Factories;
 using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
-using ChaosEngine.Sevices;
+using ChaosEngine.Services;
 using Newtonsoft.Json;
 
 namespace ChaosEngine.Managers

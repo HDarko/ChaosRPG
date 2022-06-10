@@ -1,4 +1,4 @@
-﻿using ChaosEngine.Sevices;
+﻿using ChaosEngine.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using System;
 using ChaosEngine.Classes;
-using ChaosEngine.Sevices;
+using ChaosEngine.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestEngine.Classes

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.GameEvents;
 
-namespace ChaosEngine.Sevices
+namespace ChaosEngine.Services
 {
    public class MessageBroker
     {

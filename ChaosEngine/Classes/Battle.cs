@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ChaosEngine.Sevices;
+using ChaosEngine.Services;
 using ChaosEngine.GameEvents;
 
 namespace ChaosEngine.Classes
