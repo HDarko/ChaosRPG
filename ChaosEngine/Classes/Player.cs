@@ -69,8 +69,8 @@ namespace ChaosEngine.Classes
 
 
         public Player(string name, string characterClass, int experiencePoints,
-                      int maximumHitPoints, int currentHitPoints, int gold,int dexterity) :
-            base(name, maximumHitPoints, currentHitPoints, gold,dexterity)
+                      int maximumHitPoints, int currentHitPoints, int gold,int dexterity, int level = 1) :
+            base(name, maximumHitPoints, currentHitPoints, gold,dexterity, level)
         {
             CharacterClass = characterClass;
             ExperiencePoints = experiencePoints;

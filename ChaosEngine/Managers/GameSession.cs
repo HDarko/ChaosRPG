@@ -153,7 +153,8 @@ namespace ChaosEngine.Managers
               10,
               10,
               20,
-              dexterity
+              dexterity,
+              1
             );
             
             if (!CurrentPlayer.Weapons.Any())

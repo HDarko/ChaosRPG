@@ -12,7 +12,7 @@ namespace TestEngine.Classes
         public void Test_FirstAttacker()
         {
           //Built for debugging purposes
-            Player player = new Player("", "", 0, 0, 0, 18, 4);
+            Player player = new Player("", "", 0, 0, 0, 18, 4,1);
             Monster monster = new Monster(0, "", "", 0, 12, 0, 0);
 
             CombatService.Combatant result = CombatService.FirstAttacker(player, monster);
