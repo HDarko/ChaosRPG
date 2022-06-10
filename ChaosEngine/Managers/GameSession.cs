@@ -119,6 +119,7 @@ namespace ChaosEngine.Managers
                 {
                     _currentBattle.OnCombatVictory -= OnCurrentMonsterKilled;
                     _currentBattle.Dispose();
+                    _currentBattle = null;
                 }
 
 
@@ -351,7 +352,16 @@ namespace ChaosEngine.Managers
         {
             if (CurrentPlayer.CurrentConsumable != null)
             {
+                //To ensure messages for using consumable items works if the player isn’t in a battle.
+                if (_currentBattle == null)
+                {
+                    CurrentPlayer.OnActionPerformed += OnConsumableActionPerformed;
+                }
                 CurrentPlayer.UseCurrentConsumableOnSelf();
+                if (_currentBattle == null)
+                {
+                    CurrentPlayer.OnActionPerformed -= OnConsumableActionPerformed;
+                }
             }
                 
         }
@@ -360,9 +370,14 @@ namespace ChaosEngine.Managers
         {
             _messageBroker.RaiseMessage($"You are now level {CurrentPlayer.Level}!");
         }
+
+        private void OnConsumableActionPerformed(object sender, string result)
+        {
+            _messageBroker.RaiseMessage(result);
+        }
         public void AttackCurrentMonster()
         {
-            _currentBattle.AttackOpponent();
+            _currentBattle?.AttackOpponent();
         }
     }
 }
