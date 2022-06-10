@@ -59,7 +59,7 @@ namespace ChaosEngine.Managers
 
         public Location CurrentLocation
         {
-            get { return _currentLocation; }
+            get => _currentLocation;
             set
             {
                 _currentLocation = value;
@@ -69,10 +69,10 @@ namespace ChaosEngine.Managers
                 OnPropertyChanged(nameof(HasLocationToEast));
                 OnPropertyChanged(nameof(HasLocationToWest));
                 OnPropertyChanged(nameof(HasLocationToSouth));
-                CurrentTrader = CurrentLocation.TraderHere;
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
-                CurrentMonster = CurrentLocation.GetMonster();
+                CurrentTrader = _currentLocation.TraderHere;
+                CurrentMonster = _currentLocation.GetMonster();
                    
             }
         }

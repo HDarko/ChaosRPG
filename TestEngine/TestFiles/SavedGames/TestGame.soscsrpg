@@ -97,8 +97,8 @@
     ]
   },
   "CurrentLocation": {
-    "XCoordinate": 2,
-    "YCoordinate": 2,
-    //"MonstersHere": []
+    "XCoordinate": 0,
+    "YCoordinate": 0,
+    "MonstersHere": []
   }
 }
