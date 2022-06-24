@@ -16,7 +16,7 @@ namespace ChaosEngine.Classes
         }
         public string DamageRange
         {
-            get => $"{Action.GetMinDamage()}-{Action.GetMaxDamage()}";        
+            get => Action.DamageDice;        
         }
         public Weapon(int itemTypeID, string name, int price, AttackWithWeapon command=null)
            : base( ItemCategory.Weapon, itemTypeID, name, price,true)

@@ -144,7 +144,7 @@ namespace ChaosEngine.Managers
             
            
 
-            int dexterity = RandomNumberGenerator.SimpleNumberBetween(3, 40);
+            int dexterity = DiceService.Instance.Roll(6,3).Value;
 
             CurrentPlayer = new Player
             (

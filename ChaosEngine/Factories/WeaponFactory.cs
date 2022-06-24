@@ -60,8 +60,7 @@ namespace ChaosEngine.Factories
                 BuildWeapon( node.GetXmlAttributeAsInt("ID"),
                              node.GetXmlAttributeAsString("Name"),
                              node.GetXmlAttributeAsInt("Price"),
-                             node.GetXmlAttributeAsInt("minDamage"),
-                             node.GetXmlAttributeAsInt("maxDamage")
+                             node.GetXmlAttributeAsString("DamageDice")
                             );
             }
         }
@@ -81,10 +80,10 @@ namespace ChaosEngine.Factories
               }
           }*/
         public static void BuildWeapon(int id, string name, int price,
-                                        int minimumDamage, int maximumDamage)
+                                        string damageDice)
         {
             Weapon newWeapon = new Weapon(id, name, price);
-            newWeapon.Action = new AttackWithWeapon(newWeapon,minimumDamage, maximumDamage);
+            newWeapon.Action = new AttackWithWeapon(newWeapon, damageDice);
             _allweaponsinGame.Add(newWeapon);
         }
         public static Weapon CreateWeapon(int weaponTypeID)

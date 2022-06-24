@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using ChaosEngine.Factories;
+using ChaosEngine.Services;
 using Newtonsoft.Json;
 
 namespace ChaosEngine.Classes
@@ -62,8 +63,8 @@ namespace ChaosEngine.Classes
             int totalChances = MonstersHere.Sum(m => m.chanceOfEncountering);
 
             // Select a random number between 1 and the total (in case the total chances is not 100).
-            int randomNumber = RandomNumberGenerator.NumberBetween(1, totalChances);
-
+            int randomNumber = DiceService.Instance.Roll(totalChances, 1).Value;
+;
             // Loop through the monster list, 
             // adding the monster's percentage chance of appearing to the runningTotal variable.
             // When the random number is lower than the runningTotal,

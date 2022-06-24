@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using ChaosEngine.Classes.Actions;
+﻿using System.Collections.Generic;
 using ChaosEngine.Factories;
+using ChaosEngine.Services;
 
 namespace ChaosEngine.Classes
 {
@@ -47,7 +42,7 @@ namespace ChaosEngine.Classes
             //Else pick a weapon randomly and use it
             if (Weapons.Count > 1)
             {
-                int index = RandomNumberGenerator.NumberBetween(0, Weapons.Count - 1);
+                int index = DiceService.Instance.Roll(Weapons.Count - 1, 1).Value;
                 CurrentWeapon = Weapons[index];
             }
             else
@@ -79,7 +74,7 @@ namespace ChaosEngine.Classes
                 newMonster.AddItemToLootTable(lootPercentage.ID, lootPercentage.Percentage, lootPercentage.Quantity);
 
                 // Populate the new monster's inventory, using the loot table
-                if (RandomNumberGenerator.NumberBetween(1, 100) <= lootPercentage.Percentage)
+                if (DiceService.Instance.Roll(100,1).Value <= lootPercentage.Percentage)
                 {
                     newMonster.AddItemToInventory(ItemFactory.CreateGameItem(lootPercentage.ID));
                 }

@@ -9,13 +9,15 @@ namespace ChaosEngine.Classes.Actions
 {
     public class AttackWithWeapon: BaseAction,IAction
     {
-    
-        private readonly int _maximumDamage;
-        private readonly int _minimumDamage;
+        private string _damageDice;
 
-   
+        public string DamageDice
+        {
+            get => _damageDice;
+            set => _damageDice = value;
+        }
 
-        public AttackWithWeapon(Weapon weapon, int minimumDamage, int maximumDamage)
+        public AttackWithWeapon(Weapon weapon, string damageDice)
             :base(weapon)
         {
             if (weapon.Category != GameItem.ItemCategory.Weapon)
@@ -23,29 +25,12 @@ namespace ChaosEngine.Classes.Actions
                 throw new ArgumentException($"{weapon.Name} is not a weapon");
             }
 
-            if (minimumDamage < 0)
+            if (string.IsNullOrEmpty(damageDice))
             {
-                throw new ArgumentException("minimumDamage must be 0 or larger");
+                throw new ArgumentException("damageDice must be valid dice notation");
             }
-
-            if (maximumDamage < minimumDamage)
-            {
-                throw new ArgumentException("maximumDamage must be >= minimumDamage");
-            }
-            _minimumDamage = minimumDamage;
-            _maximumDamage = maximumDamage;
+            DamageDice = damageDice;
         }
-
-        public int GetMaxDamage()
-        {
-            return _maximumDamage;
-        }
-
-        public int GetMinDamage()
-        {
-            return _minimumDamage;
-        }
-
 
         public void Execute(LivingEntity actor, LivingEntity target)
         {
@@ -55,7 +40,7 @@ namespace ChaosEngine.Classes.Actions
             string targetName = (target is Player) ? "you" : $"the {target.Name.ToLower()}";
             if (CombatService.AttackSucceeded(actor, target))
             {
-                int damage = RandomNumberGenerator.NumberBetween(_minimumDamage, _maximumDamage);
+                int damage = DiceService.Instance.Roll(_damageDice).Value;
                 ReportResult($"{actorName} hit {targetName} for {damage} point{(damage > 1 ? "s" : "")}.");
                 target.TakeDamage(damage);
             }
