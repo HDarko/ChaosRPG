@@ -18,7 +18,7 @@ namespace TestEngine.Services
                     .LoadLastSaveOrCreateNew(@".\TestFiles\SavedGames\TestGame.soscsrpg");
 
             // Game session data
-            Assert.AreEqual("0.1.001", gameSession.Version);
+            Assert.AreEqual("0.1.001", gameSession.GameDetails.Version);
             Assert.AreEqual(0, gameSession.CurrentLocation.XCoordinate);
             Assert.AreEqual(0, gameSession.CurrentLocation.YCoordinate);
 

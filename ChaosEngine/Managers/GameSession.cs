@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 using System.Linq;
 using ChaosEngine.Classes;
 using ChaosEngine.Factories;
@@ -8,6 +9,8 @@ using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using ChaosEngine.Models;
 
 namespace ChaosEngine.Managers
 {
@@ -19,6 +22,7 @@ namespace ChaosEngine.Managers
         private Player _player;
         private Trader _currentTrader;
         private Battle _currentBattle;
+        private GameDetails _gameDetails;
         #endregion
 
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
@@ -90,6 +94,16 @@ namespace ChaosEngine.Managers
             }
         }
 
+        [JsonIgnore]
+        public GameDetails GameDetails
+        {
+            get => _gameDetails;
+            set
+            {
+                _gameDetails = value;
+                OnPropertyChanged();
+            }
+        }
 
         #region  Button Properties
         [JsonIgnore]
@@ -141,11 +155,8 @@ namespace ChaosEngine.Managers
         //-------------------------------------------------------------------------------------------
         public GameSession()
         {
-            
-           
-
+            PopulateGameDetails();
             int dexterity = DiceService.Instance.Roll(6,3).Value;
-
             CurrentPlayer = new Player
             (
                "Player",
@@ -178,6 +189,7 @@ namespace ChaosEngine.Managers
 
         public GameSession(Player player, int xCoordinate, int yCoordinate)
         {
+            PopulateGameDetails();
             CurrentPlayer = player;
             CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);    
             CurrentLocation = CurrentWorld.LocationAt(xCoordinate, yCoordinate);
@@ -378,6 +390,20 @@ namespace ChaosEngine.Managers
         public void AttackCurrentMonster()
         {
             _currentBattle?.AttackOpponent();
+        }
+
+        private void PopulateGameDetails()
+        {
+            JObject gameDetails =
+                JObject.Parse(File.ReadAllText(".\\GameData\\GameDetails.json"));
+            GameDetails = new GameDetails(gameDetails["Name"].ToString(),
+                                          gameDetails["Version"].ToString());
+            foreach (JToken token in gameDetails["PlayerAttributes"])
+            {
+                GameDetails.PlayerAttributes.Add(new PlayerAttribute(token["Key"].ToString(),
+                                                                     token["DisplayName"].ToString(),
+                                                                     token["DiceNotation"].ToString()));
+            }
         }
     }
 }
