@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Newtonsoft.Json.Linq;
 
 namespace ChaosEngine.Shared
 {
@@ -44,7 +45,22 @@ namespace ChaosEngine.Shared
             }
             
         }
-
+        public static string StringValueOf(this JObject jsonObject, string key)
+        {
+            return jsonObject[key].ToString();
+        }
+        public static string StringValueOf(this JToken jsonObject, string key)
+        {
+            return jsonObject[key].ToString();
+        }
+        public static bool BoolValueOf(this JToken jsonToken, string key)
+        {
+            return Convert.ToBoolean(jsonToken[key]);
+        }
+        public static int IntValueOf(this JToken jsonToken, string key)
+        {
+            return Convert.ToInt32(jsonToken[key]);
+        }
     }
 }
 

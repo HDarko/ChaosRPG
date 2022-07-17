@@ -74,16 +74,22 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CustomConverters\FileToBitmapConverter.cs" />
-    <Compile Include="ItemTradeScreen.xaml.cs">
+    <Compile Include="Windows\ItemTradeScreen.xaml.cs">
       <DependentUpon>ItemTradeScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WeaponTradeScreen.xaml.cs">
+    <Compile Include="Windows\WeaponTradeScreen.xaml.cs">
       <DependentUpon>WeaponTradeScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\CharacterCreation.xaml.cs">
+      <DependentUpon>CharacterCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Startup.xaml.cs">
+      <DependentUpon>Startup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\YesNoWindow.xaml.cs">
       <DependentUpon>YesNoWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -91,15 +97,23 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ItemTradeScreen.xaml">
+    <Page Include="Windows\ItemTradeScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WeaponTradeScreen.xaml">
+    <Page Include="Windows\WeaponTradeScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CharacterCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Startup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@
              xmlns:converters="clr-namespace:WPFUI.CustomConverters"
              xmlns:local="clr-namespace:WPFUI"   
              DispatcherUnhandledException="App_OnDispatcherUnhandledException"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Windows/Startup.xaml">
     <Application.Resources>
         <converters:FileToBitmapConverter x:Key="FileToBitmapConverter"/>
     </Application.Resources>
