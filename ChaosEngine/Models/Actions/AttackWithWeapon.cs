@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChaosEngine.Classes.Actions
+namespace ChaosEngine.Models.Actions
 {
     public class AttackWithWeapon: BaseAction,IAction
     {

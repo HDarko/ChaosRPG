@@ -1,5 +1,5 @@
 ﻿using System;
-using ChaosEngine.Classes;
+using ChaosEngine.Models;
 using ChaosEngine.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

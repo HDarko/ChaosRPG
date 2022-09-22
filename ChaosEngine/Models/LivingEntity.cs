@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public abstract class LivingEntity : BaseNotificationClass
     {

@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class Player: LivingEntity
     {

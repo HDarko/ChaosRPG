@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ChaosEngine.Services;
 using ChaosEngine.GameEvents;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class Battle : IDisposable
     {

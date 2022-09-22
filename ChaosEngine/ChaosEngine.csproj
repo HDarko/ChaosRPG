@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\CharacterCreationManager.cs" />
     <Compile Include="Models\Actions\BaseAction.cs" />
     <Compile Include="Models\Actions\Heal.cs" />
     <Compile Include="Models\Actions\IAction.cs" />

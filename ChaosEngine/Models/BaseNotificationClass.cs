@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class BaseNotificationClass: INotifyPropertyChanged
     {

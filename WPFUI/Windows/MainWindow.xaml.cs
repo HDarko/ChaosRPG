@@ -17,7 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChaosEngine.Managers;
 using ChaosEngine.GameEvents;
-using ChaosEngine.Classes;
+using ChaosEngine.Models;
 using ChaosEngine.Services;
 
 namespace WPFUI
@@ -38,6 +38,12 @@ namespace WPFUI
             InitializeUserInputActions();
             SetActiveGameSessionTo(new GameSession());
             DataContext = _gameSession;
+        }
+
+        public MainWindow( Player player) :
+            this()
+        {
+            _gameSession.CurrentPlayer = player;
         }
 
         private void InitializeUserInputActions()

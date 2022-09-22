@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using ChaosEngine.Classes.Actions;
+using ChaosEngine.Models.Actions;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class GameItem
     {

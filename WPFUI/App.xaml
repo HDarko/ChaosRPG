@@ -6,6 +6,7 @@
              DispatcherUnhandledException="App_OnDispatcherUnhandledException"
              StartupUri="Windows/Startup.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:FileToBitmapConverter x:Key="FileToBitmapConverter"/>
     </Application.Resources>
 </Application>

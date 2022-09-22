@@ -2,7 +2,7 @@
 using ChaosEngine.Factories;
 using ChaosEngine.Services;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
 
     public class Monster: LivingEntity

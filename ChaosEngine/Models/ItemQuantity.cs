@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Factories;
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class ItemQuantity
     {

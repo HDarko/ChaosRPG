@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
-using ChaosEngine.Classes;
+using ChaosEngine.Models;
 using ChaosEngine.Factories;
 using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ChaosEngine.Models;
 
 namespace ChaosEngine.Managers
 {

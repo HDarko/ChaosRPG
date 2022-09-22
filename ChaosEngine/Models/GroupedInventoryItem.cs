@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class GroupedInventoryItem: BaseNotificationClass
     {

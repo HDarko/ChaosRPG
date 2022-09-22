@@ -1,7 +1,7 @@
 ﻿using System;
-using ChaosEngine.Classes;
+using ChaosEngine.Models;
 using ChaosEngine.Factories;
-using ChaosEngine.Classes.Actions;
+using ChaosEngine.Models.Actions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestEngine.Actions

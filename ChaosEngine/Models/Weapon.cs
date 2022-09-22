@@ -1,11 +1,11 @@
-﻿using ChaosEngine.Classes.Actions;
+﻿using ChaosEngine.Models.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class Weapon : GameItem
     {

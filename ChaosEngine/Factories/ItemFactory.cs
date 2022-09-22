@@ -5,8 +5,8 @@ using System.Text;
 using System.IO;
 using System.Xml;
 using System.Threading.Tasks;
-using ChaosEngine.Classes;
-using ChaosEngine.Classes.Actions;
+using ChaosEngine.Models;
+using ChaosEngine.Models.Actions;
 using ChaosEngine.Shared;
 
 namespace ChaosEngine.Factories

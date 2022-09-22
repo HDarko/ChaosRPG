@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class Trader: LivingEntity
     {

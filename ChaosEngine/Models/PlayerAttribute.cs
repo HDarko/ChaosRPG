@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ChaosEngine.Services;
+﻿using ChaosEngine.Services;
 
 namespace ChaosEngine.Models
 {
-    public class PlayerAttribute
+    public class PlayerAttribute : ChaosEngine.Models.BaseNotificationClass
     {
         public string Key { get; }
         public string DisplayName { get; }
         public string DiceNotation { get; }
         public int BaseValue { get; set; }
-        public int ModifiedValue { get; set; }
+        public int ModifiedValue {
+            get => _modifiedValue;
+            set
+            {
+                _modifiedValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _modifiedValue;
 
         // Constructor that will use DiceService to create a BaseValue.
         // The constructor this calls will put that same value into BaseValue and ModifiedValue

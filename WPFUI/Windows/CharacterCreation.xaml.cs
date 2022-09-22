@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ChaosEngine.Services;
 using ChaosEngine.Models;
+using ChaosEngine.Managers;
 
 namespace WPFUI.Windows
 {
@@ -21,19 +22,28 @@ namespace WPFUI.Windows
     /// </summary>
     public partial class CharacterCreation : Window
     {
-        private GameDetails _gameDetails;
+        private CharacterCreationManager _manager { get; set; }
+
         public CharacterCreation()
         {
             InitializeComponent();
-            _gameDetails = GameDetailsService.ReadGameDetails();
-            DataContext = _gameDetails;
+            _manager = new CharacterCreationManager();
+            DataContext = _manager;
         }
 
         private void RandomPlayer_OnClick(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
+            _manager.RollNewCharacter();
+        }
+        private void UseThisPlayer_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(_manager.GetPlayer());
             mainWindow.Show();
             Close();
+        }
+        private void Race_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _manager.ApplyAttributeModifiers();
         }
     }
 }

@@ -6,7 +6,7 @@ using ChaosEngine.Factories;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
 
-namespace ChaosEngine.Classes
+namespace ChaosEngine.Models
 {
     public class Location
     {
