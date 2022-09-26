@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
+using ChaosEngine.Factories;
 
 namespace ChaosEngine.Managers
 {
@@ -62,8 +63,23 @@ namespace ChaosEngine.Managers
         }
         public Player GetPlayer()
         {
-            return new Player(Name, "Fighter", 0, 10, 10,
-                                PlayerAttributes.FirstOrDefault(pa => pa.Key.Equals("DEX"))?.ModifiedValue ?? 13, 10);
+            Player player = new Player(Name, 0, 10, 10,5, PlayerAttributes);
+
+
+            if (!player.Weapons.Any())
+            {
+                player.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
+            }
+            player.AddItemToInventory(ItemFactory.CreateGameItem(6001));
+            player.AddItemToInventory(ItemFactory.CreateGameItem(4000), 4);
+            player.AddItemToInventory(ItemFactory.CreateGameItem(4001), 4);
+            player.AddItemToInventory(ItemFactory.CreateGameItem(4002), 4);
+            player.AddItemToInventory(ItemFactory.CreateGameItem(4003), 4);
+            player.LearnRecipe(RecipeFactory.RecipeByID(1));
+            player.LearnRecipe(RecipeFactory.RecipeByID(2));
+            // Give player default inventory items, weapons, recipes, etc.
+
+            return player;
         }
     }
 }

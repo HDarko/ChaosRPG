@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -8,9 +9,7 @@ namespace ChaosEngine.Models
     public class Player: LivingEntity
     {
         //--------------------------------------Private properties-----------------------
-      
-        private string _characterClass;
-       
+        
         private int _experiencePoints;
 
 
@@ -22,16 +21,6 @@ namespace ChaosEngine.Models
             new ObservableCollection<QuestStatus>();
         public ObservableCollection<Recipe> Recipes { get; } =
             new ObservableCollection<Recipe>();
-
-        public string CharacterClass
-        {
-            get { return _characterClass; }
-            set
-            {
-                _characterClass = value;
-                OnPropertyChanged(nameof(CharacterClass));
-            }
-        }
 
         public int ExperiencePoints
         {
@@ -70,11 +59,10 @@ namespace ChaosEngine.Models
         }
 
 
-        public Player(string name, string characterClass, int experiencePoints,
-                      int maximumHitPoints, int currentHitPoints, int gold,int dexterity, int level = 1) :
-            base(name, maximumHitPoints, currentHitPoints, gold,dexterity, level)
+        public Player(string name, int experiencePoints,
+                      int maximumHitPoints, int currentHitPoints, int gold, IEnumerable<PlayerAttribute> attributes, int level = 1) :
+            base(name, maximumHitPoints, currentHitPoints, gold, attributes, level)
         {
-            CharacterClass = characterClass;
             ExperiencePoints = experiencePoints;
         }
 

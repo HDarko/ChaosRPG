@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ChaosEngine.Models;
 using System.Xml;
 using Newtonsoft.Json.Linq;
 
@@ -10,6 +8,13 @@ namespace ChaosEngine.Shared
 {
     public static class ExtensionMethods
     {
+        public static PlayerAttribute GetAttribute(this LivingEntity entity, string attributeKey)
+        {
+            return entity.Attributes
+                         .First(pa => pa.Key.Equals(attributeKey,
+                                                    StringComparison.CurrentCultureIgnoreCase));
+        }
+
         public static int GetXmlAttributeAsInt(this XmlNode node, string attributeName, bool returnNull = false)
         {
             return Convert.ToInt32(node.GetXmlAttributeAsString(attributeName, returnNull));
@@ -32,6 +37,7 @@ namespace ChaosEngine.Shared
             }        
             return attribute.Value;
         }
+
         public static bool GetXmlAttributeAsBool(this XmlNode node, string attributeName, bool returnNull = false, bool defaultIfNull=false)
         {
             string value = node.GetXmlAttributeAsString(attributeName, returnNull) ?? "NoValue";

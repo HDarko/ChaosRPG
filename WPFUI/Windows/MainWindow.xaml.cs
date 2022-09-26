@@ -32,18 +32,12 @@ namespace WPFUI
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Dictionary<Key, Action> _userInputActions =
            new Dictionary<Key, Action>();
-        public MainWindow()
+        public MainWindow(Player player)
         {
             InitializeComponent();
             InitializeUserInputActions();
-            SetActiveGameSessionTo(new GameSession());
+            SetActiveGameSessionTo(new GameSession(player,0,0));
             DataContext = _gameSession;
-        }
-
-        public MainWindow( Player player) :
-            this()
-        {
-            _gameSession.CurrentPlayer = player;
         }
 
         private void InitializeUserInputActions()
@@ -163,7 +157,7 @@ namespace WPFUI
 
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
         {
-            SetActiveGameSessionTo(new GameSession());
+            //SetActiveGameSessionTo(new GameSession());
         }
         private void OnClick_DisplayWeaponTradeScreen(object sender, RoutedEventArgs e)
         {
@@ -232,13 +226,13 @@ namespace WPFUI
                 };
             if (saveFileDialog.ShowDialog() == true)
             {
-                SaveGameService.Save(_gameSession, saveFileDialog.FileName);
+              //  SaveGameService.Save(_gameSession, saveFileDialog.FileName);
             }
         }
 
         private void LoadGame_OnClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog =
+       /*     OpenFileDialog openFileDialog =
                 new OpenFileDialog
                 {
                     InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
@@ -247,7 +241,7 @@ namespace WPFUI
             if (openFileDialog.ShowDialog() == true)
             {
                 SetActiveGameSessionTo(SaveGameService.LoadLastSaveOrCreateNew(openFileDialog.FileName));
-            }
+            }*/
         }
     }
 }

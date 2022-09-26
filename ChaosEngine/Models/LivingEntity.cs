@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
@@ -15,9 +13,11 @@ namespace ChaosEngine.Models
         private int _maximumHitPoints;
         private int _gold;
         private int _level;
-        private int _dexterity;
         private Weapon _currentWeapon;
         private GameItem _currentConsumable;
+        public ObservableCollection<PlayerAttribute> Attributes { get; } =
+           new ObservableCollection<PlayerAttribute>();
+
         [JsonIgnore]
         public bool IsAlive => CurrentHitPoints > 0;
         [JsonIgnore]
@@ -74,18 +74,6 @@ namespace ChaosEngine.Models
                 OnPropertyChanged(nameof(Level));
             }
         }
-
-        public int Dexterity
-        {
-            get => _dexterity;
-            private set
-            {
-                _dexterity = value;
-                //Can go with nothing in paratheses
-                OnPropertyChanged();
-            }
-        }
-
         public Weapon CurrentWeapon
         {
             get => _currentWeapon; 
@@ -138,17 +126,21 @@ namespace ChaosEngine.Models
 
         public event EventHandler OnKilled;
         public event EventHandler<string> OnActionPerformed;
-        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold, int dexterity, int level=1 )
+        protected LivingEntity(string name, int maximumHitPoints, int currentHitPoints, int gold,
+            IEnumerable<PlayerAttribute> attributes, int level=1 )
         {
             Name = name;
             MaximumHitPoints = maximumHitPoints;
             CurrentHitPoints = currentHitPoints;
-            Dexterity = dexterity;
             Gold = gold;
             Level = level;
             Inventory = new List<GameItem>();
             Weapons = new ObservableCollection<Weapon>();
             GroupedInventory = new ObservableCollection<GroupedInventoryItem>();
+            foreach (PlayerAttribute attribute in attributes)
+            {
+                Attributes.Add(attribute);
+            }
         }
         //Will try to keep one instance of everything in inventory but correct num in GroupedInventory
         public void AddItemToInventory(GameItem item, int quantity=1)
@@ -267,10 +259,6 @@ namespace ChaosEngine.Models
             }
         }
 
-        public void SetDexterity(int dexterity)
-        {
-            Dexterity = dexterity;
-        }
         public void Heal(int hitPointsToHeal)
         {
             CurrentHitPoints += hitPointsToHeal;

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Models;
 using ChaosEngine.Shared;
+using ChaosEngine.Services;
 using System.IO;
 using System.Xml;
 
@@ -14,11 +15,13 @@ namespace ChaosEngine.Factories
     {
         private const string GAME_DATA_FILENAME = ".\\GameData\\GameMonsters.xml";
 
+        private static readonly GameDetails s_gameDetails;
         private static readonly List<Monster> _baseMonsters = new List<Monster>();
         static MonsterFactory()
         {
             if (File.Exists(GAME_DATA_FILENAME))
             {
+                s_gameDetails = GameDetailsService.ReadGameDetails();
                 XmlDocument data = new XmlDocument();
                 data.LoadXml(File.ReadAllText(GAME_DATA_FILENAME));
 
@@ -42,6 +45,11 @@ namespace ChaosEngine.Factories
             }
             foreach (XmlNode node in nodes)
             {
+                var attributes = s_gameDetails.PlayerAttributes;
+                attributes.First(a => a.Key.Equals("DEX")).BaseValue =
+                    Convert.ToInt32(node.SelectSingleNode("./Dexterity").InnerText);
+                attributes.First(a => a.Key.Equals("DEX")).ModifiedValue =
+                    Convert.ToInt32(node.SelectSingleNode("./Dexterity").InnerText);
                 Monster monster =
                     new Monster(node.GetXmlAttributeAsInt("ID"),
                                 node.GetXmlAttributeAsString("Name"),
@@ -49,7 +57,7 @@ namespace ChaosEngine.Factories
                                 node.GetXmlAttributeAsInt("MaxHitPoints"),
                                 node.GetXmlAttributeAsInt("RewardExp"),
                                 node.GetXmlAttributeAsInt("Gold"),
-                                Convert.ToInt32(node.SelectSingleNode("./Dexterity").InnerText));
+                                attributes);
 
                 LoadLootTableFromMonsterNode(node, monster);
                 LoadWeaponsFromMonsterNode(node, monster);

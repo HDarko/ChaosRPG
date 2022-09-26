@@ -23,7 +23,7 @@ namespace ChaosEngine.Services
                               JsonConvert.SerializeObject(gameSession, Formatting.Indented));
         }
 
-        public static GameSession LoadLastSaveOrCreateNew(string fileName)
+       /** public static GameSession LoadLastSaveOrCreateNew(string fileName)
         {
             if (!File.Exists(fileName))
             {
@@ -50,38 +50,39 @@ namespace ChaosEngine.Services
                 // create a brand new GameSession object.
                 return new GameSession();
             }
-        }
+        }*/
 
         private static Player CreatePlayer(JObject data)
         {
-            string fileVersion = FileVersion(data);
+            /*  string fileVersion = FileVersion(data);
 
-            Player player;
+              Player player;
 
-            switch (fileVersion)
-            {
-                case _currentGameVersion:
-                    player =
-                        new Player((string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Name)],
-                                   (string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CharacterClass)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.ExperiencePoints)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.MaximumHitPoints)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CurrentHitPoints)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Gold)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Dexterity)],
-                                   (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Level)]);
-                    break;
-                default:
-                    throw new InvalidDataException($"File version '{fileVersion}' not recognized");
-            }
+              switch (fileVersion)
+              {
+                  case _currentGameVersion:
+                      player =
+                          new Player((string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Name)],
+                                     (string)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CharacterClass)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.ExperiencePoints)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.MaximumHitPoints)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.CurrentHitPoints)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Gold)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Dexterity)],
+                                     (int)data[nameof(GameSession.CurrentPlayer)][nameof(Player.Level)]);
+                      break;
+                  default:
+                      throw new InvalidDataException($"File version '{fileVersion}' not recognized");
+              }
 
-            PopulatePlayerInventory(data, player);
+              PopulatePlayerInventory(data, player);
 
-            PopulatePlayerQuests(data, player);
+              PopulatePlayerQuests(data, player);
 
-            PopulatePlayerRecipes(data, player);
+              PopulatePlayerRecipes(data, player);
 
-            return player;
+              return player;*/
+            return null;
         }
 
         private static void PopulatePlayerInventory(JObject data, Player player)

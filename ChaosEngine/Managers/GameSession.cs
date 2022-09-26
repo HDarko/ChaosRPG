@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+﻿
 using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Factories;
@@ -9,7 +6,7 @@ using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 
 namespace ChaosEngine.Managers
 {
@@ -152,39 +149,6 @@ namespace ChaosEngine.Managers
 
         #endregion
         //-------------------------------------------------------------------------------------------
-        public GameSession()
-        {
-            PopulateGameDetails();
-            int dexterity = DiceService.Instance.Roll(6,3).Value;
-            CurrentPlayer = new Player
-            (
-               "Player",
-               "Paladin",
-                15,
-              10,
-              10,
-              20,
-              dexterity,
-              1
-            );
-            
-            if (!CurrentPlayer.Weapons.Any())
-            {
-                CurrentPlayer.AddWeaponToWeapons(WeaponFactory.CreateWeapon(1001));
-            }
-            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(6001));
-            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4000),4);
-            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4001),4);
-            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4002),4);
-            CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(4003), 4);
-            CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(1));
-            CurrentPlayer.LearnRecipe(RecipeFactory.RecipeByID(2));
-
-            CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);
-            CurrentLocation = CurrentWorld.LocationAt(0, 0);
-
-
-        }
 
         public GameSession(Player player, int xCoordinate, int yCoordinate)
         {
