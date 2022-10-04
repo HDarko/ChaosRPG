@@ -40,13 +40,10 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
               FontSize="11pt"
               Background="AliceBlue">
             <MenuItem Header="File">
-                <MenuItem Header="Start New Game"
-                          Click="StartNewGame_OnClick" IsEnabled="False"/>
-                <Separator/>
-                <MenuItem Header="Load Game"
-                          Click="LoadGame_OnClick" IsEnabled="False"/>
+                <MenuItem Header="New Game"
+                          Click="StartNewGame_OnClick"/>
                 <MenuItem Header="Save Game"
-                          Click="SaveGame_OnClick" IsEnabled="False"/>
+                          Click="SaveGame_OnClick"/>
                 <Separator/>
                 <MenuItem Header="Exit"
                           Click="Exit_OnClick"/>

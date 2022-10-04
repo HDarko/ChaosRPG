@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ChaosEngine.Models;
+using ChaosEngine.Managers;
 using ChaosEngine.Services;
+using Microsoft.Win32;
 
 namespace WPFUI.Windows
 {
@@ -9,12 +12,11 @@ namespace WPFUI.Windows
     /// </summary>
     public partial class Startup : Window
     {
-        private GameDetails _gameDetails;
+        private const string SAVE_GAME_FILE_EXTENSION = "soscsrpg";
         public Startup()
         {
             InitializeComponent();
-            _gameDetails = GameDetailsService.ReadGameDetails();
-            DataContext = _gameDetails;
+            DataContext = GameDetailsService.ReadGameDetails();
         }
 
         private void StartNewGame_OnClick(object sender, RoutedEventArgs e)
@@ -27,6 +29,30 @@ namespace WPFUI.Windows
         private void Exit_OnClick(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void LoadSavedGame_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog =
+                new OpenFileDialog
+                {
+                    InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
+                    Filter = $"Saved games (*.{SAVE_GAME_FILE_EXTENSION})|*.{SAVE_GAME_FILE_EXTENSION}"
+                };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                GameSession gameSession =
+                    SaveGameService.LoadLastSaveOrCreateNew(openFileDialog.FileName);
+
+                MainWindow mainWindow =
+                    new MainWindow(gameSession.CurrentPlayer,
+                                   gameSession.CurrentLocation.XCoordinate,
+                                   gameSession.CurrentLocation.YCoordinate);
+
+                mainWindow.Show();
+                Close();
+            }
         }
     }
 }
