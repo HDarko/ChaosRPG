@@ -150,6 +150,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChaosEngine.Managers\ChaosEngine.Managers.csproj">
+      <Project>{3b048fe5-03c8-4889-a704-c7015911317b}</Project>
+      <Name>ChaosEngine.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChaosEngine.Models\ChaosEngine.Models.csproj">
+      <Project>{4d5e8493-6313-4271-ad8b-a19676aad636}</Project>
+      <Name>ChaosEngine.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
       <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
       <Name>ChaosEngine</Name>
