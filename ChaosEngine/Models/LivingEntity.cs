@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 
 namespace ChaosEngine.Models
 {
-    public abstract class LivingEntity : BaseNotificationClass
+    public abstract class LivingEntity : INotifyPropertyChanged
     {
         private string _name;
         private int _currentHitPoints;
@@ -17,6 +18,8 @@ namespace ChaosEngine.Models
         private GameItem _currentConsumable;
         public ObservableCollection<PlayerAttribute> Attributes { get; } =
            new ObservableCollection<PlayerAttribute>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         [JsonIgnore]
         public bool IsAlive => CurrentHitPoints > 0;
@@ -31,7 +34,6 @@ namespace ChaosEngine.Models
             private set
             {
                 _name = value;
-                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -41,7 +43,6 @@ namespace ChaosEngine.Models
             private set
             {
                 _currentHitPoints = value;
-                OnPropertyChanged(nameof(CurrentHitPoints));
             }
         }
 
@@ -51,7 +52,6 @@ namespace ChaosEngine.Models
             protected set
             {
                 _maximumHitPoints = value;
-                OnPropertyChanged(nameof(MaximumHitPoints));
             }
         }
 
@@ -61,7 +61,6 @@ namespace ChaosEngine.Models
             private set
             {
                 _gold = value;
-                OnPropertyChanged(nameof(Gold));
             }
         }
 
@@ -71,7 +70,6 @@ namespace ChaosEngine.Models
             protected set
             {
                 _level = value;
-                OnPropertyChanged(nameof(Level));
             }
         }
         public Weapon CurrentWeapon
@@ -90,8 +88,6 @@ namespace ChaosEngine.Models
                 {
                     _currentWeapon.Action.OnActionPerformed += RaiseActionPerformedEvent;
                 }
-
-                OnPropertyChanged();
             }
         }
 
@@ -111,8 +107,6 @@ namespace ChaosEngine.Models
                 {
                     _currentConsumable.Action.OnActionPerformed += RaiseActionPerformedEvent;
                 }
-
-                OnPropertyChanged();
             }
         }
 
@@ -163,9 +157,6 @@ namespace ChaosEngine.Models
                 
                 GroupedInventory.First(gi => gi.Item.ItemTypeID == item.ItemTypeID).Quantity+=quantity;
             }
-            OnPropertyChanged(nameof(Consumables));
-            OnPropertyChanged(nameof(HasConsumable));
-
         }
 
         //The binding in Views will prevent us from going over or under
@@ -185,9 +176,6 @@ namespace ChaosEngine.Models
                     Inventory.Remove(item);
                 }
             }
-            OnPropertyChanged(nameof(Consumables));
-            OnPropertyChanged(nameof(HasConsumable));
-
         }
 
         public void RemoveItemsFromInventory(List<ItemQuantity> itemQuantities)
@@ -297,14 +285,10 @@ namespace ChaosEngine.Models
         public void AddWeaponToWeapons(Weapon weapon)
         {
             Weapons.Add(weapon);
-
-            OnPropertyChanged(nameof(Weapons));
         }
         public void RemoveWeaponFromWeapons(Weapon weapon)
         {
             Weapons.Remove(weapon);
-
-            OnPropertyChanged(nameof(Weapons));
         }
 
         private void RaiseOnKilledEvent()

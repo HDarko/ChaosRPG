@@ -4,14 +4,16 @@ using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
 using ChaosEngine.Factories;
+using System.ComponentModel;
 
 namespace ChaosEngine.Managers
 {
-    public class CharacterCreationManager : ChaosEngine.Models.BaseNotificationClass
+    public class CharacterCreationManager : INotifyPropertyChanged
     {
-        
-
         private Race _selectedRace;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public GameDetails GameDetails { get; }
         public Race SelectedRace
         {
@@ -19,7 +21,6 @@ namespace ChaosEngine.Managers
             set
             {
                 _selectedRace = value;
-                OnPropertyChanged();
             }
         }
         public string Name { get; set; }

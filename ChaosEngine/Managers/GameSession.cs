@@ -6,11 +6,12 @@ using ChaosEngine.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 
 namespace ChaosEngine.Managers
 {
-   public class GameSession: BaseNotificationClass
+   public class GameSession: INotifyPropertyChanged
     {
         #region Fields
         private Location _currentLocation;
@@ -22,6 +23,8 @@ namespace ChaosEngine.Managers
         #endregion
 
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #region Properties
 
@@ -64,11 +67,6 @@ namespace ChaosEngine.Managers
             {
                 _currentLocation = value;
 
-                OnPropertyChanged(nameof(CurrentLocation));
-                OnPropertyChanged(nameof(HasLocationToNorth));
-                OnPropertyChanged(nameof(HasLocationToEast));
-                OnPropertyChanged(nameof(HasLocationToWest));
-                OnPropertyChanged(nameof(HasLocationToSouth));
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 CurrentTrader = _currentLocation.TraderHere;
@@ -83,10 +81,6 @@ namespace ChaosEngine.Managers
             set
             {
                 _currentTrader = value;
-
-                OnPropertyChanged(nameof(CurrentTrader));
-                OnPropertyChanged(nameof(HasTrader));
-                OnPropertyChanged(nameof(TradeWeapons));
             }
         }
 
@@ -97,7 +91,6 @@ namespace ChaosEngine.Managers
             set
             {
                 _gameDetails = value;
-                OnPropertyChanged();
             }
         }
 
@@ -140,10 +133,6 @@ namespace ChaosEngine.Managers
                     _currentBattle = new Battle(CurrentPlayer, CurrentMonster);
                     _currentBattle.OnCombatVictory += OnCurrentMonsterKilled;
                 }
-
-                OnPropertyChanged(nameof(CurrentMonster));
-                OnPropertyChanged(nameof(HasMonster));
-                
             }
         }
 

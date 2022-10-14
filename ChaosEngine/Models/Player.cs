@@ -9,13 +9,9 @@ namespace ChaosEngine.Models
     public class Player: LivingEntity
     {
         //--------------------------------------Private properties-----------------------
-        
         private int _experiencePoints;
 
-
         public event EventHandler OnLeveledUp;
-
-
 
         public ObservableCollection<QuestStatus> Quests { get; } =
             new ObservableCollection<QuestStatus>();
@@ -29,8 +25,6 @@ namespace ChaosEngine.Models
             {
                 _experiencePoints = value;
                 SetLevelAndMaximumHitPoints();
-                OnPropertyChanged(nameof(ExperiencePoints));
-                //Can also be parantheseless on property change
             }
         }
 

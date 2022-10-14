@@ -164,4 +164,12 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(SolutionDir)ChaosEngine\Images\*.*" "$(ProjectDir)$(OutDir)" /s /y
+xcopy "$(SolutionDir)ChaosEngine\GameData\*.*" "$(ProjectDir)$(OutDir)" /s /y</PostBuildEvent>
+  </PropertyGroup>
 </Project>

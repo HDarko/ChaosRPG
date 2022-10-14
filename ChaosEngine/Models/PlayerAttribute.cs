@@ -1,8 +1,9 @@
 ﻿using ChaosEngine.Services;
+using System.ComponentModel;
 
 namespace ChaosEngine.Models
 {
-    public class PlayerAttribute : ChaosEngine.Models.BaseNotificationClass
+    public class PlayerAttribute : INotifyPropertyChanged
     {
         public string Key { get; }
         public string DisplayName { get; }
@@ -13,11 +14,12 @@ namespace ChaosEngine.Models
             set
             {
                 _modifiedValue = value;
-                OnPropertyChanged();
             }
         }
 
         private int _modifiedValue;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // Constructor that will use DiceService to create a BaseValue.
         // The constructor this calls will put that same value into BaseValue and ModifiedValue

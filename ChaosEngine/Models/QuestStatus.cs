@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace ChaosEngine.Models
 {
-    public class QuestStatus: BaseNotificationClass
+    public class QuestStatus: INotifyPropertyChanged
     {
         private bool _isCompleted = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public Quest PlayerQuest { get; }
         public bool IsCompleted
         { 
@@ -16,7 +20,6 @@ namespace ChaosEngine.Models
             set
             {
                 _isCompleted = value;
-                OnPropertyChanged();
             }
         }
 public QuestStatus(Quest quest)
