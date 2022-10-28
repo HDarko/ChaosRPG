@@ -17,9 +17,7 @@ namespace ChaosEngine.Managers
         private Location _currentLocation;
         private Monster _currentMonster;
         private Player _player;
-        private Trader _currentTrader;
         private Battle _currentBattle;
-        private GameDetails _gameDetails;
         #endregion
 
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
@@ -75,24 +73,10 @@ namespace ChaosEngine.Managers
             }
         }
         [JsonIgnore]
-        public Trader CurrentTrader
-        {
-            get { return _currentTrader; }
-            set
-            {
-                _currentTrader = value;
-            }
-        }
+        public Trader CurrentTrader { get; private set; }
 
         [JsonIgnore]
-        public GameDetails GameDetails
-        {
-            get => _gameDetails;
-            set
-            {
-                _gameDetails = value;
-            }
-        }
+        public GameDetails GameDetails { get; private set; }
 
         #region  Button Properties
         [JsonIgnore]

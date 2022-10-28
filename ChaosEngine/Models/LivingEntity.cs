@@ -9,11 +9,12 @@ namespace ChaosEngine.Models
 {
     public abstract class LivingEntity : INotifyPropertyChanged
     {
-        private string _name;
-        private int _currentHitPoints;
-        private int _maximumHitPoints;
-        private int _gold;
-        private int _level;
+        public string Name { set; get; }
+        public int CurrentHitPoints { get; private set; }
+        public int MaximumHitPoints { get; protected set; }
+        public int Gold { get; private set; }
+
+        public int Level { get; protected set; }
         private Weapon _currentWeapon;
         private GameItem _currentConsumable;
         public ObservableCollection<PlayerAttribute> Attributes { get; } =
@@ -28,50 +29,7 @@ namespace ChaosEngine.Models
         public bool HasConsumable => Consumables.Any();
 
         #region Properties
-        public string Name
-        {
-            get => _name; 
-            private set
-            {
-                _name = value;
-            }
-        }
 
-        public int CurrentHitPoints
-        {
-            get => _currentHitPoints;
-            private set
-            {
-                _currentHitPoints = value;
-            }
-        }
-
-        public int MaximumHitPoints
-        {
-            get => _maximumHitPoints;
-            protected set
-            {
-                _maximumHitPoints = value;
-            }
-        }
-
-        public int Gold
-        {
-            get => _gold; 
-            private set
-            {
-                _gold = value;
-            }
-        }
-
-        public int Level
-        {
-            get => _level; 
-            protected set
-            {
-                _level = value;
-            }
-        }
         public Weapon CurrentWeapon
         {
             get => _currentWeapon; 

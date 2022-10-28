@@ -9,15 +9,7 @@ namespace ChaosEngine.Models
         public string DisplayName { get; }
         public string DiceNotation { get; }
         public int BaseValue { get; set; }
-        public int ModifiedValue {
-            get => _modifiedValue;
-            set
-            {
-                _modifiedValue = value;
-            }
-        }
-
-        private int _modifiedValue;
+        public int ModifiedValue { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

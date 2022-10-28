@@ -10,21 +10,14 @@ namespace ChaosEngine.Managers
 {
     public class CharacterCreationManager : INotifyPropertyChanged
     {
-        private Race _selectedRace;
+        private Race SelectedRace { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public GameDetails GameDetails { get; }
-        public Race SelectedRace
-        {
-            get => _selectedRace;
-            set
-            {
-                _selectedRace = value;
-            }
-        }
+
         public string Name { get; set; }
-        public ObservableCollection<PlayerAttribute> PlayerAttributes { get; set; } =
+        public ObservableCollection<PlayerAttribute> PlayerAttributes { get;} =
             new ObservableCollection<PlayerAttribute>();
         public bool HasRaces =>
             GameDetails.Races.Any();
