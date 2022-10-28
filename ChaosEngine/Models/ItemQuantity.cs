@@ -8,16 +8,17 @@ namespace ChaosEngine.Models
 {
     public class ItemQuantity
     {
-        public int ItemID { get;  }
+        readonly GameItem _item = null;
+        public int ItemID => _item.ItemTypeID;
         public int Quantity { get; }
         public bool isWeapon { get; }
 
         public string ItemDescription =>
-            $"{Quantity} {(isWeapon? WeaponFactory.WeaponName(ItemID):ItemFactory.ItemName(ItemID))}";
+            $"{Quantity} {(_item.Name)}";
 
-        public ItemQuantity(int itID, int itemQuantity, bool itemIsWeapon=false)
+        public ItemQuantity(GameItem item, int itemQuantity, bool itemIsWeapon = false)
         {
-            ItemID = itID;
+            _item = item;
             Quantity = itemQuantity;
             isWeapon = itemIsWeapon;
         }
