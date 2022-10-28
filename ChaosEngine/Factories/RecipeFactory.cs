@@ -10,7 +10,7 @@ using ChaosEngine.Shared;
 
 namespace ChaosEngine.Factories
 {
-    class RecipeFactory
+    public static class RecipeFactory
     {
         private static readonly List<Recipe> _recipes = new List<Recipe>();
         private const string GAME_DATA_FILENAME = ".\\GameData\\Recipes.xml";

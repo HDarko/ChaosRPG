@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\CharacterCreationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\ChaosEngine.Services\ChaosEngine.Services.csproj">
       <Project>{5ed0a6fc-609b-46cf-910f-af74179116a2}</Project>
       <Name>ChaosEngine.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
+      <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
+      <Name>ChaosEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -16,9 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ChaosEngine.Managers;
-using ChaosEngine.GameEvents;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
+using ChaosEngine.Models.GameEvents;
 
 namespace WPFUI
 {

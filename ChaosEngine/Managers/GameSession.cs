@@ -2,7 +2,7 @@
 using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Factories;
-using ChaosEngine.GameEvents;
+using ChaosEngine.Models.GameEvents;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;

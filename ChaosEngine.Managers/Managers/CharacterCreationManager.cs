@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
@@ -10,7 +9,7 @@ namespace ChaosEngine.Managers
 {
     public class CharacterCreationManager : INotifyPropertyChanged
     {
-        private Race SelectedRace { get; set; }
+        public Race SelectedRace { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
