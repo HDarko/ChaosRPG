@@ -173,7 +173,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)ChaosEngine\Images\*.*" "$(ProjectDir)$(OutDir)" /s /y
-xcopy "$(SolutionDir)ChaosEngine\GameData\*.*" "$(ProjectDir)$(OutDir)" /s /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)GameFiles\*.*" "$(ProjectDir)$(OutDir)" /s /y
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

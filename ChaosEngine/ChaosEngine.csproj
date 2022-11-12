@@ -150,74 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
-    <Content Include="GameFiles\GameData\GameItems.xml" />
-    <Content Include="GameFiles\GameData\GameMonsters.xml" />
-    <Content Include="GameFiles\GameData\GameWeapons.xml" />
-    <Content Include="GameFiles\GameData\Locations.xml" />
-    <Content Include="GameFiles\GameData\Quests.xml" />
-    <Content Include="GameFiles\GameData\Recipes.xml" />
-    <Content Include="GameFiles\GameData\Traders.xml" />
-    <Content Include="GameFiles\Images\Avatars\herbalist.jpg" />
-    <Content Include="GameFiles\Images\Avatars\Hero.jpg" />
-    <Content Include="GameFiles\Images\Avatars\Kobold.png" />
-    <Content Include="GameFiles\Images\Avatars\Raul.png" />
-    <Content Include="GameFiles\Images\Icons\pngwave.png" />
-    <Content Include="GameFiles\Images\Icons\pngwave2.png" />
-    <Content Include="GameFiles\Images\Locations\Bridge.jpg" />
-    <Content Include="GameFiles\Images\Locations\CaveTown.png" />
-    <Content Include="GameFiles\Images\Locations\Forest.png" />
-    <Content Include="GameFiles\Images\Locations\Home.png" />
-    <Content Include="GameFiles\Images\Monsters\Frog.gif" />
-    <Content Include="GameFiles\Images\Monsters\JungleBoss.gif" />
-    <Content Include="GameFiles\Images\Monsters\mushroomhand.png" />
-    <Content Include="GameFiles\Images\Monsters\Turkeydon.gif" />
-    <Content Include="Images\Avatars\herbalist.jpg" />
-    <Content Include="Images\Avatars\Hero.jpg" />
-    <Content Include="Images\Avatars\Kobold.png" />
-    <Content Include="Images\Avatars\Raul.png" />
-    <Content Include="Images\Icons\pngwave.png" />
-    <Content Include="Images\Icons\pngwave2.png" />
-    <Content Include="Images\Locations\Bridge.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Locations\CaveTown.png" />
-    <Content Include="Images\Locations\Forest.png" />
-    <Content Include="Images\Locations\Home.png" />
-    <Content Include="Images\Monsters\Frog.gif" />
-    <Content Include="Images\Monsters\JungleBoss.gif" />
-    <Content Include="Images\Monsters\mushroomhand.png" />
-    <Content Include="Images\Monsters\Turkeydon.gif" />
     <None Include="app.config" />
-    <Content Include="GameData\GameDetails.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="GameFiles\GameData\GameDetails.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="GameData\GameItems.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\GameMonsters.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\GameWeapons.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\Locations.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\Quests.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\Recipes.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameData\Traders.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChaosEngine.Models\ChaosEngine.Models.csproj">

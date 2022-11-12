@@ -107,8 +107,7 @@
   </Target>
   <Import Project="..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets" Condition="Exists('..\packages\MSTest.TestAdapter.2.1.1\build\net45\MSTest.TestAdapter.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(SolutionDir)ChaosEngine\Images\*.*" "$(ProjectDir)$(OutDir)" /s /y
-xcopy "$(SolutionDir)ChaosEngine\GameData\*.*" "$(ProjectDir)$(OutDir)" /s /y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(SolutionDir)GameFiles\*.*" "$(ProjectDir)$(OutDir)" /s /y</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
