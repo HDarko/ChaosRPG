@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ChaosEngine.Factories;
-using ChaosEngine.Services;
+using ChaosEngine.Core.Services;
 
 namespace ChaosEngine.Models
 {

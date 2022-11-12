@@ -49,6 +49,10 @@
       <Project>{4d5e8493-6313-4271-ad8b-a19676aad636}</Project>
       <Name>ChaosEngine.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ChaosRPG.Core\ChaosRPG.Core.csproj">
+      <Project>{2d6db522-bdfb-4adc-84d6-f873a5ebdcbf}</Project>
+      <Name>ChaosRPG.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

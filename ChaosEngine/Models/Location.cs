@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using ChaosEngine.Factories;
-using ChaosEngine.Services;
+using ChaosEngine.Core.Services;
 using Newtonsoft.Json;
 
 namespace ChaosEngine.Models

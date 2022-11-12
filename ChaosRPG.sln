@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaosEngine.Managers", "Cha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaosEngine.Services", "ChaosEngine.Services\ChaosEngine.Services.csproj", "{5ED0A6FC-609B-46CF-910F-AF74179116A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaosRPG.Core", "ChaosRPG.Core\ChaosRPG.Core.csproj", "{2D6DB522-BDFB-4ADC-84D6-F873A5EBDCBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{5ED0A6FC-609B-46CF-910F-AF74179116A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ED0A6FC-609B-46CF-910F-AF74179116A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5ED0A6FC-609B-46CF-910F-AF74179116A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6DB522-BDFB-4ADC-84D6-F873A5EBDCBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6DB522-BDFB-4ADC-84D6-F873A5EBDCBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6DB522-BDFB-4ADC-84D6-F873A5EBDCBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6DB522-BDFB-4ADC-84D6-F873A5EBDCBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
