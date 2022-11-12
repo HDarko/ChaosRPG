@@ -7,6 +7,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
 using Newtonsoft.Json;
 using System.ComponentModel;
+using System.Xml.Linq;
 
 
 namespace ChaosEngine.Managers
@@ -31,6 +32,11 @@ namespace ChaosEngine.Managers
         public bool HasMonster => CurrentMonster != null;
         [JsonIgnore]
         public bool HasTrader => CurrentTrader != null;
+
+        public string TraderShopIcon { get; } = $".{"/Images/Icons/"}{"pngwave2.png"}";
+
+        public string WeaponShopIcon { get; } = $".{"/Images/Icons/"}{"pngwave.png"}";
+
         public bool TradeWeapons => (HasTrader && (CurrentTrader.weaponsAvailable));
 
         public Player CurrentPlayer

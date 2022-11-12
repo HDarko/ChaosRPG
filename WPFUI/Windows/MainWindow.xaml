@@ -55,8 +55,8 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                 <MenuItem Header="About"
                           IsEnabled="False"/>
             </MenuItem>
-            </Menu>
-            <!-- Player stats -->
+        </Menu>
+        <!-- Player stats -->
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -276,7 +276,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                         ItemsSource="{Binding CurrentPlayer.Recipes}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column">
-                    <DataGrid.Columns>
+                        <DataGrid.Columns>
                             <DataGridTextColumn Header="Name"
                                                 Binding="{Binding Name, Mode=OneWay}"
                                                 Width="*">
@@ -288,16 +288,16 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                                 </DataGridTextColumn.CellStyle>
                             </DataGridTextColumn>
                             <DataGridTemplateColumn MinWidth="75">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Click="OnClick_Craft"
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Click="OnClick_Craft"
                                             Width="55"
                                             Content="Craft"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
         </Grid>
@@ -341,13 +341,13 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                         Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}"
                         Click="OnClick_AttackMonster"/>
 
-                    <ComboBox Grid.Row="1" Grid.Column="0"
+                <ComboBox Grid.Row="1" Grid.Column="0"
                           Visibility="{Binding CurrentPlayer.HasConsumable, Converter={StaticResource BooleanToVisibility}}"
                           ItemsSource="{Binding CurrentPlayer.Consumables}"
                           SelectedItem="{Binding CurrentPlayer.CurrentConsumable}"
                           DisplayMemberPath="Name"/>
 
-                    <Button Grid.Row="1" Grid.Column="2"
+                <Button Grid.Row="1" Grid.Column="2"
                         Visibility="{Binding CurrentPlayer.HasConsumable, Converter={StaticResource BooleanToVisibility}}"
                         Content="Use"
                         Click="OnClick_UseCurrentConsumable"/>
@@ -375,19 +375,19 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                          Visibility="{Binding HasLocationToEast, Converter={StaticResource BooleanToVisibility}}"/>
                 <Button Grid.Row="2" Grid.Column="1"  Height="25" Width="65" Margin="10"  Content="South" Click="OnClick_Move" Tag="S"
                          Visibility="{Binding HasLocationToSouth, Converter={StaticResource BooleanToVisibility}}"/>
-    <!--Items-->
+                <!--Items-->
                 <Button Grid.Row="1" Grid.Column="1" 
-                        Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" 
+                        Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                         Visibility="{Binding HasTrader, Converter={StaticResource BooleanToVisibility}}"
-                         Click="OnClick_DisplayItemTradeScreen">
-                    <Image Source="/ChaosEngine;component/Images/Icons/pngwave2.png"></Image>
+                         Click="OnClick_DisplayItemTradeScreen" Margin="0,0,0,50">
+                    <Image Source="{Binding TraderShopIcon, Converter={StaticResource FileToBitmapConverter}}"></Image>
                 </Button>
                 <!--Weapons-->
                 <Button Grid.Row="1" Grid.Column="1" 
                         Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Bottom"
                         Visibility="{Binding TradeWeapons, Converter={StaticResource BooleanToVisibility}}"
                          Click="OnClick_DisplayWeaponTradeScreen">
-                    <Image Source="/ChaosEngine;component/Images/Icons/pngwave.png"></Image>
+                    <Image Source="{Binding WeaponShopIcon, Converter={StaticResource FileToBitmapConverter}}"></Image>
                 </Button>
 
 
