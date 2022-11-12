@@ -262,11 +262,11 @@ namespace ChaosEngine.Managers
                 foreach (ItemQuantity itemQuantity in recipe.Ingredients)
                     if(itemQuantity.isWeapon)
                     {
-                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {WeaponFactory.WeaponName(itemQuantity.ItemID)}");
+                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {itemQuantity.ItemDescription}");
                     }
                 else
                     {
-                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {ItemFactory.ItemName(itemQuantity.ItemID)}");
+                        _messageBroker.RaiseMessage($"{itemQuantity.Quantity} {itemQuantity.ItemDescription}");
                     }
             }
         }

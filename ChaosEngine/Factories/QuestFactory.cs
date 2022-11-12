@@ -42,14 +42,18 @@ namespace ChaosEngine.Factories
 
                 foreach (XmlNode childNode in node.SelectNodes("./ItemsToComplete/Item"))
                 {
-                    itemsToComplete.Add(new ItemQuantity(childNode.GetXmlAttributeAsInt("ID"),
+                    GameItem item = ItemFactory.CreateGameItem(childNode.GetXmlAttributeAsInt("ID"));
+
+                    itemsToComplete.Add(new ItemQuantity(item,
                                                          childNode.GetXmlAttributeAsInt("Quantity"),
                                                          childNode.GetXmlAttributeAsBool("IsWeapon", true,false)));
                 }
 
                 foreach (XmlNode childNode in node.SelectNodes("./RewardItems/Item"))
                 {
-                    rewardItems.Add(new ItemQuantity(childNode.GetXmlAttributeAsInt("ID"),
+                    GameItem item = ItemFactory.CreateGameItem(childNode.GetXmlAttributeAsInt("ID"));
+
+                    rewardItems.Add(new ItemQuantity(item,
                                                      childNode.GetXmlAttributeAsInt("Quantity"),
                                                      childNode.GetXmlAttributeAsBool("IsWeapon", true, false)));
                 }

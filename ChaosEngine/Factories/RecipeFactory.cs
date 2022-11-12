@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using ChaosEngine.Models;
 using ChaosEngine.Shared;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ChaosEngine.Factories
 {
@@ -35,32 +36,42 @@ namespace ChaosEngine.Factories
         {
             foreach (XmlNode node in nodes)
             {
-                Recipe recipe =
-                    new Recipe(node.GetXmlAttributeAsInt("ID"),
-                               node.SelectSingleNode("./Name")?.InnerText ?? "");
+                var ingredients = new List<ItemQuantity>();
 
                 foreach (XmlNode childNode in node.SelectNodes("./Ingredients/Item"))
                 {
-                    recipe.AddIngredient(childNode.GetXmlAttributeAsInt("ID"),
-                                         childNode.GetXmlAttributeAsInt("Quantity"));
+                    GameItem item = ItemFactory.CreateGameItem(childNode.GetXmlAttributeAsInt("ID"));
+
+                    ingredients.Add(new ItemQuantity(item, childNode.GetXmlAttributeAsInt("Quantity")));
                 }
+
+                var outputItems = new List<ItemQuantity>();
 
                 foreach (XmlNode childNode in node.SelectNodes("./Ingredients/Weapon"))
                 {
-                    recipe.AddWeaponIngredient(childNode.GetXmlAttributeAsInt("ID"));
+                    Weapon weapon = WeaponFactory.CreateWeapon(childNode.GetXmlAttributeAsInt("ID"));
+
+                    ingredients.Add(new ItemQuantity(weapon, 1, true));
                 }
                 foreach (XmlNode childNode in node.SelectNodes("./OutputItems/Item"))
                 {
-                    recipe.AddOutputItem(childNode.GetXmlAttributeAsInt("ID"),
-                                         childNode.GetXmlAttributeAsInt("Quantity"));
+                    GameItem item = ItemFactory.CreateGameItem(childNode.GetXmlAttributeAsInt("ID"));
+
+                    outputItems.Add(new ItemQuantity(item, childNode.GetXmlAttributeAsInt("Quantity")));
                 }
 
                 foreach (XmlNode childNode in node.SelectNodes("./OutputItems/Weapon"))
                 {
-                    recipe.AddOutputWeapon(childNode.GetXmlAttributeAsInt("ID"));
+                    Weapon weapon = WeaponFactory.CreateWeapon(childNode.GetXmlAttributeAsInt("ID"));
+                    outputItems.Add(new ItemQuantity(weapon,1, true));
                 }
 
-                AddRecipeToList(recipe);
+                Recipe recipe =
+                    new Recipe(node.GetXmlAttributeAsInt("ID"),
+                        node.SelectSingleNode("./Name")?.InnerText ?? "",
+                        ingredients, outputItems);
+
+                _recipes.Add(recipe);
             }
         }
 
