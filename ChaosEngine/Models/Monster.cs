@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
-using ChaosEngine.Factories;
+using System.Xml;
 using ChaosEngine.Core.Services;
+using ChaosEngine.Factories;
 
 namespace ChaosEngine.Models
 {
-
     public class Monster: LivingEntity
     {
         #region Properties    
-
         public int ID { get; }
         public string ImageName { get;  }
        
         public int RewardExperiencePoints { get; private set; }
 
         // public List<IAction> monsterActions { get; set; }
-        private readonly List<LootPercentage> _lootTable =
+        public List<LootPercentage> LootTable =
            new List<LootPercentage>();
 
         #endregion
@@ -34,6 +33,20 @@ namespace ChaosEngine.Models
             ImageName = imageFileName;
             RewardExperiencePoints = rewardExpPoints;
      
+        }
+
+        public Monster Clone()
+        {
+            Monster newMonster = new Monster(ID, Name, ImageName, MaximumHitPoints, RewardExperiencePoints, Gold, Attributes);
+
+            newMonster.LootTable.AddRange(LootTable);
+
+            foreach (Weapon weapon in Weapons)
+            {
+                newMonster.AddWeaponToWeapons(weapon);
+            }
+
+            return newMonster;
         }
 
         public void UseWeaponOn(LivingEntity target)
@@ -56,37 +69,9 @@ namespace ChaosEngine.Models
         {
             // Remove the entry from the loot table,
             // if it already contains an entry with this ID
-            _lootTable.RemoveAll(ip => ip.ID == id);
+            LootTable.RemoveAll(ip => ip.ID == id);
 
-            _lootTable.Add(new LootPercentage(id, percentage, quantity));
-        }
-
-        public Monster GetNewInstance()
-        {
-            // "Clone" this monster to a new Monster object
-            Monster newMonster =
-                new Monster(ID, Name, ImageName, MaximumHitPoints,
-                            RewardExperiencePoints, Gold, Attributes);
-
-            foreach (LootPercentage lootPercentage in _lootTable)
-            {
-                // Clone the loot table - even though we probably won't need it
-                newMonster.AddItemToLootTable(lootPercentage.ID, lootPercentage.Percentage, lootPercentage.Quantity);
-
-                // Populate the new monster's inventory, using the loot table
-                if (DiceService.Instance.Roll(100,1).Value <= lootPercentage.Percentage)
-                {
-                    newMonster.AddItemToInventory(ItemFactory.CreateGameItem(lootPercentage.ID));
-                }
-                //Add the weaponry
-                foreach(Weapon weapon in Weapons)
-                {
-                    newMonster.AddWeaponToWeapons(WeaponFactory.CreateWeapon(weapon.ItemTypeID));
-                }
-                
-            }
-
-            return newMonster;
+            LootTable.Add(new LootPercentage(id, percentage, quantity));
         }
     }
 }

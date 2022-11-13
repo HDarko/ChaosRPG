@@ -74,7 +74,7 @@ namespace ChaosEngine.Managers
                 CompleteQuestsAtLocation();
                 GivePlayerQuestsAtLocation();
                 CurrentTrader = _currentLocation.TraderHere;
-                CurrentMonster = _currentLocation.GetMonster();
+                CurrentMonster = MonsterFactory.GetMonsterFromLocation(_currentLocation);
                    
             }
         }
@@ -298,7 +298,7 @@ namespace ChaosEngine.Managers
         private void OnCurrentMonsterKilled(object sender, System.EventArgs eventArgs)
         {
             // Get another monster to fight
-            CurrentMonster = CurrentLocation.GetMonster();
+            CurrentMonster = MonsterFactory.GetMonsterFromLocation(_currentLocation);
         }
    
 
