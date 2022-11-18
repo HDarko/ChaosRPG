@@ -1,14 +1,18 @@
 ﻿using System;
-using ChaosEngine.Services;
 using ChaosEngine.Core;
 using ChaosEngine.Models.GameEvents;
+using ChaosEngine.Shared;
 
 namespace ChaosEngine.Models
 {
     public class Battle : IDisposable
     {
+        private enum Combatant
+        {
+            Player,
+            Opponent
+        }
 
-        
         private readonly MessageBroker _messageBroker = MessageBroker.GetInstance();
         private readonly Player _player;
         private readonly Monster _opponent;
@@ -28,7 +32,7 @@ namespace ChaosEngine.Models
             _messageBroker.RaiseMessage("");
             _messageBroker.RaiseMessage($"You see a {_opponent.Name} here!");
 
-            if (CombatService.FirstAttacker(_player,_opponent) == CombatService.Combatant.Opponent)
+            if (FirstAttacker(_player,_opponent) == Combatant.Opponent)
             {
                 AttackPlayer();
             }
@@ -50,6 +54,23 @@ namespace ChaosEngine.Models
             }
         }
 
+        private  Combatant FirstAttacker(Player player, Monster opponent)
+        {
+            //Might update this to be two living entities so player can fight traders
+            // Formula is: ((Dex(player)^2 - Dex(monster)^2)/10) + Random(-10/10)
+            // For dexterity values from 3 to 18, this should produce an offset of +/- 41.5
+            int playerDexterity = player.GetAttribute("DEX").ModifiedValue *
+                                  player.GetAttribute("DEX").ModifiedValue;
+            int opponentDexterity = opponent.GetAttribute("DEX").ModifiedValue *
+                                    opponent.GetAttribute("DEX").ModifiedValue;
+            decimal dexterityOffset = (playerDexterity - opponentDexterity) / 10m;
+            int randomOffset = DiceService.Instance.Roll(20).Value - 10;
+            decimal totalOffset = dexterityOffset + randomOffset;
+
+            return DiceService.Instance.Roll(100).Value <= 50 + totalOffset
+                       ? Combatant.Player
+                       : Combatant.Opponent;
+        }
 
         private void OnOpponentKilled(object sender, System.EventArgs eventArgs)
         {
