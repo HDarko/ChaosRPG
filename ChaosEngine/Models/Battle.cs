@@ -1,5 +1,6 @@
 ﻿using System;
 using ChaosEngine.Services;
+using ChaosEngine.Core;
 using ChaosEngine.Models.GameEvents;
 
 namespace ChaosEngine.Models

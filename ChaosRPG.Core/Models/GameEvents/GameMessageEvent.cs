@@ -1,5 +1,5 @@
 ﻿
-namespace ChaosEngine.Models.GameEvents
+namespace ChaosEngine.Core
 {
    public class GameMessageEvent: System.EventArgs
     {

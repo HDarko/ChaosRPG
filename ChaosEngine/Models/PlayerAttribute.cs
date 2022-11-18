@@ -1,4 +1,4 @@
-﻿using ChaosEngine.Core.Services;
+﻿using ChaosEngine.Core;
 using System.ComponentModel;
 
 namespace ChaosEngine.Models

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ChaosEngine.Models.GameEvents;
 
-namespace ChaosEngine.Services
+namespace ChaosEngine.Core
 {
    public class MessageBroker
     {
@@ -23,7 +22,7 @@ namespace ChaosEngine.Services
             return s_messageBroker;
         }
 
-        internal void RaiseMessage(string message)
+        public void RaiseMessage(string message)
         {
             OnMessageRaised?.Invoke(this, new GameMessageEvent(message));
         }

@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\LoggingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChaosEngine.Models\ChaosEngine.Models.csproj">
@@ -53,6 +52,9 @@
       <Project>{2d6db522-bdfb-4adc-84d6-f873a5ebdcbf}</Project>
       <Name>ChaosRPG.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

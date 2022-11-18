@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 using ChaosEngine.Managers;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
-using ChaosEngine.Models.GameEvents;
+using ChaosEngine.Core;
 
 namespace WPFUI
 {

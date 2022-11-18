@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ChaosEngine.Services
+namespace ChaosEngine.Core
 {
     public static class LoggingService
     {

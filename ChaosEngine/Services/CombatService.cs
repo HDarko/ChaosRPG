@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ChaosEngine.Shared;
 using ChaosEngine.Models;
-using ChaosEngine.Core.Services;
+using ChaosEngine.Core;
 
 namespace ChaosEngine.Services
 {

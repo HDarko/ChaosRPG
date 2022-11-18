@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using ChaosEngine.Services;
+using ChaosEngine.Core;
 
 namespace WPFUI
 {

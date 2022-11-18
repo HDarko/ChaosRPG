@@ -1,6 +1,6 @@
 ﻿using D20Tek.DiceNotation;
 using D20Tek.DiceNotation.DieRoller;
-namespace ChaosEngine.Core.Services
+namespace ChaosEngine.Core
 {
     public interface IDiceService
     {

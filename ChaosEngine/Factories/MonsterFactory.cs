@@ -4,7 +4,7 @@ using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Shared;
 using ChaosEngine.Services;
-using ChaosEngine.Core.Services;
+using ChaosEngine.Core;
 using System.IO;
 using System.Xml;
 
