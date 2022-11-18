@@ -1,6 +1,6 @@
 ﻿using System;
 using ChaosEngine.Models;
-using ChaosEngine.Factories;
+using ChaosEngine.Services.Factories;
 using ChaosEngine.Models.Actions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

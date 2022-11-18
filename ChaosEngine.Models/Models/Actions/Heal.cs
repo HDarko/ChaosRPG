@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChaosEngine.Models.Actions
 {
-    class Heal:BaseAction, IAction
+    public class Heal:BaseAction, IAction
     {
        
         private readonly int _hitPointsToHeal;

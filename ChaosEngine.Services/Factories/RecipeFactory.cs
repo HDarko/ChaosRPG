@@ -9,7 +9,7 @@ using ChaosEngine.Models;
 using ChaosEngine.Shared;
 using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
-namespace ChaosEngine.Factories
+namespace ChaosEngine.Services.Factories
 {
     public static class RecipeFactory
     {

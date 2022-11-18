@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="D20Tek.Common.Net47, Version=3.3.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=4.0.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.4.0.4\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
@@ -45,12 +49,54 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameEvents\CombatVictoryEvent.cs" />
+    <Compile Include="Models\Actions\AttackWithWeapon.cs" />
+    <Compile Include="Models\Actions\BaseAction.cs" />
+    <Compile Include="Models\Actions\Heal.cs" />
+    <Compile Include="Models\Actions\IAction.cs" />
+    <Compile Include="Models\Battle.cs" />
+    <Compile Include="Models\GameDetails.cs" />
+    <Compile Include="Models\GameItem.cs" />
+    <Compile Include="Models\GameState.cs" />
+    <Compile Include="Models\GroupedInventoryItem.cs" />
+    <Compile Include="Models\ItemQuantity.cs" />
+    <Compile Include="Models\LivingEntity.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\LootPercentage.cs" />
+    <Compile Include="Models\Monster.cs" />
+    <Compile Include="Models\MonsterEncounter.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PlayerAttribute.cs" />
+    <Compile Include="Models\PlayerAttributeModifier.cs" />
+    <Compile Include="Models\Quest.cs" />
+    <Compile Include="Models\QuestStatus.cs" />
+    <Compile Include="Models\Race.cs" />
+    <Compile Include="Models\Recipe.cs" />
+    <Compile Include="Models\Trader.cs" />
+    <Compile Include="Models\Weapon.cs" />
+    <Compile Include="Models\World.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

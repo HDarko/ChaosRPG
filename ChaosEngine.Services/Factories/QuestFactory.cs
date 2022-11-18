@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using ChaosEngine.Models;
 using ChaosEngine.Shared;
 
-namespace ChaosEngine.Factories
+namespace ChaosEngine.Services.Factories
 {
-   internal static class QuestFactory
+   public static class QuestFactory
     {
         private const string GAME_DATA_FILENAME = ".\\GameData\\Quests.xml";
 

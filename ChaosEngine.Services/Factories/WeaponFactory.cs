@@ -8,7 +8,8 @@ using System.Xml;
 using ChaosEngine.Models;
 using ChaosEngine.Models.Actions;
 using ChaosEngine.Shared;
-namespace ChaosEngine.Factories
+
+namespace ChaosEngine.Services.Factories
 {
     public static class WeaponFactory
     {
@@ -19,19 +20,6 @@ namespace ChaosEngine.Factories
         {
             _allweaponsinGame = new List<Weapon>();
 
-           /* BuildWeapon(1001, "Frail Stick", 1, 0, 2);
-            BuildWeapon(1002, "Thick Stick", 3, 0, 4);
-            BuildWeapon(1003, "Stonka Stick", 5, 3, 4);
-            BuildWeapon(1004, "Old Rusty Sword", 5, 1, 8);
-            BuildWeapon(1005, "Sharpened Spade", 6, 5, 6);
-            //Turkeysaur
-            BuildWeapon(1006, "Vicious Maul", 4, 2, 4);
-            //FrogMan
-            BuildWeapon(1007, "Lashing Tounge", 6, 0, 5);
-            BuildWeapon(1008, "Frogman Claws", 3, 0, 3);
-            //Jungle-Beast
-            BuildWeapon(1009, "Raging Fist", 3, 0, 8);
-            BuildWeapon(1010, "Fanged Roar", 3, 2, 7);*/
             if (File.Exists(GAME_DATA_FILENAME))
             {
                 XmlDocument data = new XmlDocument();
@@ -44,8 +32,6 @@ namespace ChaosEngine.Factories
             {
                 throw new FileNotFoundException($"Missing data file: {GAME_DATA_FILENAME}");
             }
-
-
         }
 
         private static void LoadWeaponsFromNodes(XmlNodeList nodes)

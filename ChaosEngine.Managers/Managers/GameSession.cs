@@ -1,14 +1,11 @@
 ﻿
 using System.Linq;
 using ChaosEngine.Models;
-using ChaosEngine.Factories;
+using ChaosEngine.Services.Factories;
 using ChaosEngine.Core;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 using ChaosEngine.Services;
-using Newtonsoft.Json;
 using System.ComponentModel;
-using System.Xml.Linq;
-
+using Newtonsoft.Json;
 
 namespace ChaosEngine.Managers
 {

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using ChaosEngine.Models;
 using ChaosEngine.Shared;
 
-namespace ChaosEngine.Factories
+namespace ChaosEngine.Services.Factories
 {
-    class TraderFactory
+    public class TraderFactory
     {
         private const string GAME_DATA_FILENAME = ".\\GameData\\Traders.xml";
         private static readonly List<Trader> _traders = new List<Trader>();

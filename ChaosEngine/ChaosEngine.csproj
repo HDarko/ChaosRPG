@@ -107,46 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Actions\BaseAction.cs" />
-    <Compile Include="Models\Actions\Heal.cs" />
-    <Compile Include="Models\Actions\IAction.cs" />
-    <Compile Include="Models\Actions\AttackWithWeapon.cs" />
-    <Compile Include="Models\Battle.cs" />
-    <Compile Include="Models\GameDetails.cs" />
-    <Compile Include="Models\GameItem.cs" />
-    <Compile Include="Models\GameState.cs" />
-    <Compile Include="Models\GroupedInventoryItem.cs" />
-    <Compile Include="Models\ItemQuantity.cs" />
-    <Compile Include="Models\LivingEntity.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\LootPercentage.cs" />
-    <Compile Include="Models\Monster.cs" />
-    <Compile Include="Models\MonsterEncounter.cs" />
-    <Compile Include="Models\Player.cs" />
-    <Compile Include="Models\PlayerAttribute.cs" />
-    <Compile Include="Models\PlayerAttributeModifier.cs" />
-    <Compile Include="Models\Quest.cs" />
-    <Compile Include="Models\QuestStatus.cs" />
-    <Compile Include="Models\Race.cs" />
-    <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\Trader.cs" />
-    <Compile Include="Models\Weapon.cs" />
-    <Compile Include="Models\World.cs" />
-    <Compile Include="Factories\ItemFactory.cs" />
-    <Compile Include="Factories\MonsterFactory.cs" />
-    <Compile Include="Factories\QuestFactory.cs" />
-    <Compile Include="Factories\RecipeFactory.cs" />
-    <Compile Include="Factories\TraderFactory.cs" />
-    <Compile Include="Factories\WeaponFactory.cs" />
-    <Compile Include="Factories\WorldFactory.cs" />
-    <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\CombatService.cs" />
-    <Compile Include="Services\GameDetailsService.cs" />
-    <Compile Include="Services\SaveGameService.cs" />
-    <Compile Include="Shared\DiceService.cs" />
-    <Compile Include="Shared\ExtensionMethods.cs" />
-    <Compile Include="Shared\IDiceService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />

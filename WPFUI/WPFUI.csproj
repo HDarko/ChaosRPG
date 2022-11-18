@@ -162,10 +162,6 @@
       <Project>{5ed0a6fc-609b-46cf-910f-af74179116a2}</Project>
       <Name>ChaosEngine.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
-      <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
-      <Name>ChaosEngine</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ChaosRPG.Core\ChaosRPG.Core.csproj">
       <Project>{2d6db522-bdfb-4adc-84d6-f873a5ebdcbf}</Project>
       <Name>ChaosRPG.Core</Name>

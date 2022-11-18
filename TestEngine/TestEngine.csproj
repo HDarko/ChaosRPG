@@ -55,9 +55,21 @@
     <Compile Include="Services\TestCombatService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
-      <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
-      <Name>ChaosEngine</Name>
+    <ProjectReference Include="..\ChaosEngine.Managers\ChaosEngine.Managers.csproj">
+      <Project>{3b048fe5-03c8-4889-a704-c7015911317b}</Project>
+      <Name>ChaosEngine.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChaosEngine.Models\ChaosEngine.Models.csproj">
+      <Project>{4d5e8493-6313-4271-ad8b-a19676aad636}</Project>
+      <Name>ChaosEngine.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChaosEngine.Services\ChaosEngine.Services.csproj">
+      <Project>{5ed0a6fc-609b-46cf-910f-af74179116a2}</Project>
+      <Name>ChaosEngine.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChaosRPG.Core\ChaosRPG.Core.csproj">
+      <Project>{2d6db522-bdfb-4adc-84d6-f873a5ebdcbf}</Project>
+      <Name>ChaosRPG.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WPFUI\WPFUI.csproj">
       <Project>{ee7203b0-154c-4f1e-b272-4681ffe7bcdd}</Project>

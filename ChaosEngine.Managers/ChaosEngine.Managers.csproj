@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=4.0.4.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.4.0.4\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
@@ -48,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\CharacterCreationManager.cs" />
+    <Compile Include="Managers\GameSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,12 +63,13 @@
       <Project>{5ed0a6fc-609b-46cf-910f-af74179116a2}</Project>
       <Name>ChaosEngine.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ChaosEngine\ChaosEngine.csproj">
-      <Project>{5f632a9b-4257-420d-a992-58743255cd95}</Project>
-      <Name>ChaosEngine</Name>
+    <ProjectReference Include="..\ChaosRPG.Core\ChaosRPG.Core.csproj">
+      <Project>{2d6db522-bdfb-4adc-84d6-f873a5ebdcbf}</Project>
+      <Name>ChaosRPG.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

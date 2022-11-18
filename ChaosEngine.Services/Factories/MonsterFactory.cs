@@ -8,9 +8,9 @@ using ChaosEngine.Core;
 using System.IO;
 using System.Xml;
 
-namespace ChaosEngine.Factories
+namespace ChaosEngine.Services.Factories
 {
-   internal static class MonsterFactory
+   public static class MonsterFactory
     {
         private const string GAME_DATA_FILENAME = ".\\GameData\\GameMonsters.xml";
 

@@ -9,7 +9,7 @@ using ChaosEngine.Models;
 using ChaosEngine.Models.Actions;
 using ChaosEngine.Shared;
 
-namespace ChaosEngine.Factories
+namespace ChaosEngine.Services.Factories
 {
     public static class ItemFactory
     {

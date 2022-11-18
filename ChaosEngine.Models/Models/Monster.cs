@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using ChaosEngine.Core;
-using ChaosEngine.Factories;
 
 namespace ChaosEngine.Models
 {

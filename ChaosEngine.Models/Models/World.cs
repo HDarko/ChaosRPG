@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ChaosEngine.Models
 {
@@ -13,7 +8,7 @@ namespace ChaosEngine.Models
         private readonly List<Location> _locations = new List<Location>();
      
 
-        internal void AddLocation(int xCoordinate, int yCoordinate, string name, string description,
+       public void AddLocation(int xCoordinate, int yCoordinate, string name, string description,
        string imageFileName)
         {
             Location loc = new Location(
@@ -26,13 +21,13 @@ namespace ChaosEngine.Models
             _locations.Add(loc);
 
         }
-        internal void AddLocation(Location location)
+        public void AddLocation(Location location)
         {
             _locations.Add(location);
         }
 
-        internal void AddIntroLocation(int xCoordinate, int yCoordinate, string name, string playerName,
-      string imageFileName)
+        public void AddIntroLocation(int xCoordinate, int yCoordinate, string name, string playerName,
+            string imageFileName)
         {
 
             Location loc = new Location(
@@ -44,8 +39,8 @@ namespace ChaosEngine.Models
              imageFileName);
             _locations.Add(loc);
         }
-        internal void AddIntroLocation2(int xCoordinate, int yCoordinate, string name, string description,
-     string imageFileName)
+        public void AddIntroLocation2(int xCoordinate, int yCoordinate, string name, string description,
+            string imageFileName)
         {
             Location loc = new Location(
              xCoordinate,

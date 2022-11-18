@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Collections.Generic;
 using ChaosEngine.Models;
-using ChaosEngine.Factories;
+using ChaosEngine.Services.Factories;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 

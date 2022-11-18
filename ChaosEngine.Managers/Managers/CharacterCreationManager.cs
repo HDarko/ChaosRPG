@@ -2,7 +2,7 @@
 using System.Linq;
 using ChaosEngine.Models;
 using ChaosEngine.Services;
-using ChaosEngine.Factories;
+using ChaosEngine.Services.Factories;
 using System.ComponentModel;
 
 namespace ChaosEngine.Managers
