@@ -86,6 +86,8 @@ namespace ChaosEngine.Managers
 
         public PopupDetails WeaponryDetails { get; set; }
 
+        public PopupDetails PlayerDetails { get; set; }
+
         #region  Button Properties
         [JsonIgnore]
         public bool HasLocationToNorth=> 
@@ -158,6 +160,17 @@ namespace ChaosEngine.Managers
                 MinHeight = 75,
                 MaxHeight = 175,
                 MinWidth = 250,
+                MaxWidth = 400
+            };
+
+            PlayerDetails = new PopupDetails
+            {
+                IsVisible = false,
+                Top = 10,
+                Left = 10,
+                MinHeight = 75,
+                MaxHeight = 400,
+                MinWidth = 265,
                 MaxWidth = 400
             };
         }

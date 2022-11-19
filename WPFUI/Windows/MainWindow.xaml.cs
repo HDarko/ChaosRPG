@@ -75,6 +75,7 @@ namespace WPFUI
             //Navigating UI
             _userInputActions.Add(Key.I, () => _gameSession.InventoryDetails.IsVisible = !_gameSession.InventoryDetails.IsVisible);
             _userInputActions.Add(Key.W, () => _gameSession.WeaponryDetails.IsVisible = !_gameSession.WeaponryDetails.IsVisible);
+            _userInputActions.Add(Key.P, () => _gameSession.PlayerDetails.IsVisible = !_gameSession.PlayerDetails.IsVisible);
             _userInputActions.Add(Key.Q, () => SetTabFocusTo("QuestsTabItem"));
             _userInputActions.Add(Key.R, () => SetTabFocusTo("RecipesTabItem"));
         }
@@ -155,8 +156,11 @@ namespace WPFUI
             _gameSession.AttackCurrentMonster();
         }
 
-     
-       
+
+        private void ClosePlayerDetailsWindow_OnClick(object sender, RoutedEventArgs e)
+        {
+            _gameSession.PlayerDetails.IsVisible = false;
+        }
         private void OnClick_DisplayItemTradeScreen(object sender, RoutedEventArgs e)
         {
             if (_gameSession.HasTrader)
