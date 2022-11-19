@@ -4,7 +4,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Managers="clr-namespace:ChaosEngine.Managers;assembly=ChaosEngine"
+        xmlns:Managers="clr-namespace:ChaosEngine.Managers;assembly=ChaosEngine.Managers"
         d:DataContext="{Binding Managers.GameSession}"
         xmlns:local="clr-namespace:WPFUI"      
         mc:Ignorable="d"
@@ -23,7 +23,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
     </Window.Resources>
 
 
-    <Grid>
+    <Grid ZIndex="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -56,6 +56,156 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                           IsEnabled="False"/>
             </MenuItem>
         </Menu>
+
+        <!-- Main game canvas (full window) -->
+        <Canvas Grid.Row="1" Grid.Column="0"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                x:Name="GameCanvas"
+                ZIndex="99">
+
+            <!-- Player Inventory Details -->
+            <Canvas Top="{Binding InventoryDetails.Top}" Left="{Binding InventoryDetails.Left}"
+                    Width="Auto" Height="Auto"
+                    x:Name="PlayerInventoryDetailsPopup"
+                    MinHeight="{Binding InventoryDetails.MinHeight}"
+                    MaxHeight="{Binding InventoryDetails.MaxHeight}"
+                    MinWidth="{Binding InventoryDetails.MinWidth}"
+                    MaxWidth="{Binding InventoryDetails.MaxWidth}"
+                    Visibility="{Binding InventoryDetails.IsVisible, Converter={StaticResource BooleanToVisibility}}">
+
+                <Border BorderBrush="Navy" BorderThickness="3"
+                        Background="LightSteelBlue">
+
+                    <Grid Margin="2,2,2,2" ZIndex="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               HorizontalAlignment="Left"
+                               FontWeight="Bold"
+                               Content="Inventory"/>
+
+                        <Button Grid.Row="0" Grid.Column="1"
+                                Width="25"
+                                FontWeight="Bold"
+                                Content="X"
+                                Click="CloseInventoryWindow_OnClick">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <DataGrid Grid.Row="2" Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  ItemsSource="{Binding CurrentPlayer.GroupedInventory}"
+                                  AutoGenerateColumns="False"
+                                  HeadersVisibility="Column"
+                                  VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor,
+                                          AncestorType={x:Type Canvas}},Path=MaxHeight}"
+                                  Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                                          AncestorType={x:Type Canvas}},Path=ActualWidth}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Description"
+                                                    Binding="{Binding Item.Name, Mode=OneWay}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Qty"
+                                                    IsReadOnly="True"
+                                                    Width="Auto"
+                                                    Binding="{Binding Quantity, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="Price"
+                                                    Binding="{Binding Item.Price, Mode=OneWay}"
+                                                    Width="Auto"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+
+                </Border>
+
+            </Canvas>
+            <Canvas Top="{Binding WeaponryDetails.Top}" Left="{Binding WeaponryDetails.Left}"
+                    Width="Auto" Height="Auto"
+                    x:Name="PlayerWeaponsDetailsPopup"
+                    MinHeight="{Binding WeaponryDetails.MinHeight}"
+                    MaxHeight="{Binding WeaponryDetails.MaxHeight}"
+                    MinWidth="{Binding WeaponryDetails.MinWidth}"
+                    MaxWidth="{Binding WeaponryDetails.MaxWidth}"
+                    Visibility="{Binding WeaponryDetails.IsVisible, Converter={StaticResource BooleanToVisibility}}">
+
+                <Border BorderBrush="Navy" BorderThickness="3"
+                        Background="LightSteelBlue">
+
+                    <Grid Margin="2,2,2,2" ZIndex="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="4"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               HorizontalAlignment="Left"
+                               FontWeight="Bold"
+                               Content="Weapons"/>
+
+                        <Button Grid.Row="0" Grid.Column="1"
+                                Width="25"
+                                FontWeight="Bold"
+                                Content="X"
+                                Click="CloseWeaponryWindow_OnClick">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="3"/>
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <DataGrid Grid.Row="2" Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  ItemsSource="{Binding CurrentPlayer.Weapons}"
+                                  AutoGenerateColumns="False"
+                                  HeadersVisibility="Column"
+                                  VerticalScrollBarVisibility="Auto"
+                                  MaxHeight="{Binding RelativeSource={RelativeSource FindAncestor,
+                                          AncestorType={x:Type Canvas}},Path=MaxHeight}"
+                                  Width="{Binding RelativeSource={RelativeSource FindAncestor,
+                                          AncestorType={x:Type Canvas}},Path=ActualWidth}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Description"
+                                                    Binding="{Binding Name, Mode=OneWay}"
+                                                    Width="*"/>
+                                <DataGridTextColumn Header="Damage"
+                                                    IsReadOnly="True"
+                                                    Width="Auto"
+                                                    Binding="{Binding DamageRange, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="Price"
+                                                    Binding="{Binding Price, Mode=OneWay}"
+                                                    Width="Auto"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+
+                </Border>
+
+            </Canvas>
+
+
+        </Canvas>
         <!-- Player stats -->
         <Grid Grid.Row="1" Grid.Column="0" Background="Aquamarine">
             <Grid.RowDefinitions>
@@ -92,7 +242,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <Grid>
+                            <Grid ZIndex="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition SharedSizeGroup="Description"/>
                                 </Grid.ColumnDefinitions>
@@ -100,7 +250,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                                            HorizontalAlignment="Left"
                                            MinWidth="100"/>
                             </Grid>
-                            <Grid>
+                            <Grid ZIndex="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition SharedSizeGroup="ModifiedValue"/>
                                 </Grid.ColumnDefinitions>
@@ -147,7 +297,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                     BorderBrush="Gainsboro"
                     BorderThickness="1">
 
-                <Grid Margin="3">
+                <Grid Margin="3" ZIndex="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -181,7 +331,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                     BorderBrush="Gainsboro"
                     BorderThickness="1">
 
-                <Grid>
+                <Grid ZIndex="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -353,7 +503,7 @@ The line with “d:DataContext” lets the XAML editor know what type of object 
                         Click="OnClick_UseCurrentConsumable"/>
             </Grid>
             <!-- Movement Controls-->
-            <Grid Grid.Row="0" Grid.Column="1">
+            <Grid Grid.Row="0" Grid.Column="1" ZIndex="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />

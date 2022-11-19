@@ -6,6 +6,7 @@ using ChaosEngine.Core;
 using ChaosEngine.Services;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using ChaosEngine.Models.UI;
 
 namespace ChaosEngine.Managers
 {
@@ -81,6 +82,10 @@ namespace ChaosEngine.Managers
         [JsonIgnore]
         public GameDetails GameDetails { get; private set; }
 
+        public PopupDetails InventoryDetails { get; set; }
+
+        public PopupDetails WeaponryDetails { get; set; }
+
         #region  Button Properties
         [JsonIgnore]
         public bool HasLocationToNorth=> 
@@ -132,6 +137,29 @@ namespace ChaosEngine.Managers
             CurrentPlayer = player;
             CurrentWorld = WorldFactory.CreateWorld(CurrentPlayer.Name);    
             CurrentLocation = CurrentWorld.LocationAt(xCoordinate, yCoordinate);
+
+            // Setup popup window properties
+            InventoryDetails = new PopupDetails
+            {
+                IsVisible = false,
+                Top = 225,
+                Left = 275,
+                MinHeight = 75,
+                MaxHeight = 175,
+                MinWidth = 250,
+                MaxWidth = 400
+            };
+
+            WeaponryDetails = new PopupDetails
+            {
+                IsVisible = false,
+                Top = 225,
+                Left = 275,
+                MinHeight = 75,
+                MaxHeight = 175,
+                MinWidth = 250,
+                MaxWidth = 400
+            };
         }
         #region Move Functions
 

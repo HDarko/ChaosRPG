@@ -90,6 +90,7 @@
     <Compile Include="Models\Race.cs" />
     <Compile Include="Models\Recipe.cs" />
     <Compile Include="Models\Trader.cs" />
+    <Compile Include="Models\UI\PopupDetails.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Models\World.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
